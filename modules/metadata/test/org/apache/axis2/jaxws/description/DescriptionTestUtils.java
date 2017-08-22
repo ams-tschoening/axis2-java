@@ -31,7 +31,7 @@ import java.net.URL;
 import java.io.File;
 
 /**
- * 
+ *
  */
 public class DescriptionTestUtils {
 
@@ -45,7 +45,7 @@ public class DescriptionTestUtils {
         return getWSDLURL("WSDLTests.wsdl");
 
     }
-    
+
     static public String getWSDLLocation(String wsdlFileName) {
         String basedir = System.getProperty("basedir", ".");
         String urlString = basedir + "/test-resources/wsdl/" + wsdlFileName;
@@ -57,7 +57,7 @@ public class DescriptionTestUtils {
         String urlString = getWSDLLocation(wsdlFileName);
         // Get the URL to the WSDL file.  Note that 'basedir' is setup by Maven
         try {
-            wsdlURL = new File(urlString).getAbsoluteFile().toURL();
+            wsdlURL = new File(urlString).getAbsoluteFile().toURI().toURL();
         } catch (Exception e) {
             System.out.println("Caught exception creating WSDL URL :" + urlString +
                     "; exception: " + e.toString());
@@ -104,7 +104,7 @@ public class DescriptionTestUtils {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
         return returnComposite;
     }
 
