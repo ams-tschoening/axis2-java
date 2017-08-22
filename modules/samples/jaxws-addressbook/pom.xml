@@ -77,7 +77,7 @@
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} src/AddressBookEntry.xsd" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet &quot;src/AddressBookEntry.xsd&quot;" />
                                 </java>
                             </tasks>
                         </configuration>

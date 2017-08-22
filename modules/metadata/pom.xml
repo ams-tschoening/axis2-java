@@ -229,7 +229,7 @@
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet -p org.test.proxy.doclitwrapped -quiet -wsdl ${wsdl.source.dir}/ProxyDocLitWrapped.wsdl" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet -p org.test.proxy.doclitwrapped -wsdl &quot;${wsdl.source.dir}/ProxyDocLitWrapped.wsdl&quot;" />
                                 </java>
                             </tasks>
                         </configuration>
