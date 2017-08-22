@@ -41,7 +41,7 @@ import java.net.URL;
 public class MultiRedirectionCatalogTest extends TestCase {
 	private static final String ROOT_WSDL = "/test-resources/catalog/root.wsdl";
 	private static final String TEST_RESOURCES = "/test-resources/catalog/";
-	
+
 	public void testOneCatalogSuccess() {
 		verifySuccess(ROOT_WSDL, TEST_RESOURCES + "basic-catalog.xml");
 	}
@@ -49,35 +49,35 @@ public class MultiRedirectionCatalogTest extends TestCase {
 	public void testNextCatalogSuccess() {
 		verifySuccess(ROOT_WSDL, TEST_RESOURCES + "root-catalog.xml");
 	}
-	
+
 	public void testNextCatalogFailure() {
-		verifyFailure(ROOT_WSDL, TEST_RESOURCES + "fail/root-catalog.xml");		
+		verifyFailure(ROOT_WSDL, TEST_RESOURCES + "fail/root-catalog.xml");
 	}
-	
+
 	public void testNoCatEntryForFirstImport() {
 		verifyFailure(ROOT_WSDL, TEST_RESOURCES + "fail/firstImportFail.xml");
 	}
-	
+
 	public void testNoCatEntryForSecondImport() {
 		verifyFailure(ROOT_WSDL, TEST_RESOURCES + "fail/secondImportFail.xml");
 	}
-	
+
 	public void testNoCatEntryForThirdImport() {
 		verifyFailure(ROOT_WSDL, TEST_RESOURCES + "fail/thirdImportFail.xml");
 	}
-	
+
 	/**
 	 * Ensure that the catalog is used to locate imported resources.
 	 */
 	private void verifySuccess(String wsdlLocation, String catalogFile) {
 	    URL url = getURLFromLocation(wsdlLocation);
-	    
+
 	    try{
 			OASISCatalogManager catalogManager = new OASISCatalogManager();
 			catalogManager.setCatalogFiles(getURLFromLocation(catalogFile).toString());
             WSDL4JWrapper w4j = new WSDL4JWrapper(url, catalogManager, false, 0);
 	    	Definition wsdlDef = w4j.getDefinition();
-	    	assertNotNull(wsdlDef);   
+	    	assertNotNull(wsdlDef);
 	    	QName portTypeName = new QName("http://www.example.com/test/calculator",
 	    			                       "CalculatorService",
 	    			                       "");
@@ -95,21 +95,21 @@ public class MultiRedirectionCatalogTest extends TestCase {
 	    	e.printStackTrace();
 	    	fail();
 	    }
-	}	
-	
+	}
+
 	/**
 	 * Ensure that the test case is valid by failing in the absence of a needed
 	 * catalog entry.
 	 */
 	private void verifyFailure(String wsdlLocation, String catalogFile) {
 	    URL url = getURLFromLocation(wsdlLocation);
-	    
+
 	    try{
 			OASISCatalogManager catalogManager = new OASISCatalogManager();
             catalogManager.setCatalogFiles(getURLFromLocation(catalogFile).toString());
 	    	WSDL4JWrapper w4j = new WSDL4JWrapper(url, catalogManager, false, 0);
 	    	w4j.getDefinition();
-	    	fail("Should have received a WSDLException due to the invalid WSDL location " 
+	    	fail("Should have received a WSDLException due to the invalid WSDL location "
 	        		+ "not redirected by the catalog.");
 	    } catch(WSDLException e) {
 	    	// do nothing - successful test case
@@ -118,7 +118,7 @@ public class MultiRedirectionCatalogTest extends TestCase {
 	    	fail();
 	    }
 	}
-	
+
 	/**
 	 * Given a String representing a file location, return a URL.
 	 * @param wsdlLocation
@@ -135,12 +135,12 @@ public class MultiRedirectionCatalogTest extends TestCase {
         		fail();
         	}
 	       	File file = new File(wsdlLocation);
-	       	url = file.toURL();
+	       	url = file.toURI().toURL();
 	    } catch (MalformedURLException e) {
 	        e.printStackTrace();
 	        fail();
 	    }
-	    
+
 	    return url;
 	}
 }

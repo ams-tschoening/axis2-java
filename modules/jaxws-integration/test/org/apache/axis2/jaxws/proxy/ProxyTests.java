@@ -74,16 +74,16 @@ public class ProxyTests extends AbstractTestCase {
         TestLogger.logger.debug("Proxy Response =" + response2);
         TestLogger.logger.debug("---------------------------------------");
     }
-    
+
     public void testInvokeWithNullParam() throws Exception {
         if(!runningOnAxis){
             return;
         }
         TestLogger.logger.debug("---------------------------------------");
         TestLogger.logger.debug("Test Name: " + getName());
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
-        Service service = Service.create(null, serviceName); 
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
+        Service service = Service.create(null, serviceName);
         Object proxy =service.getPort(portName, DocLitWrappedProxy.class);
         TestLogger.logger.debug(">>Invoking Binding Provider property");
         BindingProvider p = (BindingProvider)proxy;
@@ -100,27 +100,27 @@ public class ProxyTests extends AbstractTestCase {
         TestLogger.logger.debug("Proxy Response =" + response);
         TestLogger.logger.debug("---------------------------------------");
     }
-    
+
     public void testInvoke() throws Exception {
         if(!runningOnAxis){
             return;
         }
         TestLogger.logger.debug("---------------------------------------");
-        
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
+
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(null, serviceName);
-        String request = new String("some string request"); 
+        String request = new String("some string request");
         Object proxy =service.getPort(portName, DocLitWrappedProxy.class);
         TestLogger.logger.debug(">>Invoking Binding Provider property");
         BindingProvider p = (BindingProvider)proxy;
             p.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,axisEndpoint);
-            
+
         DocLitWrappedProxy dwp = (DocLitWrappedProxy)proxy;
         TestLogger.logger.debug(">> Invoking Proxy Synchronously");
         String response = dwp.invoke(request);
         TestLogger.logger.debug("Proxy Response =" + response);
-        
+
         // Try again
         response = dwp.invoke(request);
         TestLogger.logger.debug("Proxy Response =" + response);
@@ -132,60 +132,60 @@ public class ProxyTests extends AbstractTestCase {
             return;
         }
         TestLogger.logger.debug("---------------------------------------");
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(wsdlUrl, serviceName);
-        String request = new String("some string request"); 
+        String request = new String("some string request");
         Object proxy =service.getPort(portName, DocLitWrappedProxy.class);
         TestLogger.logger.debug(">>Invoking Binding Provider property");
         BindingProvider p = (BindingProvider)proxy;
         p.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,axisEndpoint);
-            
+
         DocLitWrappedProxy dwp = (DocLitWrappedProxy)proxy;
         TestLogger.logger.debug(">> Invoking Proxy Synchronously");
         String response = dwp.invoke(request);
         TestLogger.logger.debug("Proxy Response =" + response);
-        
+
         // Try again
         response = dwp.invoke(request);
         TestLogger.logger.debug("Proxy Response =" + response);
         TestLogger.logger.debug("---------------------------------------");
     }
-    
+
     public void testInvokeAsyncCallback() throws Exception {
         if(!runningOnAxis){
             return;
         }
         TestLogger.logger.debug("---------------------------------------");
-        
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
+
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(null, serviceName);
-        String request = new String("some string request"); 
+        String request = new String("some string request");
         Object proxy =service.getPort(portName, DocLitWrappedProxy.class);
         TestLogger.logger.debug(">>Invoking Binding Provider property");
         BindingProvider p = (BindingProvider)proxy;
             p.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,axisEndpoint);
-            
+
         DocLitWrappedProxy dwp = (DocLitWrappedProxy)proxy;
         TestLogger.logger.debug(">> Invoking Proxy Asynchronous Callback");
         AsyncHandler handler = new AsyncCallback();
         Future<?> response = dwp.invokeAsync(request, handler);
-        
+
         // Try again
         handler = new AsyncCallback();
         response = dwp.invokeAsync(request, handler);
         TestLogger.logger.debug("---------------------------------------");
     }
-    
+
     public void testInvokeAsyncPolling() throws Exception {
         TestLogger.logger.debug("---------------------------------------");
-        
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
+
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(null, serviceName);
         DocLitWrappedProxy proxy =service.getPort(portName, DocLitWrappedProxy.class);
-        
+
         String request = new String("some string request");
 
         TestLogger.logger.debug(">> Invoking Binding Provider property");
@@ -199,10 +199,10 @@ public class ProxyTests extends AbstractTestCase {
             TestLogger.logger.debug(">> Async invocation still not complete");
             Thread.sleep(1000);
         }
-        
+
         ReturnType response = asyncResponse.get();
         assertNotNull(response);
-        
+
         // Try again
         asyncResponse = proxy.invokeAsync(request);
 
@@ -210,66 +210,66 @@ public class ProxyTests extends AbstractTestCase {
             TestLogger.logger.debug(">> Async invocation still not complete");
             Thread.sleep(1000);
         }
-        
+
         response = asyncResponse.get();
         assertNotNull(response);
     }
-    
+
     public void testTwoWay() throws Exception {
         if(runningOnAxis){
             return;
         }
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(null, serviceName);
-        String request = new String("some string request"); 
-        
-        Object proxy =service.getPort(portName, DocLitWrappedProxy.class); 
+        String request = new String("some string request");
+
+        Object proxy =service.getPort(portName, DocLitWrappedProxy.class);
         BindingProvider p = (BindingProvider)proxy;
         p.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, axisEndpoint);
-            
-        DocLitWrappedProxy dwp = (DocLitWrappedProxy)proxy;  
+
+        DocLitWrappedProxy dwp = (DocLitWrappedProxy)proxy;
         String response = dwp.twoWay(request);
         System.out.println("Response =" + response);
-        
+
         // Try again
         response = dwp.twoWay(request);
         System.out.println("Response =" + response);
     }
-    
+
     public void testOneWay(){
-        
+
     }
-    
+
     public void testHolder(){
-        
+
     }
-    
+
     public void testTwoWayAsyncCallback() throws Exception {
         if(runningOnAxis){
             return;
         }
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(null, serviceName);
-        
-        String request = new String("some string request"); 
-        
-        Object proxy =service.getPort(portName, DocLitWrappedProxy.class); 
+
+        String request = new String("some string request");
+
+        Object proxy =service.getPort(portName, DocLitWrappedProxy.class);
         BindingProvider p = (BindingProvider)proxy;
             p.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, axisEndpoint);
-            
+
         DocLitWrappedProxy dwp = (DocLitWrappedProxy)proxy;
         AsyncHandler handler = new AsyncCallback();
         Future<?> response = dwp.twoWayAsync(request, handler);
-        
+
         // Try again
         handler = new AsyncCallback();
         response = dwp.twoWayAsync(request, handler);
     }
-    
+
     public void testAsyncPooling(){
-        
+
     }
 }
 

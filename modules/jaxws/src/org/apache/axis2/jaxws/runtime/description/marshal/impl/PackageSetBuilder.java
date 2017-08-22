@@ -105,7 +105,7 @@ public class PackageSetBuilder {
      * @return Set of Packages
      */
     public static TreeSet<String> getPackagesFromSchema(ServiceDescription serviceDesc) {
-    	
+
     	if (log.isDebugEnabled()) {
     		log.debug("start getPackagesFromSchema");
     		log.debug("ServiceDescription = " + serviceDesc.toString());
@@ -162,7 +162,7 @@ public class PackageSetBuilder {
     	}
         TreeSet<String> set = new TreeSet<String>();
         Collection<EndpointDescription> endpointDescs = serviceDesc.getEndpointDescriptions_AsCollection();
-        
+
         // Build a set of packages from all of the endpoints
         if (endpointDescs != null) {
             for (EndpointDescription endpointDesc: endpointDescs) {
@@ -219,9 +219,9 @@ public class PackageSetBuilder {
             EndpointInterfaceDescription endpointInterfaceDesc,
             TreeSet<String> set,
             MarshalServiceRuntimeDescription msrd) {
-        
+
     	if (log.isDebugEnabled()) {
-    		log.debug("start getPackagesFromAnnotations for EndpointInterfaceDescription " + 
+    		log.debug("start getPackagesFromAnnotations for EndpointInterfaceDescription " +
     					endpointInterfaceDesc.getPortType());
     	}
         OperationDescription[] opDescs = endpointInterfaceDesc.getDispatchableOperations();
@@ -261,8 +261,8 @@ public class PackageSetBuilder {
             }
         }
         addXmlSeeAlsoPackages(seicls, msrd, set);
-        
-        
+
+
         // Build a set of packages from all of the operations
         if (opDescs != null) {
             for (int i = 0; i < opDescs.length; i++) {
@@ -270,7 +270,7 @@ public class PackageSetBuilder {
             }
         }
         if (log.isDebugEnabled()) {
-    		log.debug("end getPackagesFromAnnotations for EndpointInterfaceDescription " + 
+    		log.debug("end getPackagesFromAnnotations for EndpointInterfaceDescription " +
     					endpointInterfaceDesc.getPortType());
     	}
         return;
@@ -322,8 +322,8 @@ public class PackageSetBuilder {
             set.add("@" + responseWrapperPkg);  // Indicates a package from an actual class reference (versus namespace)
             set.add("[" + responseWrapperName + "]");  // Indicates a actual class reference
         }
-      
-        // The wrapper class and the element defining the wrapper may be 
+
+        // The wrapper class and the element defining the wrapper may be
         // in different namespaces and packages.  So also look at the namespaces.
         String ns = opDesc.getRequestWrapperTargetNamespace();
         if (ns != null && ns.length() > 0) {
@@ -341,7 +341,7 @@ public class PackageSetBuilder {
             List packages = makePackages(ns);
             set.addAll(packages);
         }
-        
+
         // See if the Method is available.  If so, additional reflection
         // can be performed to obtain the generic references
         Method m = getMethod(opDesc, msrd);
@@ -349,12 +349,12 @@ public class PackageSetBuilder {
             log.debug("Method obtained:" + m);
         }
 
-        
+
         // Examine the parameters
         if (log.isDebugEnabled()) {
             log.debug("Collect the packages of the parameters");
         }
-        addPackagesFromParameters(set, opDesc) ; 
+        addPackagesFromParameters(set, opDesc) ;
         if (m != null) {
             addPackagesFromParameters(set, m);
         }
@@ -377,14 +377,14 @@ public class PackageSetBuilder {
 
         }
     }
-    
+
     /**
      * Get Method associated with this OperationDesc
      * @param opDesc
      * @param msrd
      * @return Method or null
      */
-    private static Method getMethod(OperationDescription opDesc, 
+    private static Method getMethod(OperationDescription opDesc,
             MarshalServiceRuntimeDescription msrd) {
         Method m = null;
         try {
@@ -477,7 +477,7 @@ public class PackageSetBuilder {
                         String name = clz.getCanonicalName();
                         if (log.isDebugEnabled()) {
                             log.debug(" adding class " + name);
-                        }   
+                        }
                         set.add("@" + pkgText);  // Indicates a package from an actual class reference
                         set.add("[" + name + "]");  // Indicates a actual class referenced
                     }
@@ -488,7 +488,7 @@ public class PackageSetBuilder {
             log.debug("exit addClassesToPackageSet");
         }
     }
-    
+
     /**
      * addPackagesFromParameters
      * @param set  Set of packages
@@ -516,7 +516,7 @@ public class PackageSetBuilder {
                     }
                 }
             }
-        }    
+        }
     }
 
     /**
@@ -545,7 +545,7 @@ public class PackageSetBuilder {
      * @param faultDesc FaultDescription
      * @param set       Set<Package> that is updated
      */
-    private static void getPackagesFromAnnotations(EndpointDescription ed, 
+    private static void getPackagesFromAnnotations(EndpointDescription ed,
                                                    FaultDescription faultDesc, TreeSet<String> set,
                                                    MarshalServiceRuntimeDescription msrd) {
 
@@ -634,7 +634,7 @@ public class PackageSetBuilder {
         if (tClass != eClass) {
             if (eClass == null) {
                 // A null or empty namespace indicates that the element is
-                // unqualified.  This can occur if the parameter is represented as a child element 
+                // unqualified.  This can occur if the parameter is represented as a child element
                 // in doc/lit wrapped.  The package is determined from the wrapper element in such casses.
                 if (namespace != null && namespace.length() > 0) {
                     // Use default namespace to package algorithm
@@ -651,7 +651,7 @@ public class PackageSetBuilder {
                     set.add("@" + pkg);  // Indicates a package from an actual class reference (versus namespace)
                     set.add("[" + eClass.getCanonicalName() + "]");  // Indicates a actual class reference
                 }
-                
+
                 if (pkg != null) {
                     AnnotationDesc ad = msrd.getAnnotationDesc(tClass);
                     if (ad != null && ad.hasXmlRootElement()) {
@@ -736,7 +736,7 @@ public class PackageSetBuilder {
 
     /**
      * Return the package associated with the class name.  The className may not be specified (in
-     * which case a null Package is returned). 
+     * which case a null Package is returned).
      * If class has anunnamed package return ""
      *
      * @param className String (may be null or empty)
@@ -747,13 +747,13 @@ public class PackageSetBuilder {
         String pkg = getPackageFromClass(clz);
         return pkg;
     }
-    
+
     /**
      * Return the package associated with the class name.  The className may not be specified (in
      * which case a null Package is returned). if class has unnamed package return ""
      *
      * @param cls Class
-     * @return String or null 
+     * @return String or null
      */
     public static String getPackageFromClass(Class cls) {
         String pkgName = null;
@@ -765,13 +765,13 @@ public class PackageSetBuilder {
             pkgName = null;
         } else {
             pkgName =
-                (cls.getPackage() == null) ? "" : cls.getPackage().getName(); 
+                (cls.getPackage() == null) ? "" : cls.getPackage().getName();
         }
         return pkgName;
     }
 
-    private static void addXmlSeeAlsoPackages(Class clz, 
-                                              MarshalServiceRuntimeDescription msrd, 
+    private static void addXmlSeeAlsoPackages(Class clz,
+                                              MarshalServiceRuntimeDescription msrd,
                                               TreeSet<String> set) {
     	if (log.isDebugEnabled()) {
     		log.debug("start addXmlSeeAlsoPackages for " + clz);
@@ -783,8 +783,8 @@ public class PackageSetBuilder {
                 if (seeAlso != null) {
                     for (int i=0; i<seeAlso.length; i++) {
                         String pkg =
-                            (seeAlso[i] == null) ? null : 
-                                (seeAlso[i].getPackage() == null) ? "" : 
+                            (seeAlso[i] == null) ? null :
+                                (seeAlso[i].getPackage() == null) ? "" :
                                     seeAlso[i].getPackage().getName();
                         if (pkg != null) {
                         	if (log.isDebugEnabled()) {
@@ -797,7 +797,7 @@ public class PackageSetBuilder {
                     }
                 }
             }
-            
+
             Class[] interfaces = clz.getInterfaces();
             if (interfaces != null) {
                 for (int i=0; i<interfaces.length; i++) {
@@ -880,7 +880,7 @@ public class PackageSetBuilder {
                                 String baseDir = new File(System.getProperty("basedir",".")).getCanonicalPath();
                                 String wsdlLocationPath = new File(baseDir +File.separator+ wsdlLocation).getAbsolutePath();
                                 File file = new File(wsdlLocationPath);
-                                URL url = file.toURL();
+                                URL url = file.toURI().toURL();
                                 if(log.isDebugEnabled()){
                                     log.debug("Reading WSDL from URL:" +url.toString());
                                 }
@@ -975,10 +975,10 @@ public class PackageSetBuilder {
         }
         return result;
     }
-    
+
     /**
      * Get an annotation.  This is wrappered to avoid a Java2Security violation.
-     * @param cls Class that contains annotation 
+     * @param cls Class that contains annotation
      * @param annotation Class of requrested Annotation
      * @return annotation or null
      */

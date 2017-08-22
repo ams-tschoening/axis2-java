@@ -39,7 +39,7 @@ public class BareDocLitNoArgService
 {
 
     private final static URL BAREDOCLITNOARGSERVICE_WSDL_LOCATION;
-    
+
     private static String wsdlLocation = "/test/org/apache/axis2/jaxws/sample/doclitbarenoarg/META-INF/doclitbarenoarg.wsdl";
     static {
         URL url = null;
@@ -47,7 +47,7 @@ public class BareDocLitNoArgService
             String baseDir = new File(System.getProperty("basedir",".")).getCanonicalPath();
             wsdlLocation = new File(baseDir + wsdlLocation).getAbsolutePath();
             File file = new File(wsdlLocation);
-            url = file.toURL();
+            url = file.toURI().toURL();
 //            url = new URL("file:/test/org/apache/axis2/jaxws/sample/doclitbarenoarg/META-INF/doclitbarenoarg.wsdl");
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class BareDocLitNoArgService
     }
 
     /**
-     * 
+     *
      * @return
      *     returns DocLitBareNoArgPortType
      */
@@ -76,7 +76,7 @@ public class BareDocLitNoArgService
     }
 
     /**
-     * 
+     *
      * @param features
      *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return

@@ -49,13 +49,13 @@ public class RPCLitSWAProxyTests extends AbstractTestCase {
             "RPCLitSWA");
     private String wsdlLocation = System.getProperty("basedir",".")+"/"+
     "test/org/apache/axis2/jaxws/proxy/rpclitswa/META-INF/RPCLitSWA.wsdl";
-        
+
     static {
         String imageResourceDir =
                 System.getProperty("basedir", ".") + "/" + "test-resources" + File.separator
                         + "image";
 
-        //Create a DataSource from an image 
+        //Create a DataSource from an image
         File file = new File(imageResourceDir + File.separator + "test.jpg");
         ImageInputStream fiis = null;
         try {
@@ -63,15 +63,15 @@ public class RPCLitSWAProxyTests extends AbstractTestCase {
             Image image = ImageIO.read(fiis);
             imageDS = new DataSourceImpl("image/jpeg", "test.jpg", image);
         } catch (Exception e) {
-            throw new RuntimeException(e);    
+            throw new RuntimeException(e);
         }
     }
     private static DataSource imageDS;
-    
+
     public static Test suite() {
         return getTestSetup(new TestSuite(RPCLitSWAProxyTests.class));
     }
-    
+
     /**
      * Utility method to get the proxy
      * @return RPCLit proxy
@@ -80,34 +80,34 @@ public class RPCLitSWAProxyTests extends AbstractTestCase {
     public RPCLitSWA getProxy() throws MalformedURLException {
         File wsdl= new File(wsdlLocation);
         assertTrue("WSDL does not exist:" + wsdlLocation,wsdl.exists());
-        URL wsdlUrl = wsdl.toURL(); 
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(wsdlUrl, serviceName);
         Object proxy =service.getPort(portName, RPCLitSWA.class);
-        BindingProvider p = (BindingProvider)proxy; 
+        BindingProvider p = (BindingProvider)proxy;
         p.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,axisEndpoint);
-        
+
         return (RPCLitSWA)proxy;
     }
-    
+
     /**
      * Utility Method to get a Dispatch<String>
      * @return
      * @throws MalformedURLException
      */
     public Dispatch<String> getDispatch() throws MalformedURLException {
-        File wsdl= new File(wsdlLocation); 
-        URL wsdlUrl = wsdl.toURL(); 
+        File wsdl= new File(wsdlLocation);
+        URL wsdlUrl = wsdl.toURI().toURL();
         Service service = Service.create(null, serviceName);
         service.addPort(portName, null, axisEndpoint);
-        Dispatch<String> dispatch = service.createDispatch(portName, String.class, 
+        Dispatch<String> dispatch = service.createDispatch(portName, String.class,
                                                            Service.Mode.PAYLOAD);
         return dispatch;
     }
-    
+
     public void testNOOP() {
-        
+
     }
-    
+
     /**
      * Simple test that ensures that we can echo a string to an rpc/lit web service
      * NOTE:
@@ -116,86 +116,86 @@ public class RPCLitSWAProxyTests extends AbstractTestCase {
      * buildAttachmentInformation()
      * // TODO: Start HACK for RPCLitSWAProxyTest
         addPartAttachmentDescription("dummyAttachmentIN",
-                                     new AttachmentDescriptionImpl(AttachmentType.SWA, 
+                                     new AttachmentDescriptionImpl(AttachmentType.SWA,
                                                                    new String[] {"text/plain"}));
         addPartAttachmentDescription("dummyAttachmentINOUT",
-                                     new AttachmentDescriptionImpl(AttachmentType.SWA, 
+                                     new AttachmentDescriptionImpl(AttachmentType.SWA,
                                                                    new String[] {"image/jpeg"}));
         addPartAttachmentDescription("dummyAttachmentOUT",
-                                     new AttachmentDescriptionImpl(AttachmentType.SWA, 
+                                     new AttachmentDescriptionImpl(AttachmentType.SWA,
                                                                    new String[] {"text/plain"}));
         // TODO: End HACK for RPCListSWAProxyTest
      */
     public void testRPCLitSWAEcho() throws Exception {
-        
+
             RPCLitSWA proxy = getProxy();
             String request = "This is a not attachment data";
-            
+
             String attachmentIN = "Data for plain text attachment";
             DataHandler attachmentINOUT = getImageDH();
-            
+
             Holder<DataHandler> attachmentINOUT_Holder = new Holder<DataHandler>();
             attachmentINOUT_Holder.value = attachmentINOUT;
             Holder<String> response_Holder = new Holder<String>();
             Holder<String> attachmentOUT_Holder = new Holder<String>();
-           
-            proxy.echo(request, attachmentIN, attachmentINOUT_Holder, response_Holder, 
+
+            proxy.echo(request, attachmentIN, attachmentINOUT_Holder, response_Holder,
                        attachmentOUT_Holder);
-            
+
             assertTrue("Bad Response Holder", response_Holder != null);
             assertTrue("Response value is null", response_Holder.value != null);
-            assertTrue("Response is not the same as request. Receive="+response_Holder.value, 
+            assertTrue("Response is not the same as request. Receive="+response_Holder.value,
                        request.equals(response_Holder.value));
-            
+
             assertTrue("The output attachment holder is null", attachmentOUT_Holder != null);
             assertTrue("The output attachment is null", attachmentOUT_Holder.value != null);
-            assertTrue("The output attachment is not the same as the input.  Received=" + 
-                       attachmentOUT_Holder.value, 
+            assertTrue("The output attachment is not the same as the input.  Received=" +
+                       attachmentOUT_Holder.value,
                     attachmentIN.equals(attachmentOUT_Holder.value));
-            
-           
+
+
             assertTrue("The inout attachment holder is null", attachmentINOUT_Holder != null);
             assertTrue("The inout attachment is null", attachmentINOUT_Holder.value != null);
             // Ensure that this is not the same object
-            assertTrue(attachmentINOUT_Holder.value != attachmentINOUT); 
-            
+            assertTrue(attachmentINOUT_Holder.value != attachmentINOUT);
+
             // ------------------
             // Try again with the same proxy
             // ------------------
             request = "This is a not attachment data";
-            
+
             attachmentIN = "Data for plain text attachment";
             attachmentINOUT = getImageDH();
-            
+
             attachmentINOUT_Holder = new Holder<DataHandler>();
             attachmentINOUT_Holder.value = attachmentINOUT;
             response_Holder = new Holder<String>();
             attachmentOUT_Holder = new Holder<String>();
-           
-            proxy.echo(request, attachmentIN, attachmentINOUT_Holder, response_Holder, 
+
+            proxy.echo(request, attachmentIN, attachmentINOUT_Holder, response_Holder,
                        attachmentOUT_Holder);
-            
+
             assertTrue("Bad Response Holder", response_Holder != null);
             assertTrue("Response value is null", response_Holder.value != null);
-            assertTrue("Response is not the same as request. Receive="+response_Holder.value, 
+            assertTrue("Response is not the same as request. Receive="+response_Holder.value,
                        request.equals(response_Holder.value));
-            
+
             assertTrue("The output attachment holder is null", attachmentOUT_Holder != null);
             assertTrue("The output attachment is null", attachmentOUT_Holder.value != null);
-            assertTrue("The output attachment is not the same as the input.  Received=" + 
-                       attachmentOUT_Holder.value, 
+            assertTrue("The output attachment is not the same as the input.  Received=" +
+                       attachmentOUT_Holder.value,
                     attachmentIN.equals(attachmentOUT_Holder.value));
-            
-           
+
+
             assertTrue("The inout attachment holder is null", attachmentINOUT_Holder != null);
             assertTrue("The inout attachment is null", attachmentINOUT_Holder.value != null);
             // Ensure that this is not the same object
-            assertTrue(attachmentINOUT_Holder.value != attachmentINOUT);  
-        
+            assertTrue(attachmentINOUT_Holder.value != attachmentINOUT);
+
     }
-    
+
     private DataHandler getImageDH() {
         return new DataHandler(imageDS);
     }
-    
+
 }

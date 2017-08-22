@@ -51,9 +51,9 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
     private Combo styleSelectionCombo;
     private Button searchDeclaredMethodsCheckBox;
     private Table table;
-    
+
 //    private boolean dirty = false;
-    
+
     public WSDLOptionsPage(){
         super("page6");
     }
@@ -127,7 +127,7 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
 
         gd = new GridData(GridData.FILL_HORIZONTAL);
         gd.horizontalSpan = 3;
-        
+
         searchDeclaredMethodsCheckBox = new Button(container,SWT.CHECK);
         searchDeclaredMethodsCheckBox.setLayoutData(gd);
         searchDeclaredMethodsCheckBox.setText("List Declared Methods Only");
@@ -135,9 +135,9 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
             public void widgetSelected(SelectionEvent e){
                 updateDirtyStatus(true);//dirty
             }
-            public void widgetDefaultSelected(SelectionEvent e){} 
+            public void widgetDefaultSelected(SelectionEvent e){}
         });
-        
+
         // #####################################################
         label = new Label(container, SWT.NULL);
         label.setText(ServiceArchiver.getResourceString("page6.style.label"));
@@ -157,52 +157,52 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
             public void widgetDefaultSelected(SelectionEvent e) {
             }
         });
-        
+
         gd = new GridData(GridData.FILL_BOTH);
         gd.horizontalSpan = 3;
         gd.verticalSpan = 5;
-        
+
         table = new Table(container,SWT.SINGLE|SWT.FULL_SELECTION|SWT.CHECK);
         table.setLinesVisible(true);
-        table.setHeaderVisible(true); 
+        table.setHeaderVisible(true);
         table.setLayoutData(gd);
         declareColumn(table,20,"");
         declareColumn(table,100,"Method Name");
         declareColumn(table,100,"Return Type");
         declareColumn(table,100,"Parameter Count");
-        
+
         table.setVisible(false);
-        
+
         setControl(container);
 
     }
-    
+
     private void declareColumn(Table table, int width,String colName){
         TableColumn column = new TableColumn(table,SWT.NONE);
         column.setWidth(width);
         column.setText(colName);
     }
-    
-    
+
+
     private void populateStyleCombo() {
         styleSelectionCombo.add("Document");
         styleSelectionCombo.add("rpc");
         styleSelectionCombo.add("Wrapped");
 
         styleSelectionCombo.select(settings.getInt(PREF_WSDL_STYLE_INDEX));
-        
+
     }
-    
+
     private void updateTable() {
         //get a URL from the class file location
         try {
             String classFileLocation = getClassFileLocation();
-            URL classFileURL = new File(classFileLocation).toURL();
+            URL classFileURL = new File(classFileLocation).toURI().toURL();
             ClassLoader loader = new URLClassLoader(new URL[] { classFileURL });
 
             Class clazz = loader.loadClass(classNameTextBox.getText());
             Method[] methods = null;
-            
+
             if (searchDeclaredMethodsCheckBox.getSelection()){
                 methods = clazz.getDeclaredMethods();
             }else{
@@ -221,7 +221,7 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
                    items[i].setChecked(true);//check them all by default
                 }
                 table.setVisible(true);
-                
+
                 //update the dirty variable
                updateDirtyStatus(false);
                updateStatus(null);
@@ -236,7 +236,7 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
     private void handleClassNameModification(){
         String className = classNameTextBox.getText();
         settings.put(PREF_WSDL_CLASS_NAME, className);
-        
+
         if (className==null || "".equals(className.trim())){
             updateStatus(ServiceArchiver.getResourceString("page6.error.classname1"));
         }else if (className.endsWith(".")){
@@ -244,13 +244,13 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
         }else{
             updateStatus(null);
         }
-        
+
     }
-    
+
     private void handlFileNameModification(){
         String wsdlFileName = outputFileNameTextBox.getText();
         settings.put(PREF_WSDL_FILE_NAME, wsdlFileName);
-        
+
         if (wsdlFileName==null || "".equals(wsdlFileName.trim())){
             updateStatus(ServiceArchiver.getResourceString("page6.error.fileName1"));
         }else if (wsdlFileName.endsWith(".wsdl")){
@@ -258,13 +258,13 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
         }else{
             updateStatus(null);
         }
-        
+
     }
     private String getClassFileLocation(){
         ServiceArchiveWizard wizard = (ServiceArchiveWizard)getWizard();
         return wizard.getClassFileLocation();
     }
-    
+
     public WSDLAutoGenerateOptionBean getBean(){
         WSDLAutoGenerateOptionBean optionBean = new WSDLAutoGenerateOptionBean();
         optionBean.setClassFileName(classNameTextBox.getText());
@@ -272,7 +272,7 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
         optionBean.setStyle(styleSelectionCombo.getItem(styleSelectionCombo.getSelectionIndex()));
         return optionBean;
     }
-    
+
     private void updateDirtyStatus(boolean status){
 //        dirty = status;
         if (table.isVisible()){
@@ -280,7 +280,7 @@ public class WSDLOptionsPage extends AbstractServiceWizardPage {
         }
         setPageComplete(!status);
     }
-    
+
 	protected boolean getWizardComplete() {
 		return false;
 	}

@@ -52,7 +52,7 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         java2WsdlBuilder = new Java2WSDLBuilder(resolveOutputStream(className, optionsMap),
                                                 className,
                                                 resolveClassLoader(optionsMap));
-        
+
         configureJava2WSDLBuilder(optionsMap, className);
     }
 
@@ -73,7 +73,7 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         } else if (!outputFolder.isDirectory()) {
             throw new Exception("The specivied location " + outputFolderName + "is not a folder");
         }
-        
+
         option = loadOption(Java2WSDLConstants.OUTPUT_FILENAME_OPTION,
                             Java2WSDLConstants.OUTPUT_FILENAME_OPTION_LONG, optionsMap);
         String outputFileName = option == null ? null : option.getOptionValue();
@@ -81,7 +81,7 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         if (outputFileName == null) {
             outputFileName = Java2WSDLUtils.getSimpleClassName(className) + WSDL_FILENAME_SUFFIX;
         }
-    
+
         //first create a file in the given location
         outputFile = new File(outputFolder, outputFileName);
         FileOutputStream out;
@@ -93,10 +93,10 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         } catch (IOException e) {
             throw new Exception(e);
         }
-        
+
         return out;
     }
-    
+
     private ClassLoader resolveClassLoader(Map<String,Java2WSDLCommandLineOption> optionsMap) throws Exception
     {
         // if the class path is present, create a URL class loader with those
@@ -121,7 +121,7 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
                     if (Java2WSDLUtils.isURL(classPathEntry)) {
                         urls[i] = new URL(classPathEntry);
                     } else {
-                        urls[i] = new File(classPathEntry).toURL();
+                        urls[i] = new File(classPathEntry).toURI().toURL();
                     }
                 }
             } catch (MalformedURLException e) {
@@ -133,7 +133,7 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         } else {
             classLoader = Thread.currentThread().getContextClassLoader();
         }
-        
+
         return classLoader;
     }
 
@@ -177,25 +177,25 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         if (option != null) {
             java2WsdlBuilder.setUse(option.getOptionValue());
         }
-        
+
         option = loadOption(Java2WSDLConstants.ATTR_FORM_DEFAULT_OPTION,
                 Java2WSDLConstants.ATTR_FORM_DEFAULT_OPTION_LONG, optionsMap);
         java2WsdlBuilder.setAttrFormDefault(option == null ? null : option.getOptionValue());
-        
+
         option = loadOption(Java2WSDLConstants.ELEMENT_FORM_DEFAULT_OPTION,
                 Java2WSDLConstants.ELEMENT_FORM_DEFAULT_OPTION_LONG, optionsMap);
         java2WsdlBuilder.setElementFormDefault(option == null ? null : option.getOptionValue());
-        
+
         option = loadOption(Java2WSDLConstants.EXTRA_CLASSES_DEFAULT_OPTION,
                             Java2WSDLConstants.EXTRA_CLASSES_DEFAULT_OPTION_LONG, optionsMap);
         java2WsdlBuilder.setExtraClasses(option == null ? new ArrayList<String>() : option.getOptionValues());
-        
+
         option = loadOption(Java2WSDLConstants.NAMESPACE_GENERATOR_OPTION,
                             Java2WSDLConstants.NAMESPACE_GENERATOR_OPTION_LONG, optionsMap);
         if ( option != null ) {
             java2WsdlBuilder.setNsGenClassName(option.getOptionValue());
         }
-        
+
         option = loadOption(Java2WSDLConstants.SCHEMA_GENERATOR_OPTION,
                             Java2WSDLConstants.SCHEMA_GENERATOR_OPTION_LONG, optionsMap);
         if ( option != null ) {
@@ -244,14 +244,14 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         if (option != null) {
             java2WsdlBuilder.setNillableElementsAllowed(false);
         }
-        
+
         option = loadOption(Java2WSDLConstants.DISALLOW_OPTIONAL_ELEMENTS_OPTION,
                 Java2WSDLConstants.DISALLOW_OPTIONAL_ELEMENTS_OPTION_LONG,
                 optionsMap);
         if (option != null) {
             java2WsdlBuilder.setOptionalElementsAllowed(false);
         }
-        
+
         option = loadOption(Java2WSDLConstants.DISABLE_BINDING_SOAP11, null, optionsMap);
         if (option != null) {
             java2WsdlBuilder.setDisableSOAP11(true);
@@ -309,10 +309,10 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
         }
 
     }
-    
+
     private Java2WSDLCommandLineOption loadOption(String shortOption, String longOption,
                 Map<String,Java2WSDLCommandLineOption> options) {
-        
+
         //short option gets precedence
         Java2WSDLCommandLineOption option = null;
         if (longOption != null) {
@@ -327,25 +327,25 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
 
         return option;
     }
-    
+
     protected void addToSchemaLocationMap(String optionValue) throws Exception
     {
-        
-        
-        
+
+
+
     }
-    
-    protected Map<String,String> loadJavaPkg2NamespaceMap(Java2WSDLCommandLineOption option) throws Exception 
-    { 
+
+    protected Map<String,String> loadJavaPkg2NamespaceMap(Java2WSDLCommandLineOption option) throws Exception
+    {
         Map<String,String> pkg2nsMap = new Hashtable<String,String>();
-        if (option != null) 
+        if (option != null)
         {
             ArrayList<String> optionValues = option.getOptionValues();
             String anOptionValue ;
             for ( int count = 0 ; count < optionValues.size() ; ++count )
             {
                 anOptionValue = optionValues.get(count).trim();
-                
+
                 //an option value will be of the form [java package, namespace]
                 //hence we take the two substrings starting after '[' and upto ',' and
                 //starting after ',' and upto ']'
@@ -365,5 +365,5 @@ public class Java2WSDLCodegenEngine implements Java2WSDLConstants {
 	public File getOutputFile() {
     	return outputFile;
     }
-    
+
 }

@@ -46,7 +46,7 @@ public class ResourceInjectionService
                 e.printStackTrace();
             }
             File file = new File(wsdlLocation);
-            url = file.toURL();
+            url = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class ResourceInjectionService
     }
 
     /**
-     * 
+     *
      * @return
      *     returns ResourceInjectionPortType
      */

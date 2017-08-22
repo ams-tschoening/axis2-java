@@ -113,7 +113,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
     public void generateWsdl(String className, String bindingType) throws WebServiceException {
     	generateWsdl(className, bindingType, null);
     }
-    
+
     /**
      * This method will drive the call to WsGen to generate a WSDL file for
      * applications deployed without WSDL. We will then read this file in from
@@ -140,12 +140,12 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
         if (servletConfigParam != null) {
             Object obj = servletConfigParam.getValue();
             ServletContext servletContext;
-    
+
             if (obj instanceof ServletConfig) {
                 ServletConfig servletConfig = (ServletConfig) obj;
                 servletContext = servletConfig.getServletContext();
                 webBase = servletContext.getRealPath("/WEB-INF");
-            } 
+            }
         }
 
         if(classPath == null) {
@@ -239,7 +239,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
             if (wsdlFile != null) {
                 try {
                     WSDLReader wsdlReader = WSDLUtil.newWSDLReaderWithPopulatedExtensionRegistry();
-                    InputStream is = wsdlFile.toURL().openStream();
+                    InputStream is = wsdlFile.toURI().toURL().openStream();
                     Definition definition = wsdlReader.readWSDL(localOutputDirectory,
                             new InputSource(is));
                     try {
@@ -313,7 +313,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
      * This method will read in all of the schema files that were generated
      * for a given application.
      */
-    private HashMap<String, XmlSchema> readInSchema(String localOutputDirectory, 
+    private HashMap<String, XmlSchema> readInSchema(String localOutputDirectory,
     		                                        JAXWSCatalogManager catalogManager) throws Exception {
         try {
 
@@ -331,7 +331,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
             List<File> schemaFiles = getSchemaFiles(localOutputDirectory);
             for (File schemaFile : schemaFiles) {
                 // generate dom document for current schema file
-                Document parsedDoc = fac.newDocumentBuilder().parse(schemaFile.toURL().toString());
+                Document parsedDoc = fac.newDocumentBuilder().parse(schemaFile.toURI().toURL().toString());
                 // read the schema through XmlSchema
                 XmlSchema doc = schemaCollection.read(parsedDoc.getDocumentElement(),
                         UIDGenerator.generateUID());
@@ -478,7 +478,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
     	} else
     	    return new OASISCatalogManager();
     }
-    
+
     /**
      * Get the default classpath from various thingies in the message context
      *
@@ -510,7 +510,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
                 // Oh well.  No big deal.
             }
         }
-        
+
         URL serviceArchive = axisService.getFileName();
         if(serviceArchive != null) {
             try {
@@ -532,7 +532,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
         // axis.ext.dirs can be used in any appserver
         getClassPathFromDirectoryProperty(classpath, "axis.ext.dirs");
 
-        // classpath used by Jasper 
+        // classpath used by Jasper
         getClassPathFromProperty(classpath, "org.apache.catalina.jsp_classpath");
 
         // websphere stuff.
@@ -547,7 +547,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
 
         // boot classpath isn't found in above search
         getClassPathFromProperty(classpath, "sun.boot.class.path");
-        
+
         StringBuffer path = new StringBuffer();
         for (Iterator iterator = classpath.iterator(); iterator.hasNext();) {
             String s = (String) iterator.next();
@@ -679,7 +679,7 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
             return (name.endsWith(".jar") || name.endsWith(".zip"));
         }
     }
-    
+
     static private Boolean fileExists (final File file) {
         Boolean exists = (Boolean) AccessController.doPrivileged(
                 new PrivilegedAction() {
@@ -690,5 +690,5 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
         );
         return exists;
     }
-    
+
 }

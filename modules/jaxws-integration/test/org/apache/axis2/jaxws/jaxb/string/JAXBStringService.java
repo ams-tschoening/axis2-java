@@ -32,7 +32,7 @@ public class JAXBStringService
                         e.printStackTrace();
                 }
                 File file = new File(wsdlLocation);
-                url = file.toURL();
+                url = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class JAXBStringService
     }
 
     /**
-     * 
+     *
      * @return
      *     returns JAXBStringPortType
      */
@@ -58,7 +58,7 @@ public class JAXBStringService
     }
 
     /**
-     * 
+     *
      * @param features
      *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return

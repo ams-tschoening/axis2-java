@@ -51,7 +51,7 @@ public class ProxyNonWrappedTests extends AbstractTestCase {
     public static Test suite() {
         return getTestSetup(new TestSuite(ProxyNonWrappedTests.class));
     }
-    
+
     public void testInvoke(){
         TestLogger.logger.debug("-----------------------------------");
         TestLogger.logger.debug("test: " + getName());
@@ -69,7 +69,7 @@ public class ProxyNonWrappedTests extends AbstractTestCase {
         assertNotNull(response);
         TestLogger.logger.debug(">>Response =" + response.getReturnStr());
 
-        
+
         // Try again to verify
         response = proxy.invoke(invokeObj);
         assertNotNull(response);
@@ -77,7 +77,7 @@ public class ProxyNonWrappedTests extends AbstractTestCase {
 
         TestLogger.logger.debug("-------------------------------------");
     }
-    
+
     public void testNullInvoke(){
         TestLogger.logger.debug("-----------------------------------");
         TestLogger.logger.debug("test: " + getName());
@@ -92,21 +92,21 @@ public class ProxyNonWrappedTests extends AbstractTestCase {
         p.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,axisEndpoint);
         ReturnType response = proxy.invoke(invokeObj);
         assertNull(response);
-        
+
         // Try again
         response = proxy.invoke(invokeObj);
         assertNull(response);
 
         TestLogger.logger.debug("-------------------------------------");
     }
-    
+
     public void testInvokeAsyncCallback(){
         try{
             TestLogger.logger.debug("---------------------------------------");
             TestLogger.logger.debug("DocLitNonWrapped test case: " + getName());
             //Create wsdl url
-            File wsdl= new File(wsdlLocation); 
-            URL wsdlUrl = wsdl.toURL(); 
+            File wsdl= new File(wsdlLocation);
+            URL wsdlUrl = wsdl.toURI().toURL();
             ObjectFactory factory = new ObjectFactory();
             //create input object to web service operation
             Invoke invokeObj = factory.createInvoke();
@@ -126,8 +126,8 @@ public class ProxyNonWrappedTests extends AbstractTestCase {
             while(!monitor.isDone()){
                 Thread.sleep(1000);
             }
-            
-            
+
+
             // Try again
             TestLogger.logger.debug(">> Invoking Proxy Asynchronous Callback");
             handler = new AsyncCallback();
@@ -137,14 +137,14 @@ public class ProxyNonWrappedTests extends AbstractTestCase {
                 Thread.sleep(1000);
             }
             TestLogger.logger.debug("---------------------------------------");
-        }catch(Exception e){ 
-            e.printStackTrace(); 
+        }catch(Exception e){
+            e.printStackTrace();
             fail("Exception received" + e);
         }
     }
-    
+
     public void testInvokeAsyncPolling(){
-        
+
     }
 
 }

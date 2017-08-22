@@ -34,7 +34,7 @@ import java.util.Set;
 public class SchemaReaderTests extends TestCase {
 	public void testSchemaReader(){
 		SchemaReaderImpl sri = new SchemaReaderImpl();
-		
+
 	    String wsdlLocation="/test-resources/wsdl/shapes.wsdl";
 	    URL url = null;
 	    try {
@@ -46,7 +46,7 @@ public class SchemaReaderTests extends TestCase {
         		fail();
         	}
 	       	File file = new File(wsdlLocation);
-	       	url = file.toURL();
+	       	url = file.toURI().toURL();
 	    } catch (MalformedURLException e) {
 	        e.printStackTrace();
 	        fail();
@@ -65,5 +65,5 @@ public class SchemaReaderTests extends TestCase {
 	    	fail();
 	    }
 	}
-	
+
 }

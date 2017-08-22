@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
  * org.apache.axis2.deployment.ServiceBuilderExtension interface and facilitate
  * to deploy JAX-WS artifacts through other Deployers.
  * </p>
- * 
+ *
  * <p>
  * As an example it is possible to use JAXWSServiceBuilderExtension class to add
  * JAX-WS support for service.xml meta file based service deployment. First,
@@ -52,26 +52,26 @@ import org.apache.commons.logging.LogFactory;
  * Annotated call may load from embedded archive (AAR), a exploded directory or
  * from Classpath.
  * </p>
- * 
+ *
  * <p>
  * It is expected to define only JAXWSMessageReceiver as MessageReceivers in the
  * service.xml file
  * </p>
- * 
+ *
  * <p>
  * Example :
  * </p>
- * 
+ *
  * <pre>
  * {@code
  *  <messageReceivers>
  *         <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.apache.axis2.jaxws.server.JAXWSMessageReceiver"/>
  *         <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.apache.axis2.jaxws.server.JAXWSMessageReceiver"/>
  *     </messageReceivers>
- * 
+ *
  * }
  * </pre>
- * 
+ *
  * @since 1.7.0
  */
 public class JAXWSServiceBuilderExtension extends AbstractServiceBuilderExtension {
@@ -106,7 +106,7 @@ public class JAXWSServiceBuilderExtension extends AbstractServiceBuilderExtensio
                             .getServiceClassNameFromMetaData(serviceMetaData);
                 }
 
-                return deployerSupport.deployClasses(deploymentFileData.getFile().toURL(),
+                return deployerSupport.deployClasses(deploymentFileData.getFile().toURI().toURL(),
                         deploymentFileData.getClassLoader(), listOfClasses);
 
             } catch (AxisFault e) {
@@ -130,7 +130,7 @@ public class JAXWSServiceBuilderExtension extends AbstractServiceBuilderExtensio
      * This method check whether all the defined <messageReceiver> are type of
      * JAXWSMessageReceiver. Return true only if all the <messageReceiver>
      * elements satisfy above condition.
-     * 
+     *
      * @param metaData
      *            the meta data
      * @return true, if successful
@@ -143,7 +143,7 @@ public class JAXWSServiceBuilderExtension extends AbstractServiceBuilderExtensio
                 // if only one <service> present.
                 return checkMessageReceivers(metaDataEle);
             } else if (DeploymentConstants.TAG_SERVICE_GROUP.equals(metaDataEle.getLocalName())) {
-                // if <serviceGroup> present.               
+                // if <serviceGroup> present.
                 for (Iterator<OMElement> serviceItr = metaDataEle
                         .getChildrenWithLocalName(DeploymentConstants.TAG_SERVICE); serviceItr
                         .hasNext();) {

@@ -178,15 +178,15 @@ class OperationDescriptionImpl
     // Default value per JSR-181 MR sec 4.5, pg 24
     public static final Boolean WebResult_Header_DEFAULT = Boolean.FALSE;
     private Boolean webResultHeader;
-    
+
     //  Web Result Attachment Description information
     private boolean             _setAttachmentDesc = false;
     private AttachmentDescription attachmentDesc = null;
-    
+
     private boolean hasRequestSwaRefAttachments = false;
     private boolean hasResponseSwaRefAttachments = false;
     private Map<String, AttachmentDescription> partAttachmentMap;
-    
+
     private Method serviceImplMethod;
     private boolean serviceImplMethodFound = false;
     // For JAX-WS client async methods, this is the corresponding Sync method; for everything else,
@@ -195,7 +195,7 @@ class OperationDescriptionImpl
     // RUNTIME INFORMATION
     Map<String, OperationRuntimeDescription> runtimeDescMap =
             Collections.synchronizedMap(new HashMap<String, OperationRuntimeDescription>());
-    // Cache the actual Class of the type being returned. 
+    // Cache the actual Class of the type being returned.
     private Class resultActualTypeClazz;
 
     OperationDescriptionImpl(Method method, EndpointInterfaceDescription parent) {
@@ -203,8 +203,8 @@ class OperationDescriptionImpl
         methodComposite = null;
         partAttachmentMap = new HashMap<String, AttachmentDescription>();
         setSEIMethod(method);
-		
-        // The operationQName is intentionally unqualified to be consistent with the remaining parts of the system. 
+
+        // The operationQName is intentionally unqualified to be consistent with the remaining parts of the system.
         // Using a qualified name will cause breakage.
         // Don't do --> this.operationQName = new QName(parent.getTargetNamespace(), getOperationName());
         this.operationQName = new QName("", getOperationName());
@@ -220,7 +220,7 @@ class OperationDescriptionImpl
         if(this.axisOperation != null) {
             try {
                 this.axisOperation.addParameter(new Parameter(OperationDescription.AXIS_OPERATION_PARAMETER,
-                                                         this));  
+                                                         this));
             }
             catch(AxisFault af) {
                 throw ExceptionFactory.makeWebServiceException(Messages.getMessage("operationDescriptionErr1"));
@@ -238,7 +238,7 @@ class OperationDescriptionImpl
             this.operationQName = axisOperation.getName();
             try {
                 this.axisOperation.addParameter(new Parameter(OperationDescription.AXIS_OPERATION_PARAMETER,
-                                                         this));  
+                                                         this));
             }
             catch(AxisFault af) {
                 throw ExceptionFactory.makeWebServiceException(Messages.getMessage("operationDescriptionErr1"));
@@ -256,7 +256,7 @@ class OperationDescriptionImpl
         parentEndpointInterfaceDescription = parent;
         partAttachmentMap = new HashMap<String, AttachmentDescription>();
         methodComposite = mdc;
-        // The operationQName is intentionally unqualified to be consistent with the remaining parts of the system. 
+        // The operationQName is intentionally unqualified to be consistent with the remaining parts of the system.
         // Using a qualified name will cause breakage.
         // Don't do --> this.operationQName = new QName(parent.getTargetNamespace(), getOperationName());
         this.operationQName = new QName("", getOperationName());
@@ -275,24 +275,24 @@ class OperationDescriptionImpl
         } else {
             this.axisOperation = createAxisOperation();
         }
-        
+
         if(this.axisOperation != null) {
             try {
                 this.axisOperation.addParameter(new Parameter(OperationDescription.AXIS_OPERATION_PARAMETER,
-                                                         this));  
+                                                         this));
             }
             catch(AxisFault af) {
                 throw ExceptionFactory.makeWebServiceException(Messages.getMessage("operationDescriptionErr1"));
             }
         }
-        
+
         // Register understood headers on axisOperation
         registerMustUnderstandHeaders();
     }
 
     /**
      * Create an AxisOperation for this Operation.  Note that the ParameterDescriptions must
-     * be created before calling this method since, for a DOC/LIT/BARE (aka UNWRAPPED) message, the 
+     * be created before calling this method since, for a DOC/LIT/BARE (aka UNWRAPPED) message, the
      * ParamaterDescription is used to setup the AxisMessage correctly for use in SOAP Body-based
      * dispatching on incoming DOC/LIT/BARE messages.
      */
@@ -315,17 +315,17 @@ class OperationDescriptionImpl
 
         newAxisOperation.setName(determineOperationQName(seiMethod));
         newAxisOperation.setSoapAction(this.getAction());
-        
+
         //*************************************************************************************
         //NOTE: assumption here is that all info. need to generate the actions will have to come
         //      from annotations (or default values)
         //*************************************************************************************
-        
+
         String messageExchangePattern = newAxisOperation.getMessageExchangePattern();
         String operationName = newAxisOperation.getName().getLocalPart();
-        String targetNS = getEndpointInterfaceDescriptionImpl().getTargetNamespace();        
+        String targetNS = getEndpointInterfaceDescriptionImpl().getTargetNamespace();
         String portTypeName = getEndpointInterfaceDescriptionImpl().getPortType().getLocalPart();
-         
+
         //We don't have a name at this point, shouldn't matter if we have the MEP.
         //On the client the input and output actions are reversed.
         String inputName = null;
@@ -334,23 +334,23 @@ class OperationDescriptionImpl
         //If we still don't have an action then fall back to the Default Action Pattern.
         if (inputAction == null || inputAction.length() == 0) {
             inputAction =
-                WSDL11ActionHelper.getInputActionFromStringInformation( messageExchangePattern, 
-                                                                        targetNS, 
-                                                                        portTypeName, 
-                                                                        operationName, 
+                WSDL11ActionHelper.getInputActionFromStringInformation( messageExchangePattern,
+                                                                        targetNS,
+                                                                        portTypeName,
+                                                                        operationName,
                                                                         inputName);
         }
-                
+
         ArrayList inputActions = new ArrayList();
         inputActions.add(inputAction);
         newAxisOperation.setWsamappingList(inputActions);
-        
+
         //Map the action to the operation on the actual axisService
-        //TODO: Determine whether this should be done at a higher level in the 
+        //TODO: Determine whether this should be done at a higher level in the
         //      description hierarchy
         getEndpointInterfaceDescriptionImpl().getEndpointDescriptionImpl().
-            getAxisService().mapActionToOperation(inputAction, newAxisOperation);        
-        
+            getAxisService().mapActionToOperation(inputAction, newAxisOperation);
+
         //set the OUTPUT ACTION
 
         //We don't have a name at this point, shouldn't matter if we have the MEP
@@ -360,26 +360,26 @@ class OperationDescriptionImpl
 
         if (outputAction == null || outputAction.length() == 0) {
             outputAction =
-                WSDL11ActionHelper.getOutputActionFromStringInformation( messageExchangePattern, 
-                                                                         targetNS, 
-                                                                         portTypeName, 
-                                                                         operationName, 
+                WSDL11ActionHelper.getOutputActionFromStringInformation( messageExchangePattern,
+                                                                         targetNS,
+                                                                         portTypeName,
+                                                                         operationName,
                                                                          outputName);
         }
-        
+
         newAxisOperation.setOutputAction(outputAction);
 
         setFaultActions(newAxisOperation, operationName, targetNS, portTypeName);
 
         getEndpointInterfaceDescriptionImpl().getEndpointDescriptionImpl().
             getAxisService().addOperation(newAxisOperation);
-        
+
         return newAxisOperation;
     }
-    
+
     /**
      * Create an AxisOperation for this Operation.  Note that the ParameterDescriptions must
-     * be created before calling this method since, for a DOC/LIT/BARE (aka UNWRAPPED) message, the 
+     * be created before calling this method since, for a DOC/LIT/BARE (aka UNWRAPPED) message, the
      * ParamaterDescription is used to setup the AxisMessage correctly for use in SOAP Body-based
      * dispatching on incoming DOC/LIT/BARE messages.
      */
@@ -407,58 +407,58 @@ class OperationDescriptionImpl
         //NOTE: assumption here is that all info. need to generate the actions will have to come
         //      from annotations (or default values)
         //*************************************************************************************
-        
+
         String messageExchangePattern = newAxisOperation.getMessageExchangePattern();
         String operationName = newAxisOperation.getName().getLocalPart();
-        String targetNS = getEndpointInterfaceDescriptionImpl().getTargetNamespace();        
+        String targetNS = getEndpointInterfaceDescriptionImpl().getTargetNamespace();
         String portTypeName = getEndpointInterfaceDescriptionImpl().getPortType().getLocalPart();
-         
+
         //We don't have a name at this point, shouldn't matter if we have the MEP
         String inputName = null;
         String inputAction = getInputAction();
-        
+
         //If we don't have an action then fall back to the Default Action Pattern.
         if (inputAction == null || inputAction.length() == 0) {
             inputAction =
-                WSDL11ActionHelper.getInputActionFromStringInformation(messageExchangePattern, 
-                                                                       targetNS, 
-                                                                       portTypeName, 
-                                                                       operationName, 
+                WSDL11ActionHelper.getInputActionFromStringInformation(messageExchangePattern,
+                                                                       targetNS,
+                                                                       portTypeName,
+                                                                       operationName,
                                                                        inputName);
         }
-        
+
         ArrayList inputActions = new ArrayList();
         inputActions.add(inputAction);
         newAxisOperation.setWsamappingList(inputActions);
-        
+
         //Map the action to the operation on the actual axisService
-        //TODO: Determine whether this should be done at a higher level in the 
+        //TODO: Determine whether this should be done at a higher level in the
         //      description hierarchy
         getEndpointInterfaceDescriptionImpl().getEndpointDescriptionImpl().
             getAxisService().mapActionToOperation(inputAction, newAxisOperation);
-        
+
         //set the OUTPUT ACTION
 
         //We don't have a name at this point, shouldn't matter if we have the MEP
         String outputName = null;
         String outputAction = getOutputAction();
-        
+
         //If we don't have an action then fall back to the Default Action Pattern.
         if (outputAction == null || outputAction.length() == 0) {
             outputAction =
                 WSDL11ActionHelper.getOutputActionFromStringInformation(messageExchangePattern,
-                                                                        targetNS, 
-                                                                        portTypeName, 
-                                                                        operationName, 
+                                                                        targetNS,
+                                                                        portTypeName,
+                                                                        operationName,
                                                                         outputName);
         }
-        
+
         newAxisOperation.setOutputAction(outputAction);
-        
+
         //Set the FAULT ACTION
         setFaultActions(newAxisOperation, operationName, targetNS, portTypeName);
 
-        // If this is a DOC/LIT/BARE operation, then set the QName of the input AxisMessage to the 
+        // If this is a DOC/LIT/BARE operation, then set the QName of the input AxisMessage to the
         // part for the first IN or IN/OUT non-header parameter.  If there are no parameters, then don't set
         // anything.  The AxisMessage name is used to do SOAP-body based routing of DOC/LIT/BARE
         // incoming messages.
@@ -498,7 +498,7 @@ class OperationDescriptionImpl
                                         partQName);
                             }
                             axisMessage.setElementQName(partQName);
-                            
+
                             getEndpointInterfaceDescriptionImpl().getEndpointDescriptionImpl()
                         		.getAxisService()
                         			.addMessageElementQNameToOperationMapping(partQName, newAxisOperation);
@@ -508,7 +508,7 @@ class OperationDescriptionImpl
                 }
             } else {
                 // There are no parameters for this Doc/Lit/Bare operation.  That means the inbound soap:Body will
-                // be empty, so when asking the Body for the first element QName for routing purposes, a null will 
+                // be empty, so when asking the Body for the first element QName for routing purposes, a null will
                 // be returned.  By mapping a null key to this operation here, it will be the one found for the null
                 // element during routing.
                 getEndpointInterfaceDescriptionImpl().getEndpointDescriptionImpl().getAxisService()
@@ -524,48 +524,48 @@ class OperationDescriptionImpl
                                  String portTypeName) {
         // Walk the fault information
         FaultDescription[] faultDescs = getFaultDescriptions();
-        
+
         //Generate fault actions according to the Default Action Pattern.
         if (faultDescs != null) {
             for (FaultDescription faultDesc : faultDescs) {
-        
+
                 AxisMessage faultMessage = new AxisMessage();
                 String faultName = faultDesc.getName();
-                
+
                 if (faultName == null || faultName.equals("")) {
                     faultName = faultDesc.getExceptionClassName();
                     // Remove package name to get just class name
                     faultName = faultName.substring((faultName.lastIndexOf('.'))+1);
                 }
-                
+
                 faultMessage.setName(faultName);
                 if (log.isDebugEnabled()) {
                     log.debug("Set faultName = "+faultName+" for faultMessage = "+faultMessage+" and faultDesc = "+faultDesc);
                 }
-                
-                String faultAction = 
-                        WSDL11ActionHelper.getFaultActionFromStringInformation( targetNS, 
-                                        portTypeName, 
-                                        operationName, 
+
+                String faultAction =
+                        WSDL11ActionHelper.getFaultActionFromStringInformation( targetNS,
+                                        portTypeName,
+                                        operationName,
                                         faultMessage.getName());
 
                 if (log.isDebugEnabled()) {
                     log.debug("Default faultAction = "+faultAction);
                 }
-                
+
                 newAxisOperation.addFaultAction(faultDesc.getExceptionClassName(),  faultAction);
                 newAxisOperation.setFaultMessages(faultMessage);
             }
         }
-        
+
         //Override the fault actions based on any FaultAction annotations that are defined.
         FaultAction[] faultActions = getFaultActions();
-        
+
         if (faultActions != null) {
             for (FaultAction faultAction : faultActions) {
-                
+
                 String className = null;
-                
+
                 if(faultAction instanceof FaultActionAnnot
                         &&
                         ((FaultActionAnnot) faultAction).classNameString() != null) {
@@ -574,10 +574,10 @@ class OperationDescriptionImpl
                 else if(faultAction.className() != null) {
                     className = faultAction.className().getName();
                 }
-                
+
                 if(className != null) {
                     if(log.isDebugEnabled()) {
-                        log.debug("Looking for FaultDescription for class: " + className + 
+                        log.debug("Looking for FaultDescription for class: " + className +
                                   " from @FaultAction annotation");
                     }
                     FaultDescription faultDesc = resolveFaultByExceptionName(className);
@@ -607,8 +607,8 @@ class OperationDescriptionImpl
     void addToAxisService(AxisService axisService) {
         AxisOperation newAxisOperation = getAxisOperation();
         QName axisOpQName = newAxisOperation.getName();
-        // See if this operation is already added to the AxisService.  Note that we need to check the 
-        // children of the service rather than using the getOperation(axisOpQName) method.  The reason is 
+        // See if this operation is already added to the AxisService.  Note that we need to check the
+        // children of the service rather than using the getOperation(axisOpQName) method.  The reason is
         // that method checks the alias table in addition to the children, and it is possible at this point
         // for an operation to have just been added to the alias table but not yet as a child.  It is this method
         // that will add that newly-created operation to the service.
@@ -631,7 +631,7 @@ class OperationDescriptionImpl
             }
             if (axisMessage != null) {
                 QName elementQName = axisMessage.getElementQName();
-                if (!DescriptionUtils.isEmpty(elementQName) && 
+                if (!DescriptionUtils.isEmpty(elementQName) &&
                     axisService.getOperationByMessageElementQName(elementQName) == null) {
                     axisService.addMessageElementQNameToOperationMapping(elementQName,
                             newAxisOperation);
@@ -676,7 +676,7 @@ class OperationDescriptionImpl
             onewayAnnotation = null;
             onewayIsOneway = null;
             resultActualTypeClazz = null;
-            
+
             seiMethod = method;
             webMethodAnnotation = (WebMethod)
                 getAnnotation(seiMethod, WebMethod.class);
@@ -697,16 +697,16 @@ class OperationDescriptionImpl
     }
 
     public AxisOperation getAxisOperation() {
-        // Note that only the sync operations, and not the JAX-WS async client versions of an 
-        // operation, will have an AxisOperation associated with it.  For those async operations, 
+        // Note that only the sync operations, and not the JAX-WS async client versions of an
+        // operation, will have an AxisOperation associated with it.  For those async operations,
         // get the AxisOperation associated with the sync method and return that.
         if (axisOperation == null) {
             OperationDescription opDesc = getSyncOperation();
             if (opDesc != null && opDesc != this) {
                 return getSyncOperation().getAxisOperation();
             }
-        } 
-        
+        }
+
         return axisOperation;
     }
 
@@ -913,7 +913,7 @@ class OperationDescriptionImpl
         }
         return ((eid!= null)?new QName(eid.getTargetNamespace(), determineOperationName(mdc)):new QName(determineOperationName(mdc)));
     }
-    
+
     private static String determineOperationName(Method javaMethod) {
 
         String operationName = null;
@@ -972,7 +972,7 @@ class OperationDescriptionImpl
      */
     public OperationDescription getSyncOperation() {
         if (log.isDebugEnabled()) {
-            log.debug("Current OperationDescription Web Method annotation \"operation\" name: " 
+            log.debug("Current OperationDescription Web Method annotation \"operation\" name: "
                     + getOperationName());
             log.debug("Current OperationDescription java method name: " + getJavaMethodName());
         }
@@ -983,10 +983,10 @@ class OperationDescriptionImpl
             // The current OpDesc is not an async operation.  Cache it, then return it below.
             syncOperationDescription = this;
         } else {
-            // We haven't found a sync opdesc for this operation yet, so try again.  See the 
+            // We haven't found a sync opdesc for this operation yet, so try again.  See the
             // comments in the interface declaration for this method on why this might occur.
             OperationDescription opDesc = null;
-            
+
             String webMethodAnnoName = getOperationName();
             String javaMethodName = getJavaMethodName();
             if (webMethodAnnoName != null && webMethodAnnoName.length() > 0 &&
@@ -995,7 +995,7 @@ class OperationDescriptionImpl
                 if (eid != null) {
                     //searching for operationDescription of synchronous operation.
                     OperationDescription[] allOperations = eid.getOperations();
-                    // Find a method that has a matching annotation but is not 
+                    // Find a method that has a matching annotation but is not
                     // an asynchronous operation.
                     for (OperationDescription operation : allOperations) {
                         if (webMethodAnnoName.equals(operation.getOperationName()) &&
@@ -1045,7 +1045,7 @@ class OperationDescriptionImpl
         if (webMethodExclude == null) {
             // TODO: Validation: if this attribute specified, no other elements allowed per JSR-181 MR Sec 4.2, pg 17
             // TODO: Validation: This element is not allowed on endpoint interfaces
-            // Unlike the elements with a String value, if the annotation is present, exclude will always 
+            // Unlike the elements with a String value, if the annotation is present, exclude will always
             // return a usable value since it will default to FALSE if the element is not present.
             if (getAnnoWebMethod() != null) {
                 webMethodExclude = Boolean.valueOf(getAnnoWebMethod().exclude());
@@ -1063,7 +1063,7 @@ class OperationDescriptionImpl
     public RequestWrapper getAnnoRequestWrapper() {
         if (requestWrapperAnnotation == null) {
             if (!isDBC() && seiMethod != null) {
-                requestWrapperAnnotation = (RequestWrapper) 
+                requestWrapperAnnotation = (RequestWrapper)
                     getAnnotation(seiMethod,RequestWrapper.class);
             } else if (isDBC() && methodComposite != null) {
                 requestWrapperAnnotation = methodComposite.getRequestWrapperAnnot();
@@ -1152,7 +1152,7 @@ class OperationDescriptionImpl
                     !DescriptionUtils.isEmpty(getAnnoRequestWrapper().className())) {
                 requestWrapperClassName = getAnnoRequestWrapper().className();
             } else {
-                // There is no default for the RequestWrapper class name.  
+                // There is no default for the RequestWrapper class name.
                 // In such cases the programming layer (JAXWS) may use a programming spec specific
                 // mechanism to find the class, build the class, or operate without the class.
                 requestWrapperClassName = null;
@@ -1160,11 +1160,11 @@ class OperationDescriptionImpl
         }
         return requestWrapperClassName;
     }
-    
+
     public String getRequestWrapperPartName(){
     	return getAnnoRequestWrapperPartName();
     }
-    
+
     /**
      * Return PartName for RequestWrapper annotation if one present.
      * @return
@@ -1178,7 +1178,7 @@ class OperationDescriptionImpl
                     !DescriptionUtils.isEmpty(getAnnoRequestWrapper().partName())) {
                 requestWrapperPartName = getAnnoRequestWrapper().partName();
             } else {
-                // There is no default for the RequestWrapper part name.  
+                // There is no default for the RequestWrapper part name.
             	requestWrapperPartName = null;
             }
         }
@@ -1230,7 +1230,7 @@ class OperationDescriptionImpl
                     !DescriptionUtils.isEmpty(getAnnoResponseWrapper().localName())) {
                 responseWrapperLocalName = getAnnoResponseWrapper().localName();
             } else {
-                // The default value of localName is the value of operationQName as 
+                // The default value of localName is the value of operationQName as
                 // defined in the WebMethod annotation appended with "Response". [JAX-WS Sec. 7.4, p. 81]
                 responseWrapperLocalName = getAnnoWebMethodOperationName() + "Response";
             }
@@ -1286,7 +1286,7 @@ class OperationDescriptionImpl
                     !DescriptionUtils.isEmpty(getAnnoResponseWrapper().className())) {
                 responseWrapperClassName = getAnnoResponseWrapper().className();
             } else {
-                // There is no default for the ResponseWrapper class name.  
+                // There is no default for the ResponseWrapper class name.
                 // In such cases the programming layer (JAXWS) may use a programming spec specific
                 // mechanism to find the class, build the class, or operate without the class.
                 responseWrapperClassName = null;
@@ -1298,7 +1298,7 @@ class OperationDescriptionImpl
     public String getResponseWrapperPartName(){
     	return getAnnoResponseWrapperPartName();
     }
-    
+
     /**
      * return ResponseWrapper PartName if one present.
      * @return
@@ -1312,7 +1312,7 @@ class OperationDescriptionImpl
                     !DescriptionUtils.isEmpty(getAnnoResponseWrapper().partName())) {
                 responseWrapperPartName = getAnnoResponseWrapper().partName();
             } else {
-                // There is no default for the ResponseWrapper part name.  
+                // There is no default for the ResponseWrapper part name.
                 responseWrapperPartName = null;
             }
         }
@@ -1367,7 +1367,7 @@ class OperationDescriptionImpl
     }
 
     public ParameterDescription getParameterDescription(String parameterName) {
-        // TODO: Validation: For BARE paramaterUse, only a single IN our INOUT paramater and a single output (either return or OUT or INOUT) is allowed 
+        // TODO: Validation: For BARE paramaterUse, only a single IN our INOUT paramater and a single output (either return or OUT or INOUT) is allowed
         //       Per JSR-224, Sec 3.6.2.2, pg 37
         ParameterDescription matchingParamDesc = null;
         if (parameterName != null && !parameterName.equals("")) {
@@ -1570,7 +1570,7 @@ class OperationDescriptionImpl
         }
         if (webResultHeader == null) {
             if (getAnnoWebResult() != null) {
-                // Unlike the elements with a String value, if the annotation is present, exclude will always 
+                // Unlike the elements with a String value, if the annotation is present, exclude will always
                 // return a usable value since it will default to FALSE if the element is not present.
                 webResultHeader = Boolean.valueOf(getAnnoWebResult().header());
             } else {
@@ -1649,7 +1649,7 @@ class OperationDescriptionImpl
         }
         return soapBindingParameterStyle;
     }
-    
+
     // ===========================================
     // ANNOTATION: Action
     // ===========================================
@@ -1667,56 +1667,56 @@ class OperationDescriptionImpl
                 }
             }
         }
-        
+
         if (log.isDebugEnabled()) {
             log.debug("getAnnoAction: " + actionAnnotation);
         }
-        
+
         return actionAnnotation;
     }
-    
+
     private String getInputAction() {
         String inputAction = null;
         Action action = getAnnoAction();
-        
+
         if (action != null) {
             inputAction = action.input();
         }
-        
+
         if (log.isDebugEnabled()) {
             log.debug("getInputAction: " + inputAction);
         }
-        
+
         return inputAction;
     }
-    
+
     private String getOutputAction() {
         String outputAction = null;
         Action action = getAnnoAction();
-        
+
         if (action != null) {
             outputAction = action.output();
         }
-        
+
         if (log.isDebugEnabled()) {
             log.debug("getOutputAction: " + outputAction);
         }
-        
+
         return outputAction;
     }
-    
+
     private FaultAction[] getFaultActions() {
         FaultAction[] faultActions = null;
         Action action = getAnnoAction();
-        
+
         if (action !=  null) {
             faultActions = action.fault();
         }
-        
+
         if (log.isDebugEnabled()) {
             log.debug("getFaultActions: " + Arrays.toString(faultActions));
         }
-        
+
         return faultActions;
     }
 
@@ -1726,7 +1726,7 @@ class OperationDescriptionImpl
     public Oneway getAnnoOneway() {
         if (onewayAnnotation == null) {
             // Get the onew-way annotation from either the method composite (server-side)
-            // or from the SEI method (client-side).  
+            // or from the SEI method (client-side).
             if (isDBC() && methodComposite != null) {
                 if (methodComposite.isOneWay()) {
                     onewayAnnotation = OneWayAnnot.createOneWayAnnotImpl();
@@ -1789,11 +1789,11 @@ class OperationDescriptionImpl
      */
     public Class getResultActualType() {
         if(resultActualTypeClazz == null) {
-            resultActualTypeClazz = findResultActualType();    
+            resultActualTypeClazz = findResultActualType();
         }
         return resultActualTypeClazz;
     }
-    
+
     public Class findResultActualType() {
         // TODO: Fix this!  it isn't doing the right thing for DBC as noted below with FIXME comments
         //       This is used to marshall the rsp on the service (dbc) and demarshall on the client (reflection)
@@ -2012,14 +2012,14 @@ class OperationDescriptionImpl
         // TODO Add toString support
         runtimeDescMap.put(ord.getKey(), ord);
     }
-    
+
     public boolean isListType() {
     	return isListType;
     }
-    
+
     /**
      * This method will return the namespace for the BindingInput that this operation
-     * specifies. It will first look for a namespace on the WSDL Binding object and then 
+     * specifies. It will first look for a namespace on the WSDL Binding object and then
      * default to the web service's target namespace.
      */
     public String getBindingInputNamespace() {
@@ -2059,7 +2059,7 @@ class OperationDescriptionImpl
 
     /**
      * This method will return the namespace for the BindingOutput that this operation
-     * specifies. It will first look for a namespace on the WSDL Binding object and then 
+     * specifies. It will first look for a namespace on the WSDL Binding object and then
      * default to the web service's target namespace.
      */
     public String getBindingOutputNamespace() {
@@ -2097,7 +2097,7 @@ class OperationDescriptionImpl
         return tns;
     }
 
-    
+
     /**
      * This method will retrieve the namespace that is specified by the BindingInput or
      * BindingOutput object.
@@ -2112,7 +2112,7 @@ class OperationDescriptionImpl
         }
         return null;
     }
-    
+
     public AttachmentDescription getResultAttachmentDescription() {
         String partName = this.getResultPartName();
         if (partName != null) {
@@ -2126,7 +2126,7 @@ class OperationDescriptionImpl
         }
         return null;
     }
-    
+
     /**
      * This method will drive the building of AttachmentDescription objects for the
      * operation input/output messages in the WSDL.
@@ -2152,12 +2152,12 @@ class OperationDescriptionImpl
             if (log.isDebugEnabled()) {
                 log.debug("The WSDL is not available.  Looking for @WebService wsdlLocation.");
             }
-            
+
             // Try getting a WSDL
             String wsdlLocation = this.getEndpointInterfaceDescriptionImpl().
                 getEndpointDescriptionImpl().
                 getAnnoWebServiceWSDLLocation();
-            
+
             if (wsdlLocation == null || wsdlLocation.length() == 0) {
                 if (log.isDebugEnabled()) {
                     log.debug("@WebService wsdlLocation is not specified.  " +
@@ -2167,12 +2167,12 @@ class OperationDescriptionImpl
                 if (log.isDebugEnabled()) {
                     log.debug("@WebService wsdlLocation is " + wsdlLocation);
                 }
-                
+
                 Definition def = null;
                 WSDL4JWrapper wsdl4j = null;
                 try {
                     File file = new File(wsdlLocation);
-                    URL url = file.toURL();
+                    URL url = file.toURI().toURL();
                     wsdl4j = new WSDL4JWrapper(url, true, 2);  // In this context, limit the wsdl memory
                     def = wsdl4j.getDefinition();
                 } catch (Throwable t) {
@@ -2189,13 +2189,13 @@ class OperationDescriptionImpl
                     if (log.isDebugEnabled()) {
                         log.debug("WSDL Definition is loaded.  Get the WSDL Binding.");
                     }
-                    
+
                     Binding binding = this.getEndpointInterfaceDescriptionImpl().
                         getEndpointDescriptionImpl().getWSDLBinding();
-                    
+
                     if (binding == null) {
                         if (log.isDebugEnabled()) {
-                            log.debug("WSDL Binding was not found for serviceName=" +  
+                            log.debug("WSDL Binding was not found for serviceName=" +
                                       this.getEndpointInterfaceDescription().
                                         getEndpointDescription().getServiceQName() +
                                       " and portName=" +
@@ -2207,10 +2207,10 @@ class OperationDescriptionImpl
                             log.debug("Query Binding for AttachmentDescription Information");
                         }
                         DescriptionUtils.getAttachmentFromBinding(this, binding);
-                    }          
+                    }
                 }
             }
-            
+
         }
         if (log.isDebugEnabled()) {
             log.debug("End buildAttachmentInformation");
@@ -2227,23 +2227,23 @@ class OperationDescriptionImpl
     public void addPartAttachmentDescription(String partName, AttachmentDescription attachmentDesc) {
         partAttachmentMap.put(partName, attachmentDesc);
     }
-    
+
     public boolean hasRequestSwaRefAttachments() {
         return hasRequestSwaRefAttachments;
     }
-    
+
     public void setHasRequestSwaRefAttachments(boolean b) {
         hasRequestSwaRefAttachments = b;
     }
-    
+
     public boolean hasResponseSwaRefAttachments() {
         return hasResponseSwaRefAttachments;
     }
-    
+
     public void setHasResponseSwaRefAttachments(boolean b) {
         hasResponseSwaRefAttachments = b;
     }
-            
+
     public String toString() {
         final String newline = "\n";
         final String sameline = "; ";
@@ -2342,7 +2342,7 @@ class OperationDescriptionImpl
                 string.append("No Attachment Descriptions");
                 string.append(newline);
             }
-            
+
             string.append("RuntimeDescriptions:" + this.runtimeDescMap.size());
             string.append(newline);
             for (OperationRuntimeDescription runtimeDesc : runtimeDescMap.values()) {
@@ -2358,25 +2358,25 @@ class OperationDescriptionImpl
         }
         return string.toString();
     }
-    
-    /** 
+
+    /**
      * Adds a list of SOAP header QNames that are understood by JAXWS for this operation to the
      * AxisOperation.  This will be used by Axis2 to verify that all headers marked as
      * mustUnderstand have been or will be processed.
-     * 
+     *
      * Server side headers considered understood [JAXWS 2.0 Sec 10.2.1 page 117]
-     * - SEI method params that are in headers 
+     * - SEI method params that are in headers
      * - Headers processed by application handlers (TBD)
-     * 
+     *
      * Client side headers considered understood: None
      *
      */
     private void registerMustUnderstandHeaders() {
-        
+
         // REVIEW: If client side (return value, OUT or INOUT params) needs to be supported then
         // this needs to process client and server differently.
 
-        AxisOperation theAxisOperation = getAxisOperation(); 
+        AxisOperation theAxisOperation = getAxisOperation();
         if (theAxisOperation == null) {
             if (log.isDebugEnabled()) {
                 log.debug("The axis operation is null, so header QNames could not be registered.  OpDesc = " + this);
@@ -2389,18 +2389,18 @@ class OperationDescriptionImpl
         ArrayList understoodQNames = new ArrayList();
         if (paramDescs != null && paramDescs.length > 0) {
             for (ParameterDescription paramDesc : paramDescs) {
-                if (paramDesc.isHeader() 
-                        && (paramDesc.getMode() == WebParam.Mode.IN 
+                if (paramDesc.isHeader()
+                        && (paramDesc.getMode() == WebParam.Mode.IN
                                 || paramDesc.getMode() == WebParam.Mode.INOUT)) {
-                    QName headerQN = new QName(paramDesc.getTargetNamespace(), 
+                    QName headerQN = new QName(paramDesc.getTargetNamespace(),
                                                paramDesc.getParameterName());
                     understoodQNames.add(headerQN);
                     if (log.isDebugEnabled()) {
                         log.debug("OpDesc: understoodQName added to AxisOperation (if not null) as IN or INOUT param " + headerQN);
                     }
-                } else if (paramDesc.isHeader() 
+                } else if (paramDesc.isHeader()
                         && (paramDesc.getMode() == WebParam.Mode.OUT)) {
-                    QName headerQN = new QName(paramDesc.getTargetNamespace(), 
+                    QName headerQN = new QName(paramDesc.getTargetNamespace(),
                             paramDesc.getParameterName());
                     understoodQNames.add(headerQN);
                     if (log.isDebugEnabled()) {
@@ -2415,7 +2415,7 @@ class OperationDescriptionImpl
             understoodQNames.add(headerQN);
             if (log.isDebugEnabled()) {
                 log.debug("OpDesc: understoodQName added to AxisOperation (if not null) as result param " + headerQN);
-            }            
+            }
         }
 
         if (!understoodQNames.isEmpty()) {
@@ -2433,7 +2433,7 @@ class OperationDescriptionImpl
     }
     /**
      * Get an annotation.  This is wrappered to avoid a Java2Security violation.
-     * @param cls Class that contains annotation 
+     * @param cls Class that contains annotation
      * @param annotation Class of requrested Annotation
      * @return annotation or null
      */

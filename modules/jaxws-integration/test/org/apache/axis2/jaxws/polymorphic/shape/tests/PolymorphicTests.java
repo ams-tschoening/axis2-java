@@ -47,7 +47,7 @@ import java.util.Set;
 
 public class PolymorphicTests extends AbstractTestCase {
     String axisEndpoint = "http://localhost:6060/axis2/services/PolymorphicShapeService.PolymorphicShapePort";
-	
+
     public static Test suite() {
         return getTestSetup(new TestSuite(PolymorphicTests.class));
     }
@@ -83,7 +83,7 @@ public class PolymorphicTests extends AbstractTestCase {
         TestLogger.logger.debug("3D Square was drawn");
         TestLogger.logger.debug("-------------------------------");
 	}
-	
+
 	public void testInlineUseOfJAXBBinding(){
         TestLogger.logger.debug("------------------------------");
         TestLogger.logger.debug("Test : " + getName());
@@ -100,7 +100,7 @@ public class PolymorphicTests extends AbstractTestCase {
 				fail();
 			}
 			File file = new File(wsdlLocation);
-			url = file.toURL();
+			url = file.toURI().toURL();
 			WSDLWrapper wsdlWrapper = new WSDL4JWrapper(url);
 			org.apache.axis2.jaxws.wsdl.SchemaReader sr= new SchemaReaderImpl();
 			Set<String> set= sr.readPackagesFromSchema(wsdlWrapper.getDefinition());
@@ -134,7 +134,7 @@ public class PolymorphicTests extends AbstractTestCase {
 			fail();
 		}
 	}
-	
+
 	public void testSchemaReader(){
         TestLogger.logger.debug("------------------------------");
         TestLogger.logger.debug("Test : " + getName());
@@ -149,7 +149,7 @@ public class PolymorphicTests extends AbstractTestCase {
 				fail();
 			}
 			File file = new File(wsdlLocation);
-			url = file.toURL();
+			url = file.toURI().toURL();
 			WSDLWrapper wsdlWrapper = new WSDL4JWrapper(url);
 			org.apache.axis2.jaxws.wsdl.SchemaReader sr= new SchemaReaderImpl();
 			Set<String> set= sr.readPackagesFromSchema(wsdlWrapper.getDefinition());
@@ -181,8 +181,8 @@ public class PolymorphicTests extends AbstractTestCase {
 			e.printStackTrace();
 			fail();
 		}
-		
-		
-		        
+
+
+
 	}
 }

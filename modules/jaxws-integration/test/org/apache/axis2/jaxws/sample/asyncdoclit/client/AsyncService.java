@@ -49,7 +49,7 @@ public class AsyncService
                 e.printStackTrace();
             }
             File file = new File(wsdlLocation);
-            url = file.toURL();
+            url = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class AsyncService
     }
 
     /**
-     * 
+     *
      * @return
      *     returns AsyncPort
      */
@@ -75,7 +75,7 @@ public class AsyncService
     }
 
     /**
-     * 
+     *
      * @param features
      *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return

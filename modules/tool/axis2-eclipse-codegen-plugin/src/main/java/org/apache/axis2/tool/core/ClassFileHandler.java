@@ -31,9 +31,9 @@ import java.security.PrivilegedAction;
 public class ClassFileHandler {
 
 
-   
+
 /**
- * 
+ *
  * @param classFileName
  * @param location
  * @return
@@ -46,7 +46,7 @@ public class ClassFileHandler {
         if (!fileEndpoint.exists()){
             throw new IOException("the location is invalid");
         }
-        final URL[] urlList = {fileEndpoint.toURL()};
+        final URL[] urlList = {fileEndpoint.toURI().toURL()};
         URLClassLoader clazzLoader = AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>() {
 			public URLClassLoader run() {
 				return new URLClassLoader(urlList);

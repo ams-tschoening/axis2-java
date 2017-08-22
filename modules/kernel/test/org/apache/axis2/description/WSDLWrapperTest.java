@@ -60,14 +60,14 @@ public class WSDLWrapperTest extends TestCase {
     private String axis2xml = AbstractTestCase.basedir +
                       "/target/test-resources/deployment/axis2_a.xml";
 
-    private String wsdl1 = AbstractTestCase.basedir + 
-                      "/target/test-resources/wsdl/actionTests.wsdl"; 
+    private String wsdl1 = AbstractTestCase.basedir +
+                      "/target/test-resources/wsdl/actionTests.wsdl";
 
-    private String wsdl2 = AbstractTestCase.basedir + 
-                      "/target/test-resources/wsdl/test1.wsdl"; 
+    private String wsdl2 = AbstractTestCase.basedir +
+                      "/target/test-resources/wsdl/test1.wsdl";
 
-    private String wsdl3 = AbstractTestCase.basedir + 
-                      "/target/test-resources/wsdl/test2.wsdl"; 
+    private String wsdl3 = AbstractTestCase.basedir +
+                      "/target/test-resources/wsdl/test2.wsdl";
 
 
 
@@ -90,8 +90,8 @@ public class WSDLWrapperTest extends TestCase {
             if (testResourceFile1.exists()) {
                 try {
                     System.out.println("WSDL file 1: " + testResourceFile1.getName());
-                    def1 = readInTheWSDLFile(new FileInputStream(testResourceFile1)); 
-                } 
+                    def1 = readInTheWSDLFile(new FileInputStream(testResourceFile1));
+                }
                 catch (Exception e1) {
                     System.out.println("Error in WSDL : " + testResourceFile1.getName());
                     System.out.println("Exception: " + e1.toString());
@@ -115,7 +115,7 @@ public class WSDLWrapperTest extends TestCase {
                       .createConfigurationContextFromFileSystem(null, axis2xml)
                       .getAxisConfiguration();
 
-            WSDLDefinitionWrapper passthru = new WSDLDefinitionWrapper(def1, testResourceFile1.toURL(), false);
+            WSDLDefinitionWrapper passthru = new WSDLDefinitionWrapper(def1, testResourceFile1.toURI().toURL(), false);
 
             Definition def_passthru = passthru.getUnwrappedDefinition();
             String def_passthru_str = def_passthru.toString();
@@ -123,7 +123,7 @@ public class WSDLWrapperTest extends TestCase {
             String def_passthru_namespace = def_passthru.getTargetNamespace();
             Types def_passthru_types = def_passthru.getTypes();
 
-            WSDLDefinitionWrapper serialize = new WSDLDefinitionWrapper(def1, testResourceFile1.toURL(), axisCfg); 
+            WSDLDefinitionWrapper serialize = new WSDLDefinitionWrapper(def1, testResourceFile1.toURI().toURL(), axisCfg);
 
             Definition def_serialize = serialize.getUnwrappedDefinition();
             String def_serialize_str = def_serialize.toString();
@@ -131,7 +131,7 @@ public class WSDLWrapperTest extends TestCase {
             String def_serialize_namespace = def_serialize.getTargetNamespace();
             Types def_serialize_types = def_serialize.getTypes();
 
-            WSDLDefinitionWrapper reload = new WSDLDefinitionWrapper(def1, testResourceFile1.toURL(), 2); 
+            WSDLDefinitionWrapper reload = new WSDLDefinitionWrapper(def1, testResourceFile1.toURI().toURL(), 2);
 
             Definition def_reload = reload.getUnwrappedDefinition();
             String def_reload_str = def_reload.toString();
@@ -156,21 +156,21 @@ public class WSDLWrapperTest extends TestCase {
         // if the custem resolver is present then use it
         if (customWSLD4JResolver != null) {
             return reader.readWSDL(customWSLD4JResolver);
-        } 
+        }
         else {
             Document doc;
             try {
                 doc = newDocument(in);
-            } 
+            }
             catch (ParserConfigurationException e) {
                 throw new WSDLException(WSDLException.PARSER_ERROR,
                                         "Parser Configuration Error", e);
-            } 
+            }
             catch (SAXException e) {
                 throw new WSDLException(WSDLException.PARSER_ERROR,
                                         "Parser SAX Error", e);
 
-            } 
+            }
             catch (IOException e) {
                 throw new WSDLException(WSDLException.INVALID_WSDL, "IO Error",
                                         e);

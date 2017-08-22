@@ -47,22 +47,22 @@ public class HandlerResolverTest extends TestCase {
     private String svcLocalPart = "DummyService";
     private String portLocalPart = "DummyPort";
     private String portWrongLocalPart = "WrongPort";
-    
+
     /**
-     *  Test that setting the handler chain type on a sparse composite, but not 
+     *  Test that setting the handler chain type on a sparse composite, but not
      *  specifying that composite during construction of the HandlerResolver (i.e. no
-     *  Delegate key specified) results in no hanlders returned from this resolver. 
+     *  Delegate key specified) results in no hanlders returned from this resolver.
      */
     public void testHandlerResolverNoKey() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
-        // Create a composite with a JAXB Handler Config 
+        // Create a composite with a JAXB Handler Config
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
 
         HandlerChainsType handlerChainsType = getHandlerChainsType();
         sparseComposite.setHandlerChainsType(handlerChainsType);
         Object serviceDelegateKey = "CompositeKey";
-        
-        ServiceDescription serviceDesc = 
+
+        ServiceDescription serviceDesc =
             DescriptionFactory.createServiceDescription(null, serviceQName, HandlerResolverTestService.class, sparseComposite, serviceDelegateKey);
         HandlerResolver resolver = new HandlerResolverImpl(serviceDesc);
         assertNotNull(resolver);
@@ -70,28 +70,28 @@ public class HandlerResolverTest extends TestCase {
         List<Handler> list = resolver.getHandlerChain(pi);
         assertEquals(0, list.size());
     }
-    
+
     /**
      * The sparse composite has handler config information for the key that the HandlerResolver
-     * is created with, so that handler resolver contains those handlers.  However, the 
+     * is created with, so that handler resolver contains those handlers.  However, the
      * portInfo specified on the getHandlerChain does NOT match the QName in the config file
      * so no handlers should be returned.
      */
     public void testHandlerResolverInvalidPortInfo() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
         QName portQName = new QName(namespaceURI, portWrongLocalPart);
-        // Create a composite with a JAXB Handler Config 
+        // Create a composite with a JAXB Handler Config
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
 
         HandlerChainsType handlerChainsType = getHandlerChainsType();
         sparseComposite.setHandlerChainsType(handlerChainsType);
         Object serviceDelegateKey = "CompositeKey";
-        
+
         // The getHandlerChain will do handler lifecycle management as well, so there needs to be
         // and EnpdointDescription (representing the Port) under the ServiceDescription
-        ServiceDescription serviceDesc = 
+        ServiceDescription serviceDesc =
             DescriptionFactory.createServiceDescription(null, serviceQName, HandlerResolverTestService.class, sparseComposite, serviceDelegateKey);
-        EndpointDescription endpointDesc = 
+        EndpointDescription endpointDesc =
             DescriptionFactory.updateEndpoint(serviceDesc, HandlerResolverTestSEI.class, portQName, DescriptionFactory.UpdateType.GET_PORT);
         HandlerResolver resolver = new HandlerResolverImpl(serviceDesc, serviceDelegateKey);
         assertNotNull(resolver);
@@ -102,32 +102,32 @@ public class HandlerResolverTest extends TestCase {
 
     /**
      * The sparse composite has handler config information for the key that the HandlerResolver
-     * is created with, so that handler resolver contains those handlers.  
+     * is created with, so that handler resolver contains those handlers.
      */
     public void testHandlerResolverValidPortInfo() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
         QName portQName = new QName(namespaceURI, portLocalPart);
-        // Create a composite with a JAXB Handler Config 
+        // Create a composite with a JAXB Handler Config
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
 
         HandlerChainsType handlerChainsType = getHandlerChainsType();
         sparseComposite.setHandlerChainsType(handlerChainsType);
         Object serviceDelegateKey = "CompositeKey";
-        
+
         // The getHandlerChain will do handler lifecycle management as well, so there needs to be
         // and EnpdointDescription (representing the Port) under the ServiceDescription
-        ServiceDescription serviceDesc = 
+        ServiceDescription serviceDesc =
             DescriptionFactory.createServiceDescription(null, serviceQName, HandlerResolverTestService.class, sparseComposite, serviceDelegateKey);
-        EndpointDescription endpointDesc = 
+        EndpointDescription endpointDesc =
             DescriptionFactory.updateEndpoint(serviceDesc, HandlerResolverTestSEI.class, portQName, DescriptionFactory.UpdateType.GET_PORT);
         HandlerResolver resolver = new HandlerResolverImpl(serviceDesc, serviceDelegateKey);
         assertNotNull(resolver);
         PortInfo pi = new DummyPortInfo();
         List<Handler> list = resolver.getHandlerChain(pi);
         assertEquals(2, list.size());
-        
+
     }
-    
+
     private HandlerChainsType getHandlerChainsType() {
         InputStream is = getXMLFileStream();
         assertNotNull(is);
@@ -142,7 +142,7 @@ public class HandlerResolverTest extends TestCase {
             String sep = "/";
             configLoc = sep + "test-resources" + sep + "configuration" + sep + "handlers" + sep + "handler.xml";
             String baseDir = new File(System.getProperty("basedir",".")).getCanonicalPath();
-            is = new File(baseDir + configLoc).toURL().openStream();
+            is = new File(baseDir + configLoc).toURI().toURL().openStream();
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -46,19 +46,19 @@ import java.util.ArrayList;
 
 
 public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
-    
+
     private Text classNameTextBox;
     private Text serviceNameTextBox;
     private Button searchDeclaredMethodsCheckBox;
     Button loadButton;
     private Table table;
-    
+
     private boolean dirty = false;
-    
+
     public ServiceXMLGenerationPage(){
         super("page3");
     }
-    
+
     /* (non-Javadoc)
      * @see org.apache.axis2.tool.service.eclipse.ui.AbstractServiceWizardPage#initializeDefaultSettings()
      */
@@ -75,10 +75,10 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
         GridLayout layout = new GridLayout();
         layout.numColumns=3;
         container.setLayout(layout);
-        
+
         Label label = new Label(container,SWT.NULL);
         label.setText(ServiceArchiver.getResourceString("page3.servicename.lable"));
-        
+
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         gd.horizontalSpan = 2;
         serviceNameTextBox = new Text(container,SWT.BORDER);
@@ -92,11 +92,11 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
                 //validate
             }
         });
-       
-        
+
+
         label = new Label(container,SWT.NULL);
         label.setText(ServiceArchiver.getResourceString("page3.classname.lable"));
-        
+
         gd = new GridData(GridData.FILL_HORIZONTAL);
         classNameTextBox = new Text(container,SWT.BORDER);
         classNameTextBox.setLayoutData(gd);
@@ -108,8 +108,8 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
                 settings.put(PREF_SERVICE_GEN_CLASSNAME,classNameTextBox.getText());
             }
         });
-       
-        
+
+
         gd = new GridData(GridData.FILL_HORIZONTAL);
         loadButton = new Button(container,SWT.PUSH);
         loadButton.setText(ServiceArchiver.getResourceString("page3.loadbutton.lable"));
@@ -120,10 +120,10 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
             }
             public void widgetDefaultSelected(SelectionEvent e){}
         });
-        
+
         gd = new GridData(GridData.FILL_HORIZONTAL);
         gd.horizontalSpan = 3;
-        
+
         searchDeclaredMethodsCheckBox = new Button(container,SWT.CHECK);
         searchDeclaredMethodsCheckBox.setLayoutData(gd);
         searchDeclaredMethodsCheckBox.setText(ServiceArchiver.getResourceString("page3.declared.lable"));
@@ -134,41 +134,41 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
                 if(table.isVisible()){
                     updateTable();
                 }
-                
+
             }
-            public void widgetDefaultSelected(SelectionEvent e){} 
+            public void widgetDefaultSelected(SelectionEvent e){}
         });
         searchDeclaredMethodsCheckBox.setSelection(settings.getBoolean(PREF_SERVICE_GEN_LOAD_ALL));
-        
+
         gd = new GridData(GridData.FILL_BOTH);
         gd.horizontalSpan = 2;
         gd.verticalSpan = 5;
-        
+
         table = new Table(container,SWT.SINGLE|SWT.FULL_SELECTION|SWT.CHECK);
         table.setLinesVisible(true);
-        table.setHeaderVisible(true); 
+        table.setHeaderVisible(true);
         table.setLayoutData(gd);
         declareColumn(table,20,"");
         declareColumn(table,100,ServiceArchiver.getResourceString("page3.table.col1"));
         declareColumn(table,100,ServiceArchiver.getResourceString("page3.table.col2"));
         declareColumn(table,100,ServiceArchiver.getResourceString("page3.table.col3"));
-        
+
         table.setVisible(false);
-		
+
         if (restoredFromPreviousSettings){
             //try running the update
             updateTable();
         }else{
-            setPageComplete(false);  
+            setPageComplete(false);
         }
-        
-        
+
+
 		setControl(container);
 
     }
-     
+
     /**
-     * if the user has already filled the data, this page needs to be 
+     * if the user has already filled the data, this page needs to be
      * unchangeable
      *
      */
@@ -193,7 +193,7 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
         table.setEnabled(false);
         loadButton.setEnabled(false);
     }
-    
+
     public void clearPreviousData(){
         this.classNameTextBox.setText("");
         this.classNameTextBox.setEnabled(true);
@@ -211,37 +211,37 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
         }
         setPageComplete(!status);
     }
-    
+
     private void declareColumn(Table table, int width,String colName){
         TableColumn column = new TableColumn(table,SWT.NONE);
         column.setWidth(width);
         column.setText(colName);
     }
-    
+
     private void updateTable() {
         //get a URL from the class file location
         try {
             String classFileLocation = getClassFileLocation();
-            URL classFileURL = new File(classFileLocation).toURL();
-            
+            URL classFileURL = new File(classFileLocation).toURI().toURL();
+
            ArrayList listofURLs = new ArrayList();
            listofURLs.add(classFileURL);
-           
-            //get the libraries from the lib page and load it 
+
+            //get the libraries from the lib page and load it
             String[] libFileList = ((ServiceArchiveWizard)this.getWizard()).getLibFileList();
             if (libFileList!=null){
             	int count = libFileList.length;
 				for (int i=0;i<count;i++){
-					listofURLs.add(new File(libFileList[i]).toURL());
+					listofURLs.add(new File(libFileList[i]).toURI().toURL());
             	}
             }
-           
-            
+
+
             ClassLoader loader = new URLClassLoader((URL[])listofURLs.toArray(new URL[listofURLs.size()]));
             Class clazz = Class.forName(classNameTextBox.getText(),true,loader);
             Method[] methods = null;
-            
-            
+
+
             if (searchDeclaredMethodsCheckBox.getSelection()){
                 methods = clazz.getDeclaredMethods();
             }else{
@@ -260,7 +260,7 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
                    items[i].setChecked(true);//check them all by default
                 }
                 table.setVisible(true);
-                
+
                 //update the dirty variable
                updateDirtyStatus(false);
                updateStatus(null);
@@ -272,10 +272,10 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
            updateStatus(ServiceArchiver.getResourceString("page3.error.class")+ e.getMessage());
         } catch (Exception e){
             e.printStackTrace();
-            updateStatus(ServiceArchiver.getResourceString("page3.error.unknown") + e.getMessage()); 
+            updateStatus(ServiceArchiver.getResourceString("page3.error.unknown") + e.getMessage());
         }
     }
-    
+
     public boolean isDirty(){
         return dirty;
     }
@@ -283,7 +283,7 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
         ServiceArchiveWizard wizard = (ServiceArchiveWizard)getWizard();
         return wizard.getClassFileLocation();
     }
-    
+
     public Page2Bean getBean(Page2Bean previousBean){
         if (!previousBean.isManual()){
 	        previousBean.setAutomatic(true);
@@ -301,7 +301,7 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
         }
         return previousBean;
     }
-    
+
 	protected boolean getWizardComplete() {
 		return false;
 	}

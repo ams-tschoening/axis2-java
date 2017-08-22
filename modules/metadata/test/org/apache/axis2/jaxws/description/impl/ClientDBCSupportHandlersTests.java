@@ -48,24 +48,24 @@ public class ClientDBCSupportHandlersTests extends TestCase {
      */
     public void testHandlersOnService() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
-        // Create a composite with a JAXB Handler Config 
+        // Create a composite with a JAXB Handler Config
         DescriptionBuilderComposite composite = new DescriptionBuilderComposite();
 
         HandlerChainsType handlerChainsType = getHandlerChainsType();
         composite.setHandlerChainsType(handlerChainsType);
         Object compositeKey = "CompositeKey";
-        ServiceDescription svcDesc = 
-            DescriptionFactory.createServiceDescription(null, serviceQName, 
-                                       ClientDBCSupportHandlersService.class, 
+        ServiceDescription svcDesc =
+            DescriptionFactory.createServiceDescription(null, serviceQName,
+                                       ClientDBCSupportHandlersService.class,
                                        composite, compositeKey);
         assertNotNull(svcDesc);
         // There should only be a handler chain for the given key.
         assertNull(svcDesc.getHandlerChain());
         assertNotNull(svcDesc.getHandlerChain("CompositeKey"));
         assertNull(svcDesc.getHandlerChain("WrongKey"));
-        
+
     }
-    
+
     /**
      * Create an EndpointDescritoin specifying a HandlerChainsType in a sparse composite.
      */
@@ -85,23 +85,23 @@ public class ClientDBCSupportHandlersTests extends TestCase {
         composite.setHandlerChainsType(handlerChainsType);
         Object compositeKey = "CompositeKey";
 
-        ServiceDescription svcDesc = 
+        ServiceDescription svcDesc =
             DescriptionFactory.createServiceDescription(null, serviceQName,
-                                       ClientDBCSupportHandlersService.class, 
+                                       ClientDBCSupportHandlersService.class,
                                        null, null);
         assertNotNull(svcDesc);
-        
-        EndpointDescription epDesc = 
-            DescriptionFactory.updateEndpoint(svcDesc, ClientDBCSupportHandlersSEI.class, portQName, 
+
+        EndpointDescription epDesc =
+            DescriptionFactory.updateEndpoint(svcDesc, ClientDBCSupportHandlersSEI.class, portQName,
                                               DescriptionFactory.UpdateType.GET_PORT,
                                               composite, compositeKey);
         assertNotNull(epDesc);
-        
-        // There should be no handler info on the Service, but there should be on the Endpoint 
+
+        // There should be no handler info on the Service, but there should be on the Endpoint
         assertNull(svcDesc.getHandlerChain());
         assertNull(svcDesc.getHandlerChain("CompositeKey"));
         assertNull(svcDesc.getHandlerChain("WrongKey"));
-        
+
         assertNull(epDesc.getHandlerChain());
         assertNotNull(epDesc.getHandlerChain("CompositeKey"));
         assertNull(epDesc.getHandlerChain("WrongKey"));
@@ -121,7 +121,7 @@ public class ClientDBCSupportHandlersTests extends TestCase {
             String sep = "/";
             configLoc = sep + "test-resources" + sep + "test-handler.xml";
             String baseDir = new File(System.getProperty("basedir",".")).getCanonicalPath();
-            is = new File(baseDir + configLoc).toURL().openStream();
+            is = new File(baseDir + configLoc).toURI().toURL().openStream();
         }
         catch(Exception e) {
             e.printStackTrace();
