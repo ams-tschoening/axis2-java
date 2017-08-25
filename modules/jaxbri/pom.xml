@@ -133,7 +133,7 @@
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet -wsdl src/test/wsdl/DocLitBareService.wsdl" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet -wsdl &quot;src/test/wsdl/DocLitBareService.wsdl&quot;" />
                                 </java>
                             </tasks>
                         </configuration>

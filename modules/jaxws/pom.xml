@@ -18,7 +18,7 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">   
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.axis2</groupId>
@@ -103,7 +103,7 @@
             <artifactId>axis2-transport-local</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -233,20 +233,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                
+
                 <executions>
                     <execution>
                         <id>gen-ts</id>
                         <phase>generate-test-sources</phase>
                         <configuration>
-                            <tasks unless="maven.test.skip"> 
+                            <tasks unless="maven.test.skip">
                                 <!-- Theres got to be a better way to do this -->
                                 <property name="schema.source.dir" value="test-resources/xsd" />
                                 <property name="wsdl.source.dir" value="test-resources/wsdl" />
-                                <property name="schema.output.base.dir" value="target/schema" />                             
+                                <property name="schema.output.base.dir" value="target/schema" />
                                 <property name="schema.generated.src.dir" value="${schema.output.base.dir}/src" />
                                 <property name="schema.generated.classes.dir" value="${schema.output.base.dir}/classes" />
-                               
+
                                 <!-- make the dirs -->
                                 <mkdir dir="${schema.output.base.dir}" />
                                 <mkdir dir="${schema.generated.src.dir}" />
@@ -258,23 +258,23 @@
                                 <echo>Generating java from echo.xsd</echo>
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
-                                    
+
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet ${schema.source.dir}/echo.xsd" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet &quot;${schema.source.dir}/echo.xsd&quot;" />
                                 </java>
 
                                 <echo>Generating java from stock1.xsd</echo>
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet ${schema.source.dir}/stock1.xsd" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet &quot;${schema.source.dir}/stock1.xsd&quot;" />
                                 </java>
 
                                 <echo>Generating java from stock2.xsd</echo>
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet ${schema.source.dir}/stock2.xsd" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet &quot;${schema.source.dir}/stock2.xsd&quot;" />
                                 </java>
 
                                 <echo>Generating java from samplemtom.xsd</echo>
@@ -282,20 +282,20 @@
                                     <jvmarg value="-Djavax.xml.accessExternalSchema=all" />
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet ${schema.source.dir}/samplemtom.xsd" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet &quot;${schema.source.dir}/samplemtom.xsd&quot;" />
                                 </java>
                                 <echo>Generating java from ProxyDocLitWrapped.wsdl</echo>
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet -p org.test.proxy.doclitwrapped -quiet -wsdl ${wsdl.source.dir}/ProxyDocLitWrapped.wsdl" />
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet -p org.test.proxy.doclitwrapped -wsdl &quot;${wsdl.source.dir}/ProxyDocLitWrapped.wsdl&quot;" />
                                 </java>
                                 <echo>Generating java from AddNumbers.wsdl</echo>
                                 <java classname="com.sun.tools.xjc.Driver" fork="true">
                                     <classpath refid="maven.runtime.classpath" />
                                     <classpath location="${compiled.classes.dir}" />
-                                    <arg line="-d ${schema.generated.src.dir} -quiet -wsdl ${wsdl.source.dir}/AddNumbers.wsdl" />
-                                </java>                                
+                                    <arg line="-d &quot;${schema.generated.src.dir}&quot; -encoding &quot;UTF-8&quot; -quiet -wsdl &quot;${wsdl.source.dir}/AddNumbers.wsdl&quot;" />
+                                </java>
                             </tasks>
                         </configuration>
                         <goals>
