@@ -27,14 +27,14 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@WebServiceClient(name = "SOAP12EchoService", 
-        targetNamespace = "http://jaxws.axis2.apache.org/proxy/soap12", 
+@WebServiceClient(name = "SOAP12EchoService",
+        targetNamespace = "http://jaxws.axis2.apache.org/proxy/soap12",
         wsdlLocation = "SOAP12Echo.wsdl")
 public class SOAP12EchoService
     extends Service
 {
 
-    
+
     private final static URL SOAP12ECHOSERVICE_WSDL_LOCATION;
     private static String wsdlLocation = "/test/org/apache/axis2/jaxws/proxy/soap12/server/META-INF/SOAP12Echo.wsdl";
     static {
@@ -44,11 +44,11 @@ public class SOAP12EchoService
                 String baseDir  = new File(System.getProperty("basedir",".")).getCanonicalPath();
                 wsdlLocation = new File(baseDir + wsdlLocation).getAbsolutePath();
             }catch(Exception e){
-                
+
             }
             File file = new File(wsdlLocation);
-            url = file.toURL();
-            
+            url = file.toURI().toURL();
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

@@ -36,10 +36,10 @@ import java.net.URL;
 import java.io.File;
 
 /**
- * 
+ *
  */
 public class DescriptionTestUtils2 {
-    
+
     /*
      * ========================================================================
      * Test utility methods
@@ -48,20 +48,20 @@ public class DescriptionTestUtils2 {
 
     static public URL getWSDLURL() {
         return getWSDLURL("WSDLTests.wsdl");
-        
+
     }
-    
+
     static public String getWSDLLocation(String wsdlFileName) {
         // Get the URL to the WSDL file.  Note that 'basedir' is setup by Maven
         String basedir = System.getProperty("basedir",".");
         return basedir + "/test-resources/wsdl/" + wsdlFileName;
     }
-    
+
     static public URL getWSDLURL(String wsdlFileName) {
         URL wsdlURL = null;
         String urlString = getWSDLLocation(wsdlFileName);
         try {
-            wsdlURL = new File(urlString).getAbsoluteFile().toURL();
+            wsdlURL = new File(urlString).getAbsoluteFile().toURI().toURL();
         } catch (Exception e) {
             TestLogger.logger.debug(
                     "Caught exception creating WSDL URL :" + urlString + "; exception: " +
@@ -69,7 +69,7 @@ public class DescriptionTestUtils2 {
         }
         return wsdlURL;
     }
-    
+
     static Definition createWSDLDefinition(URL wsdlURL) {
         Definition wsdlDefinition = null;
         try {
@@ -100,20 +100,20 @@ public class DescriptionTestUtils2 {
                 Field serviceDelegateField = service.getClass().getSuperclass().getDeclaredField("delegate");
                 serviceDelegateField.setAccessible(true);
                 returnServiceDelegate = (ServiceDelegate) serviceDelegateField.get(service);
-            } 
+            }
         } catch (SecurityException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (NoSuchFieldException e) { 
+        } catch (NoSuchFieldException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return returnServiceDelegate;
     }
-    
+
     static public DescriptionBuilderComposite getServiceDescriptionComposite(ServiceDescription svcDesc) {
         DescriptionBuilderComposite returnComposite = null;
         // Need to get the composite off the implementation using the getter method, but it is all
@@ -138,7 +138,7 @@ public class DescriptionTestUtils2 {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
         return returnComposite;
     }
 

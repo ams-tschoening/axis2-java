@@ -95,7 +95,7 @@ public class CorbaDeployer extends AbstractDeployer implements DeploymentConstan
             AxisServiceGroup serviceGroup = new AxisServiceGroup(axisConfig);
             serviceGroup.setServiceGroupClassLoader(deploymentFileData.getClassLoader());
             ArrayList serviceList = processService(deploymentFileData, serviceGroup, configCtx);
-            DeploymentEngine.addServiceGroup(serviceGroup, serviceList, deploymentFileData.getFile().toURL(), deploymentFileData, axisConfig);
+            DeploymentEngine.addServiceGroup(serviceGroup, serviceList, deploymentFileData.getFile().toURI().toURL(), deploymentFileData, axisConfig);
             name = deploymentFileData.getName();
             super.deploy(deploymentFileData);
             log.info("Deploying " + name);
@@ -283,7 +283,7 @@ public class CorbaDeployer extends AbstractDeployer implements DeploymentConstan
                     service.addMessageReceiver(key, (MessageReceiver) mrs.get(key));
                 }
             }
-            
+
             // processing transports
             OMElement transports = service_element.getFirstChildWithName(new QName(TAG_TRANSPORTS));
             if (transports != null) {

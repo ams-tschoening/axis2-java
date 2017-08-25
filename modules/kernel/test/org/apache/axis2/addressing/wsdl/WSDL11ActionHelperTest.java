@@ -48,7 +48,7 @@ public class WSDL11ActionHelperTest extends TestCase {
         reader.setFeature("javax.wsdl.verbose", false);
 
         URL wsdlFile = new File(AbstractTestCase.basedir + testWSDLFile)
-                .toURL();//getClass().getClassLoader().getResource(testWSDLFile);
+                .toURI().toURL();//getClass().getClassLoader().getResource(testWSDLFile);
         definition = reader.readWSDL(wsdlFile.toString());
     }
 
@@ -160,7 +160,7 @@ public class WSDL11ActionHelperTest extends TestCase {
                 WSDL11ActionHelper.getActionFromFaultElement(definition, pt, op, fault);
         assertEquals(expectedAction, actualAction);
     }
-    
+
     // Test reading wsaw:Action values
     // portType=withWSAWActionURI
     // operation=echo
@@ -198,7 +198,7 @@ public class WSDL11ActionHelperTest extends TestCase {
                 WSDL11ActionHelper.getActionFromFaultElement(definition, pt, op, fault);
         assertEquals(expectedAction, actualAction);
     }
-    
+
     // Test reading wsaw:Action values
     // portType=withWSAActionURI
     // operation=echo
@@ -236,7 +236,7 @@ public class WSDL11ActionHelperTest extends TestCase {
                 WSDL11ActionHelper.getActionFromFaultElement(definition, pt, op, fault);
         assertEquals(expectedAction, actualAction);
     }
-    
+
     // Test reading wsaw:Action values
     // portType=withWSAMActionURI
     // operation=echo
@@ -274,7 +274,7 @@ public class WSDL11ActionHelperTest extends TestCase {
                 WSDL11ActionHelper.getActionFromFaultElement(definition, pt, op, fault);
         assertEquals(expectedAction, actualAction);
     }
-    
+
     // Test reading wsaw:Action values
     // portType=withWSASubmissionActionURI
     // operation=echo

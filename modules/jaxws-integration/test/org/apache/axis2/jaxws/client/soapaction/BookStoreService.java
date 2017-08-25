@@ -44,13 +44,13 @@ public class BookStoreService
                 e.printStackTrace();
             }
             File file = new File(wsdlLocation);
-            url = file.toURL();
+            url = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         BOOKSTORESERVICE_WSDL_LOCATION = url;
     }
-    
+
     public BookStoreService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
@@ -60,7 +60,7 @@ public class BookStoreService
     }
 
     /**
-     * 
+     *
      * @return
      *     returns BookStore
      */

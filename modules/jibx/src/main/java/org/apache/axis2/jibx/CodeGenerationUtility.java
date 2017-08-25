@@ -243,7 +243,7 @@ public class CodeGenerationUtility {
                 // added work in finding the namespaces.
                 ValidationContext vctx = BindingElement.newValidationContext();
                 binding = BindingElement.readBinding(new FileInputStream(file), path, vctx);
-                binding.setBaseUrl(file.toURL());
+                binding.setBaseUrl(file.toURI().toURL());
                 vctx.setBindingRoot(binding);
                 IncludePrevalidationVisitor ipv = new IncludePrevalidationVisitor(vctx);
                 vctx.tourTree(binding, ipv);
@@ -783,7 +783,7 @@ public class CodeGenerationUtility {
                         // simple type translates to format element in binding
                         FormatElement format = (FormatElement)simpleTypeMap.get(typename);
                         if (format == null) {
-                            
+
                             // check for restriction with simple base, and treat as base if so
                             XmlSchemaSimpleType stype = (XmlSchemaSimpleType)element.getSchemaType();
                             XmlSchemaSimpleTypeContent content = stype.getContent();
@@ -828,7 +828,7 @@ public class CodeGenerationUtility {
                         }
 
                     } else {
-                        
+
                         // conversion must be defined by mapping
                         MappingElementBase mapping;
                         if (refname == null) {
@@ -846,9 +846,9 @@ public class CodeGenerationUtility {
                                 typeMappedClassMap.put(typename, tindex);
                             }
                             param.setAttribute("type-index", tindex.toString());
-                            
+
                         } else {
-                            
+
                             // element reference translates to concrete mapping
                             mapping = (MappingElementBase)elementMap.get(refname);
                             if (mapping == null) {
@@ -857,7 +857,7 @@ public class CodeGenerationUtility {
                                         refname + " (used by element " + itemname + ')');
                             }
                             param.setAttribute("type-index", "");
-                            
+
                         }
 
                         // configure based on the mapping information
@@ -867,7 +867,7 @@ public class CodeGenerationUtility {
                         createtype = mapping.getCreateType();
                         if (createtype == null && mapping.isAbstract() &&
                             mapping.getExtensionTypes().isEmpty()) {
-                            
+
                             // abstract mapping with no extensions requires instance
                             //  this assumes the mapped type can be created, but no easy way to check
                             createtype = javatype;
@@ -1087,7 +1087,7 @@ public class CodeGenerationUtility {
                 bindingMap.put(format, binding);
 
             } else if (child.type() == ElementBase.MAPPING_ELEMENT) {
-                
+
                 // record only abstract mappings with type names, and mappings with names
                 MappingElementBase mapping = (MappingElementBase)child;
                 bindingMap.put(mapping, binding);

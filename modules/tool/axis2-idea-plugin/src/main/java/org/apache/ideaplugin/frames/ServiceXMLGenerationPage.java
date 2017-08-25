@@ -72,7 +72,7 @@ public class ServiceXMLGenerationPage extends WizardPanel {
         init();
     }
     private void init(){
-       
+
         txtServiceName =new JTextField();
         txtClassName =new JTextField();
 
@@ -172,7 +172,7 @@ public class ServiceXMLGenerationPage extends WizardPanel {
     }
 
     public void next() {
-        setNextButtonEnabled(false);        
+        setNextButtonEnabled(false);
         checkautoGeneration();
         switchPanel(CodegenFrame.PANEL_OPTION_C );
         ((ServiceXMLEditPage)getWizardComponents().getWizardPanel(CodegenFrame.PANEL_OPTION_C )).setDescription(archiveBean.getServiceXML());
@@ -191,7 +191,7 @@ public class ServiceXMLGenerationPage extends WizardPanel {
         //get a URL from the class file location
         try {
             String classFileLocation = archiveBean.getClassLoc().getPath();
-            URL classFileURL = new File(classFileLocation).toURL();
+            URL classFileURL = new File(classFileLocation).toURI().toURL();
 
            ArrayList listofURLs = new ArrayList();
            listofURLs.add(classFileURL);
@@ -206,7 +206,7 @@ public class ServiceXMLGenerationPage extends WizardPanel {
             if (libFileList!=null){
                 int count = libFileList.length;
                 for (int i=0;i<count;i++){
-                    listofURLs.add(new File(libFileList[i]).toURL());
+                    listofURLs.add(new File(libFileList[i]).toURI().toURL());
                 }
             }
             txtServiceName.setText("MyService" + count);

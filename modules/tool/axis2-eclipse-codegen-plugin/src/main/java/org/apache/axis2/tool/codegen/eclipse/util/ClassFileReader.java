@@ -56,7 +56,7 @@ public class ClassFileReader {
 					if (classPathEntry.startsWith("http://")) {
 						urls[i] = new URL(classPathEntry);
 					} else {
-						urls[i] = new File(classPathEntry).toURL();
+						urls[i] = new File(classPathEntry).toURI().toURL();
 					}
 				}
 			} catch (MalformedURLException e) {
@@ -75,14 +75,14 @@ public class ClassFileReader {
 		} else {
 			classLoader = Thread.currentThread().getContextClassLoader();
 		}
-		
+
 		//try to load the class with the given name
-		
+
 		try {
 			Class clazz=classLoader.loadClass(className);
 			clazz.getMethods();
-		    
-			
+
+
 		} catch (Throwable t) {
 			if (errorListener!=null){
 				errorListener.add(t);

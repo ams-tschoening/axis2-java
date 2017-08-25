@@ -33,9 +33,9 @@ import java.net.URL;
 
 /**
  * This class is an implementation of a WSDL4J interface and is the
- * implementation we supply to a WSDLReader instance. Its primary 
+ * implementation we supply to a WSDLReader instance. Its primary
  * goal is to assist with locating imported WSDL documents.
- * 
+ *
  */
 public class CatalogWSDLLocator extends BaseWSDLLocator implements WSDLLocator {
 
@@ -64,7 +64,7 @@ public class CatalogWSDLLocator extends BaseWSDLLocator implements WSDLLocator {
 
     /**
      * Resolves WSDL URIs using Apache Commons Resolver API.
-     * 
+     *
      * @param importURI a URI specifying the document to import
      * @param parent a URI specifying the location of the parent document doing
      * the importing
@@ -81,17 +81,17 @@ public class CatalogWSDLLocator extends BaseWSDLLocator implements WSDLLocator {
             if (resolvedImportLocation == null) {
                 resolvedImportLocation = catalogResolver.resolvePublic(importURI, parent);
             }
-        
+
         } catch (IOException e) {
             throw new RuntimeException("Catalog resolution failed", e);
         }
         return resolvedImportLocation;
     }
-    
+
     /**
      * Returns an InputStream pointed at an imported wsdl pathname relative to
      * the parent document.
-     * 
+     *
      * @param importPath
      *            identifies the WSDL file within the context
      * @return a stream of the WSDL file
@@ -117,7 +117,7 @@ public class CatalogWSDLLocator extends BaseWSDLLocator implements WSDLLocator {
         if (is == null) {
             try {
                 File file = new File(importPath);
-                is = file.toURL().openStream();
+                is = file.toURI().toURL().openStream();
             }
             catch (Throwable t) {
                 // No FFDC required
@@ -138,7 +138,7 @@ public class CatalogWSDLLocator extends BaseWSDLLocator implements WSDLLocator {
     /**
      * Return the wsdlLocation in URL form. WsdlLocation could be URL, relative
      * module path, full absolute path.
-     * 
+     *
      * @param wsdlLocation
      *            the location of a WSDL document in the form of a URL string, a
      *            relative pathname (relative to the root of a module, or a
@@ -150,12 +150,12 @@ public class CatalogWSDLLocator extends BaseWSDLLocator implements WSDLLocator {
         InputStream is = null;
         URI pathURI = null;
 
-        // If the WSDL is present in the catalog, use the location specified 
+        // If the WSDL is present in the catalog, use the location specified
         // in the catalog.  If this attempt results in failure, use the original
         // location
         // TODO:  Provide Allowance for Catalog
         // Note:  This method is not called.
-        
+
         try {
             streamURL = new URL(wsdlLocation);
             is = streamURL.openStream();
@@ -180,7 +180,7 @@ public class CatalogWSDLLocator extends BaseWSDLLocator implements WSDLLocator {
         if (is == null) {
             try {
                 File file = new File(wsdlLocation);
-                streamURL = file.toURL();
+                streamURL = file.toURI().toURL();
                 is = streamURL.openStream();
                 is.close();
             }

@@ -47,7 +47,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * An Axis2 DeploymentEngine subclass for deploying script services 
+ * An Axis2 DeploymentEngine subclass for deploying script services
  * supporting hot deploy and hot update.
  */
 public class ScriptDeploymentEngine extends DeploymentEngine {
@@ -195,7 +195,7 @@ public class ScriptDeploymentEngine extends DeploymentEngine {
 
             InputStream definition;
             try {
-                definition = wsdlFile.toURL().openStream();
+                definition = wsdlFile.toURI().toURL().openStream();
             } catch (Exception e) {
                 throw new AxisFault("exception opening wsdl", e);
             }
@@ -239,7 +239,7 @@ public class ScriptDeploymentEngine extends DeploymentEngine {
     protected String readScriptSource(File scriptFile) throws AxisFault {
         InputStream is;
         try {
-            is = scriptFile.toURL().openStream();
+            is = scriptFile.toURI().toURL().openStream();
         } catch (IOException e) {
             throw new AxisFault("IOException opening script: " + scriptFile, e);
         }

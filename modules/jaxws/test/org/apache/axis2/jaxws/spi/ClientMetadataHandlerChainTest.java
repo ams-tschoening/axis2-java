@@ -42,15 +42,15 @@ import java.util.List;
 
 /**
  * Verify that handler chains specified using the HandlerChainsType in a sparse
- * composite are correctly applied to Services and Ports on the client requester. 
+ * composite are correctly applied to Services and Ports on the client requester.
  */
 public class ClientMetadataHandlerChainTest extends TestCase {
-    
+
     static String namespaceURI = "http://www.apache.org/test/namespace";
     static String svcLocalPart = "DummyService";
     static private String portLocalPart = "DummyPort";
     private static int uniqueService = 0;
-    
+
     /**
      *  Test creating a service without a sparse composite.  This verifies pre-existing default
      *  behavior.
@@ -65,7 +65,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         PortInfo pi = new DummyPortInfo();
         List<Handler> list = resolver.getHandlerChain(pi);
         assertEquals(0, list.size());
-        
+
         ClientMetadataHandlerChainTestSEI port = service.getPort(portQName, ClientMetadataHandlerChainTestSEI.class);
         // Verify that ports created under the service have no handlers from the sparse composite
         BindingProvider bindingProvider = (BindingProvider) port;
@@ -76,13 +76,13 @@ public class ClientMetadataHandlerChainTest extends TestCase {
 
     /**
      * Test creating a service with a sparse composite that contains handler configuration
-     * information for this service delegate.  Verify that the handlers are included in the 
+     * information for this service delegate.  Verify that the handlers are included in the
      * chain.
      */
     public void testServiceWithComposite() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
         QName portQName = new QName(namespaceURI, portLocalPart);
-        // Create a composite with a JAXB Handler Config 
+        // Create a composite with a JAXB Handler Config
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
         HandlerChainsType handlerChainsType = getHandlerChainsType();
         sparseComposite.setHandlerChainsType(handlerChainsType);
@@ -97,14 +97,14 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         PortInfo pi = new DummyPortInfo();
         List<Handler> list = resolver.getHandlerChain(pi);
         assertEquals(2, list.size());
-        
+
         // Verify that ports created under the service have handlers
         BindingProvider bindingProvider = (BindingProvider) port;
         Binding binding = (Binding) bindingProvider.getBinding();
         List<Handler> portHandlers = binding.getHandlerChain();
         assertEquals(2, portHandlers.size());
         assertTrue(containSameHandlers(portHandlers, list));
-        
+
         // Verify that a subsequent port are different and that they also gets the correct handlers
         ClientMetadataHandlerChainTestSEI port2 = service.getPort(portQName, ClientMetadataHandlerChainTestSEI.class);
         BindingProvider bindingProvider2 = (BindingProvider) port2;
@@ -114,7 +114,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         assertEquals(2, portHandlers2.size());
         assertTrue(containSameHandlers(portHandlers2, list));
     }
-    
+
     /**
      * Set a sparse composite on a specific Port.  Verify that instances of that Port have the
      * correct handlers associated and other Ports do not.
@@ -124,8 +124,8 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         QName portQName = new QName(namespaceURI, portLocalPart);
 
         Service service = Service.create(serviceQName);
-        
-        // Create a composite with a JAXB Handler Config 
+
+        // Create a composite with a JAXB Handler Config
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
         HandlerChainsType handlerChainsType = getHandlerChainsType();
         sparseComposite.setHandlerChainsType(handlerChainsType);
@@ -138,14 +138,14 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         PortInfo pi = new DummyPortInfo();
         List<Handler> list = resolver.getHandlerChain(pi);
         assertEquals(2, list.size());
-        
+
         // Verify that the port created with the sparse metadata has those handlers
         BindingProvider bindingProvider = (BindingProvider) port;
         Binding binding = (Binding) bindingProvider.getBinding();
         List<Handler> portHandlers = binding.getHandlerChain();
         assertEquals(2, portHandlers.size());
         assertTrue(containSameHandlers(portHandlers, list));
-        
+
         // Verify that a creating another instance of the same port also gets those handlers
         ClientMetadataHandlerChainTestSEI port2 = service.getPort(portQName, ClientMetadataHandlerChainTestSEI.class);
         BindingProvider bindingProvider2 = (BindingProvider) port2;
@@ -154,7 +154,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         assertNotSame(port, port2);
         assertEquals(2, portHandlers2.size());
         assertTrue(containSameHandlers(portHandlers2, list));
-        
+
         // Verify that createing a different port doesn't get the handlers
         QName portQName3 = new QName(namespaceURI, portLocalPart + "3");
         ClientMetadataHandlerChainTestSEI port3 = service.getPort(portQName3, ClientMetadataHandlerChainTestSEI.class);
@@ -162,7 +162,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         Binding binding3 = (Binding) bindingProvider3.getBinding();
         List<Handler> portHandlers3 = binding3.getHandlerChain();
         assertEquals(0, portHandlers3.size());
-        
+
         // Verify setting the metadata on a different port (a different QName) will get handlers.
         QName portQName4 = new QName(namespaceURI, portLocalPart + "4");
         ServiceDelegate.setPortMetadata(sparseComposite);
@@ -171,7 +171,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         Binding binding4 = (Binding) bindingProvider4.getBinding();
         List<Handler> portHandlers4 = binding4.getHandlerChain();
         assertEquals(2, portHandlers4.size());
-        
+
         // Verify the service handler resolver knows about boths sets of handlers
         // attached to the two different port QNames and none are attached for the third port
         List<Handler> listForPort = resolver.getHandlerChain(pi);
@@ -180,15 +180,15 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         PortInfo pi4 = new DummyPortInfo(portQName4);
         List<Handler> listForPort4 = resolver.getHandlerChain(pi4);
         assertEquals(2, listForPort4.size());
-        
+
         PortInfo pi3 = new DummyPortInfo(portQName3);
         List<Handler> listForPort3 = resolver.getHandlerChain(pi3);
         assertEquals(0, listForPort3.size());
     }
-    
+
     /**
-     * Verify that handlers specified in a sparse compoiste on the service are only associated with 
-     * that specific service delegate (i.e. Service instance), even if the QNames are the same 
+     * Verify that handlers specified in a sparse compoiste on the service are only associated with
+     * that specific service delegate (i.e. Service instance), even if the QNames are the same
      * across two instances of a Service.
      */
     public void testMultipleServiceDelgatesServiceComposite() {
@@ -196,7 +196,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
             // Need to cache the ServiceDescriptions so that they are shared
             // across the two instances of the same Service.
             ClientMetadataTest.installCachingFactory();
-            
+
             QName serviceQName = new QName(namespaceURI, svcLocalPart);
             PortInfo pi = new DummyPortInfo();
 
@@ -226,7 +226,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
             Binding binding1 = (Binding) bindingProvider1.getBinding();
             List<Handler> portHandlers1 = binding1.getHandlerChain();
             assertEquals(2, portHandlers1.size());
-            
+
             // Refresh the handler list from the resolver after the port is created
             list1 = resolver1.getHandlerChain(pi);
             assertTrue(containSameHandlers(portHandlers1, list1));
@@ -252,8 +252,8 @@ public class ClientMetadataHandlerChainTest extends TestCase {
     }
 
     /**
-     * Verify that handlers specified in a sparse compoiste on the port are only associated with 
-     * that port on that specific service delegate (i.e. Service instance), even if the QNames are the same 
+     * Verify that handlers specified in a sparse compoiste on the port are only associated with
+     * that port on that specific service delegate (i.e. Service instance), even if the QNames are the same
      * across two instances of a Service.
      */
     public void testMultipleServiceDelgatesPortComposite() {
@@ -261,7 +261,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
             // Need to cache the ServiceDescriptions so that they are shared
             // across the two instances of the same Service.
             ClientMetadataTest.installCachingFactory();
-            
+
             QName serviceQName = new QName(namespaceURI, svcLocalPart);
             PortInfo pi = new DummyPortInfo();
 
@@ -288,7 +288,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
             Binding binding1 = (Binding) bindingProvider1.getBinding();
             List<Handler> portHandlers1 = binding1.getHandlerChain();
             assertEquals(2, portHandlers1.size());
-            
+
             // Refresh the handler list from the resolver after the port is created
             list1 = resolver1.getHandlerChain(pi);
             assertTrue(containSameHandlers(portHandlers1, list1));
@@ -312,16 +312,16 @@ public class ClientMetadataHandlerChainTest extends TestCase {
             ClientMetadataTest.restoreOriginalFactory();
         }
     }
-    
+
     /**
      * Verify that the original functionality of specifying a HandlerChain annotation with a
-     * file member works as it should. 
+     * file member works as it should.
      */
     public void testHandlerChainOnSEI() {
         QName serviceQN = new QName(namespaceURI, svcLocalPart);
 
         Service service = Service.create(serviceQN);
-        
+
         ClientMetadataHandlerChainTestSEIWithHC port = service.getPort(ClientMetadataHandlerChainTestSEIWithHC.class);
         BindingProvider bindingProvider = (BindingProvider) port;
         Binding binding = (Binding) bindingProvider.getBinding();
@@ -329,14 +329,14 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         assertEquals(1, portHandlers.size());
         assertTrue(containsHandlerChainAnnotationHandlers(portHandlers));
     }
-    
+
     /**
      * Verify that handler information in a sparse composite on the Port will override any handler chain
-     * annotation on the SEI. 
+     * annotation on the SEI.
      */
     public void testSEIHandlerChainOverrideOnPort() {
         QName serviceQN = new QName(namespaceURI, svcLocalPart + uniqueService++);
-        
+
         Service service = Service.create(serviceQN);
 
         // The SEI has a HandlerChain annotation, but the sparse metadata should override it
@@ -351,14 +351,14 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         assertEquals(2, portHandlers.size());
         assertTrue(containsSparseCompositeHandlers(portHandlers));
     }
-    
+
     /**
      * Verify that handler information in a sparse composite on the Service will override any handler chain
-     * annotation on the SEI. 
+     * annotation on the SEI.
      */
     public void testSEIHandlerChainOverrideOnService() {
         QName serviceQN = new QName(namespaceURI, svcLocalPart + uniqueService++);
-        
+
         // The SEI has a HandlerChain annotation, but the sparse metadata should override it
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
         HandlerChainsType handlerChainsType = getHandlerChainsType();
@@ -373,14 +373,14 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         assertEquals(2, portHandlers.size());
         assertTrue(containsSparseCompositeHandlers(portHandlers));
     }
-    
+
     /**
-     * Set different composites on the Service and the Port that specify different 
-     * HandlerChainsType values.  
+     * Set different composites on the Service and the Port that specify different
+     * HandlerChainsType values.
      */
     public void testCompositeOnServiceAndPort() {
         QName serviceQN = new QName(namespaceURI, svcLocalPart + uniqueService++);
-        
+
         // Create a service with a composite specifying handlers
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
         HandlerChainsType handlerChainsType = getHandlerChainsType();
@@ -399,14 +399,14 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         List<Handler> portHandlers = binding.getHandlerChain();
 
         // If there is a HandlerChainsType composite specified on both the Service and the Port,
-        // then the composite specified on the Port should be the one used to associate the 
+        // then the composite specified on the Port should be the one used to associate the
         // handlers for that Port.
         assertEquals(1, portHandlers.size());
         assertTrue(containsHandlerChainAnnotationHandlers(portHandlers));
     }
-    
+
     /**
-     * Verfiy that a HandlerChain annotation on the Service is associated with the Port 
+     * Verfiy that a HandlerChain annotation on the Service is associated with the Port
      */
     public void testGeneratedServiceWithHC() {
         ClientMetadataHandlerChainTestServiceWithHC service = new ClientMetadataHandlerChainTestServiceWithHC();
@@ -419,7 +419,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         assertTrue(containsHandlerChainAnnotationHandlers(portHandlers));
 
     }
-    
+
     /**
      * Verfiy that given a HandlerChain annotation on the Service and a Port and a sparse composite
      * on the Port associates the handlers from the sparse composite on the Port.
@@ -427,7 +427,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
     public void testGeneratedServiceWithHCPortOverride() {
         ClientMetadataHandlerChainTestServiceWithHC service = new ClientMetadataHandlerChainTestServiceWithHC();
 
-        // Set a HandlerChainsType on the sparse composite for the Port creation; it should override the 
+        // Set a HandlerChainsType on the sparse composite for the Port creation; it should override the
         // HandlerChain annotation on the Service.
         DescriptionBuilderComposite sparseComposite = new DescriptionBuilderComposite();
         HandlerChainsType handlerChainsType = getHandlerChainsType();
@@ -456,7 +456,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         if (inputHandlerClasses.size() != compositeHandlerClasses.size()) {
             return false;
         }
-        
+
         if (inputHandlerClasses.containsAll(compositeHandlerClasses)) {
             return true;
         } else {
@@ -467,7 +467,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
     /**
      * Answer if the List contains the same handlers as defined in the SEI
      * via the HandlerChain.file annotation memeber.
-     * 
+     *
      * @param portHandlers List of handlers
      * @return true if the list matches what was defined on the SEI via the
      *   HandlerChain annotation; false otherwise.
@@ -476,11 +476,11 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         List<Class> portHandlerClasses = handlerClasses(portHandlers);
         List<Class> seiHandlerClasses = new ArrayList<Class>();
         seiHandlerClasses.add(ClientMetadataHandlerChainHandler.class);
-        
+
         if (portHandlerClasses.size() != seiHandlerClasses.size()) {
             return false;
         }
-        
+
         if (portHandlerClasses.containsAll(seiHandlerClasses)) {
             return true;
         } else {
@@ -507,9 +507,9 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         } else {
             return false;
         }
-            
+
     }
-    
+
     private List<Class> handlerClasses(List<Handler> listOfHandlers) {
         List<Class> handlerClasses = new ArrayList<Class>();
         Iterator<Handler> handlerIterator = listOfHandlers.iterator();
@@ -518,7 +518,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         }
         return handlerClasses;
     }
-    
+
     private HandlerChainsType getHandlerChainsType() {
         return getHandlerChainsType("handler.xml");
     }
@@ -536,7 +536,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
             String sep = "/";
             configLoc = sep + "test-resources" + sep + "configuration" + sep + "handlers" + sep + fileName;
             String baseDir = new File(System.getProperty("basedir",".")).getCanonicalPath();
-            is = new File(baseDir + configLoc).toURL().openStream();
+            is = new File(baseDir + configLoc).toURI().toURL().openStream();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -547,12 +547,12 @@ public class ClientMetadataHandlerChainTest extends TestCase {
     public class DummyPortInfo implements PortInfo {
         private QName portQN;
         private QName serviceQN;
-        
+
         public DummyPortInfo() {
             this.portQN = new QName("http://www.apache.org/test/namespace", "DummyPort");
             this.serviceQN = new QName("http://www.apache.org/test/namespace", "DummyService");
         }
-        
+
         public DummyPortInfo(QName portQN) {
             this();
             this.portQN = portQN;
@@ -565,7 +565,7 @@ public class ClientMetadataHandlerChainTest extends TestCase {
         public QName getPortName() {
             return portQN;
         }
-        
+
         public QName getServiceName() {
             return serviceQN;
         }

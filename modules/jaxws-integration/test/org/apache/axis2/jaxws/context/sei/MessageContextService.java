@@ -30,8 +30,8 @@ import java.net.URL;
 import java.util.logging.Logger;
 
 
-@WebServiceClient(name = "MessageContextService", 
-                  targetNamespace = "http://context.jaxws.axis2.apache.org/", 
+@WebServiceClient(name = "MessageContextService",
+                  targetNamespace = "http://context.jaxws.axis2.apache.org/",
                   wsdlLocation = "MessageContext.wsdl")
 public class MessageContextService
         extends Service {
@@ -51,7 +51,7 @@ public class MessageContextService
                 e.printStackTrace();
             }
             File file = new File(wsdlLocation);
-            url = file.toURL();
+            url = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

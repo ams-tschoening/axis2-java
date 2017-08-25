@@ -35,7 +35,7 @@ public class ServiceClientTest extends Assert {
      * Tests that imported schemas are correctly resolved if the WSDL is loaded from a ZIP file.
      * This is a regression test for AXIS2-4353 and checks that WSDLs (with imports) can be loaded
      * from the class path (which usually means a JAR file).
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -45,7 +45,7 @@ public class ServiceClientTest extends Assert {
         if (basedir == null) {
             basedir = ".";
         }
-        URL zipUrl = new File(basedir, "target/test-zip.zip").toURL();
+        URL zipUrl = new File(basedir, "target/test-zip.zip").toURI().toURL();
         URL wsdlUrl = new URL("jar:" + zipUrl + "!/test.wsdl");
         ServiceClient serviceClient = new ServiceClient(configContext, wsdlUrl, new QName("urn:test", "EchoService"), "EchoPort");
         List<XmlSchema> schemas = serviceClient.getAxisService().getSchema();

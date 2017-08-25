@@ -37,9 +37,9 @@ public class ClientConfigTests extends TestCase {
     public ClientConfigTests(String name) {
         super(name);
     }
-    
+
     public void testBadWsdlUrl() throws Exception {
-        
+
         URL url = null;
         String wsdlLocation = null;
         try {
@@ -50,18 +50,18 @@ public class ClientConfigTests extends TestCase {
                 e.printStackTrace();
             }
             File file = new File(wsdlLocation);
-            url = file.toURL();
+            url = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        
+
         Service svc = Service.create(url, new QName("http://jaxws.axis2.apache.org", "EchoService"));
-        Dispatch dispatch = svc.createDispatch(new QName("http://jaxws.axis2.apache.org", "EchoPort"), 
+        Dispatch dispatch = svc.createDispatch(new QName("http://jaxws.axis2.apache.org", "EchoPort"),
                 String.class, Mode.PAYLOAD);
-        
+
         try {
             dispatch.invoke("");
-            
+
             // If an exception wasn't thrown, then it's an error.
             fail();
         } catch (WebServiceException e) {

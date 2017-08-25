@@ -34,12 +34,12 @@ import java.util.StringTokenizer;
 
 
 /**
- * This class is the base for an implementation of a WSDL4J interface that 
- * will be supplied to a WSDLReader instance. Its primary goal is to assist 
+ * This class is the base for an implementation of a WSDL4J interface that
+ * will be supplied to a WSDLReader instance. Its primary goal is to assist
  * with locating imported WSDL documents.
  */
 public abstract class BaseWSDLLocator {
-    
+
     private static Log log = LogFactory.getLog(BaseWSDLLocator.class);
 
     protected String baseURI, lastestImportURI;
@@ -48,22 +48,22 @@ public abstract class BaseWSDLLocator {
     /**
      * Returns an InputStream pointed at an imported wsdl pathname relative
      * to the parent resource or loadStrategy.
-     * 
-     * @param importPath identifies the WSDL file within the context 
+     *
+     * @param importPath identifies the WSDL file within the context
      * @return an stream of the WSDL file
      */
     abstract protected InputStream getInputStream(String importPath) throws IOException;
 
     /**
      * Allows for a level of indirection, such as a catalog, when importing URIs.
-     * 
+     *
      * @param importURI a URI specifying the document to import
      * @param parent a URI specifying the location of the parent document doing
      * the importing
      * @return the resolved import location, or null if no indirection is performed
      */
     abstract protected String getRedirectedURI(String importURI, String parent);
-    
+
     /**
       * Returns an InputSource "pointed at" the base document.
       */
@@ -84,7 +84,7 @@ public abstract class BaseWSDLLocator {
      */
     public InputSource getImportInputSource(String parentLocation, String relativeLocation) {
         if (log.isDebugEnabled()) {
-            log.debug("getImportInputSource, parentLocation= " + parentLocation + 
+            log.debug("getImportInputSource, parentLocation= " + parentLocation +
                     " relativeLocation= " + relativeLocation);
         }
         InputStream is = null;
@@ -93,7 +93,7 @@ public abstract class BaseWSDLLocator {
         String redirectedURI = getRedirectedURI(relativeLocation, parentLocation);
         if  (redirectedURI != null)
         	relativeLocation = redirectedURI;
-        
+
         try {
             if (isAbsoluteImport(relativeLocation)) {
                 try{
@@ -116,25 +116,25 @@ public abstract class BaseWSDLLocator {
                     try{
                         URI fileURI = new URI(relativeLocation);
                         absoluteURL = fileURI.toURL();
-                        is = absoluteURL.openStream();  
+                        is = absoluteURL.openStream();
                         lastestImportURI = absoluteURL.toExternalForm();
                     }
                     catch(Throwable t){
-                        //No FFDC code needed  
+                        //No FFDC code needed
                     }
                 }
                 if(is == null){
                     try{
                         File file = new File(relativeLocation);
-                        absoluteURL = file.toURL();
-                        is = absoluteURL.openStream();  
+                        absoluteURL = file.toURI().toURL();
+                        is = absoluteURL.openStream();
                         lastestImportURI = absoluteURL.toExternalForm();
                     }
                     catch(Throwable t){
-                        //No FFDC code needed           
+                        //No FFDC code needed
                     }
                 }
-                
+
             } else {
                 String importPath = normalizePath(parentLocation, relativeLocation);
                 is = getInputStream(importPath);
@@ -142,15 +142,15 @@ public abstract class BaseWSDLLocator {
             }
         } catch (IOException ex) {
             throw ExceptionFactory.makeWebServiceException(
-                    Messages.getMessage("WSDLRelativeErr1", 
-                                        relativeLocation, 
-                                        parentLocation, 
+                    Messages.getMessage("WSDLRelativeErr1",
+                                        relativeLocation,
+                                        parentLocation,
                                         ex.toString()));
         }
         if(is == null){
             throw ExceptionFactory.makeWebServiceException(
-                    Messages.getMessage("WSDLRelativeErr2", 
-                                        relativeLocation, 
+                    Messages.getMessage("WSDLRelativeErr2",
+                                        relativeLocation,
                                         parentLocation));
         }
         if(log.isDebugEnabled()){
@@ -179,7 +179,7 @@ public abstract class BaseWSDLLocator {
      * @param rawURI the uri for base wsdl file, which could be the form of
      *          META-INF/base.wsdl or just base.wsdl, but it can be /base.wsdl (no leading slash according to spec)
      * @return the uri which is one level up the raw uri with the trailing slash (if not empty)
-     * 
+     *
      */
     protected String convertURI(String rawURI) {
     	int idx = rawURI.lastIndexOf('/');
@@ -206,14 +206,14 @@ public abstract class BaseWSDLLocator {
             }
             else if(uri.indexOf(":\\") != -1){
                 absolute = true;
-            } 
+            }
         }
-        
+
         return absolute;
     }
 
     /**
-     * The ZipFile can not handle relative imports of that have directory components 
+     * The ZipFile can not handle relative imports of that have directory components
      * of the form "..".  Given a 'relativeLocation' relative to 'parentLocation', replace
      * any ".." with actual path component names.
      * @param parentLocation Path relative to the module root of the file that is doing the
@@ -229,14 +229,14 @@ public abstract class BaseWSDLLocator {
 
     protected String normalizePath(String parentLocation, String relativeLocation) {
         if (log.isDebugEnabled()) {
-            log.debug("normalizePath, parentLocation= " + parentLocation + 
+            log.debug("normalizePath, parentLocation= " + parentLocation +
                     " relativeLocation= " + relativeLocation);
         }
         // Get the path from the module root to the directory containing the importing WSDL file.
         // Note this path will end in a "/" and will not contain any ".." path components.
         String pathFromRoot = convertURI(parentLocation);
 
-        // Construct the path to the location relative to the module root based on the parent location, 
+        // Construct the path to the location relative to the module root based on the parent location,
         // removing any ".." or "." path components.
         StringBuffer pathToRelativeLocation = new StringBuffer(pathFromRoot);
         StringTokenizer tokenizedRelativeLocation =
@@ -249,14 +249,14 @@ public abstract class BaseWSDLLocator {
             String nextToken = tokenizedRelativeLocation.nextToken();
             if (nextToken.equals("..")) {
                 // Relative parent directory, so chop off the last path component in the path to back
-                // up to the parent directory.  First delete the trailing "/" from the path if there 
+                // up to the parent directory.  First delete the trailing "/" from the path if there
                 // is one, then delete characters from the end of the path until we find the next "/".
                 int charToDelete = pathToRelativeLocation.length() - 1;
-                if (pathToRelativeLocation.charAt(charToDelete) == WSDL_PATH_SEPERATOR_CHAR || 
+                if (pathToRelativeLocation.charAt(charToDelete) == WSDL_PATH_SEPERATOR_CHAR ||
                 		pathToRelativeLocation.charAt(charToDelete) == '\\') {
                     pathToRelativeLocation.deleteCharAt(charToDelete--);
                 }
-                while (pathToRelativeLocation.charAt(charToDelete) != WSDL_PATH_SEPERATOR_CHAR && 
+                while (pathToRelativeLocation.charAt(charToDelete) != WSDL_PATH_SEPERATOR_CHAR &&
                 		pathToRelativeLocation.charAt(charToDelete) != '\\') {
                     pathToRelativeLocation.deleteCharAt(charToDelete--);
                 }
@@ -265,8 +265,8 @@ public abstract class BaseWSDLLocator {
             } else {
                 // Make sure the current path ends in a "/"  or "\\" then append this path component
             	// This handles locations within the module and URIs
-                if ((pathToRelativeLocation.indexOf(String.valueOf(WSDL_PATH_SEPERATOR_CHAR)) 
-                		!= -1) && (pathToRelativeLocation.charAt(pathToRelativeLocation.length() 
+                if ((pathToRelativeLocation.indexOf(String.valueOf(WSDL_PATH_SEPERATOR_CHAR))
+                		!= -1) && (pathToRelativeLocation.charAt(pathToRelativeLocation.length()
                 				- 1)!= WSDL_PATH_SEPERATOR_CHAR)) {
                     pathToRelativeLocation.append(WSDL_PATH_SEPERATOR_CHAR);
                 }

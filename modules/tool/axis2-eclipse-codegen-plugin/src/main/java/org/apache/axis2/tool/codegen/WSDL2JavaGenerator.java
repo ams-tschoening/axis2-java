@@ -37,10 +37,10 @@ import java.util.Map.Entry;
 
 
 public class WSDL2JavaGenerator {
-    
+
     /**
      * Maps a string containing the name of a language to a constant defined in CommandLineOptionConstants.LanguageNames
-     * 
+     *
      * @param UILangValue a string containg a language, e.g. "java", "cs", "cpp" or "vb"
      * @return a normalized string constant
      */
@@ -51,7 +51,7 @@ public class WSDL2JavaGenerator {
     /**
      * Creates a list of parameters for the code generator based on the decisions made by the user on the OptionsPage
      * (page2). For each setting, there is a Command-Line option for the Axis2 code generator.
-     * 
+     *
      * @return a Map with keys from CommandLineOptionConstants with the values entered by the user on the Options Page.
      */
     public Map fillOptionMap(boolean isAyncOnly,
@@ -76,7 +76,7 @@ public class WSDL2JavaGenerator {
        //WSDL file name
        optionMap.put(CommandLineOptionConstants.WSDL2JavaConstants.WSDL_LOCATION_URI_OPTION, new CommandLineOption(
     		   CommandLineOptionConstants.WSDL2JavaConstants.WSDL_LOCATION_URI_OPTION, getStringArray(WSDLURI)));
-       
+
        //Async only
        if (isAyncOnly)
        {
@@ -120,11 +120,11 @@ public class WSDL2JavaGenerator {
        //output location
        optionMap.put(CommandLineOptionConstants.WSDL2JavaConstants.OUTPUT_LOCATION_OPTION, new CommandLineOption(
     		   CommandLineOptionConstants.WSDL2JavaConstants.OUTPUT_LOCATION_OPTION, getStringArray(outputLocation)));
-       
+
       //databinding
        optionMap.put(CommandLineOptionConstants.WSDL2JavaConstants.DATA_BINDING_TYPE_OPTION, new CommandLineOption(
     		   CommandLineOptionConstants.WSDL2JavaConstants.DATA_BINDING_TYPE_OPTION, getStringArray(databindingName)));
-       
+
        //port name
        if (portName!=null){
 	       optionMap.put(CommandLineOptionConstants.WSDL2JavaConstants.PORT_NAME_OPTION, new CommandLineOption(
@@ -140,13 +140,13 @@ public class WSDL2JavaGenerator {
 	       optionMap.put(CommandLineOptionConstants.WSDL2JavaConstants.NAME_SPACE_TO_PACKAGE_OPTION, new CommandLineOption(
 	    		   CommandLineOptionConstants.WSDL2JavaConstants.NAME_SPACE_TO_PACKAGE_OPTION, getStringArray(namespace2packageList)));
        }
-       
+
        //server side interface  mapping
        if (isServerSideInterface){
 	       optionMap.put(CommandLineOptionConstants.WSDL2JavaConstants.SERVER_SIDE_INTERFACE_OPTION, new CommandLineOption(
 	    		   CommandLineOptionConstants.WSDL2JavaConstants.SERVER_SIDE_INTERFACE_OPTION, new String[0]));
        }
-       
+
        if (advanceOptions != null) {
 			for (Iterator iterator = advanceOptions.entrySet().iterator(); iterator.hasNext();) {
 				Entry entry=(Entry) iterator.next();
@@ -159,30 +159,30 @@ public class WSDL2JavaGenerator {
 			}
 		}
        return optionMap;
-       
+
     }
-    
+
     public String getBaseUri(String wsdlURI){
-    	
+
     	try {
 			URL url;
 			if (wsdlURI.indexOf("://")==-1){
 				url = new URL("file","",wsdlURI);
 			}else{
-				url = new URL(wsdlURI);	
+				url = new URL(wsdlURI);
 			}
 
-			
+
 			String baseUri;
 			if ("file".equals(url.getProtocol())){
-				baseUri = new File(url.getFile()).getParentFile().toURL().toExternalForm();
+				baseUri = new File(url.getFile()).getParentFile().toURI().toURL().toExternalForm();
 			}else{
 				baseUri = url.toExternalForm().substring(0,
 						url.toExternalForm().lastIndexOf("/")
 				);
 			}
-		
-			
+
+
 			return baseUri;
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
@@ -190,31 +190,31 @@ public class WSDL2JavaGenerator {
     }
     /**
      * Reads the WSDL Object Model from the given location.
-     * 
+     *
      * @param wsdlURI the filesystem location (full path) of the WSDL file to read in.
      * @return the WSDLDescription object containing the WSDL Object Model of the given WSDL file
      * @throws WSDLException when WSDL File is invalid
      * @throws IOException on errors reading the WSDL file
      */
     public AxisService getAxisService(String wsdlURI) throws Exception{
-    	
+
     		URL url;
 			if (wsdlURI.indexOf("://")==-1){
 				url = new URL("file","",wsdlURI);
 			}else{
-				url = new URL(wsdlURI);	
+				url = new URL(wsdlURI);
 			}
 
 	    // This quick fix assume that the wsdlURI points to a wsdl 1.1 version.
-			// A better fix should be to determine which builder to use based on the wsdl version. 
+			// A better fix should be to determine which builder to use based on the wsdl version.
 			// The current implementation of the wsdl builder classes did not allow for this. I will suggest
 			// that the determination of which builder to use should be done in the builder classes, preferably
-			// in the parent builder class. 
+			// in the parent builder class.
 			// Accessable through a static reference to a method like getBuilderInstance(String wsdlURI) in
 			// the parent builder class or through a builder Abstract Factor or Abstract factory methods.
-			
+
 			WSDL11ToAxisServiceBuilder builder = new WSDL11ToAxisServiceBuilder(url.openConnection().getInputStream());
-					
+
                         // Set the URI of the base document for the Definition.
                         // Note that this is the URI of the base document, not the imports.
                         builder.setDocumentBaseUri(url.toString());
@@ -226,7 +226,7 @@ public class WSDL2JavaGenerator {
 
     /**
      * Converts a single String into a String Array
-     * 
+     *
      * @param value a single string
      * @return an array containing only one element
      */

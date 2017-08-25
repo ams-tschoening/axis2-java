@@ -183,7 +183,7 @@ public class SuggestionForm extends javax.swing.JFrame implements HyperlinkListe
         String helpDoc = System.getProperty("user.dir") + HELP_FILE_NAME;
 
         try {
-            helpDisplayPane.setPage(new File(helpDoc).toURL());
+            helpDisplayPane.setPage(new File(helpDoc).toURI().toURL());
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Help file not detected", "Help file error",
                     JOptionPane.ERROR_MESSAGE);

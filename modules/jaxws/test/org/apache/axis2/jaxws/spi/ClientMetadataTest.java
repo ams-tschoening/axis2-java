@@ -44,7 +44,7 @@ import java.util.Iterator;
  * Test creation of a generic Service and generated Service with and without additional
  * metadata specified during the creation of the service.  Additional metadata could be supplied
  * by a runtime in order to support JSR-109 deployment descriptors or injection of WebServiceRef
- * annotations. 
+ * annotations.
  */
 public class ClientMetadataTest extends TestCase {
     static final String namespaceURI = "http://description.jaxws.axis2.apache.org";
@@ -57,11 +57,11 @@ public class ClientMetadataTest extends TestCase {
     static final String originalWsdl_portLocalPart = "portLocalPart";
     static final String overridenWsdl_portLocalPart = "portLocalPartOverriden";
     static final String otherWsdl_portLocalPart = "portLocalPartOther";
-    
+
     static final String uniqueCatalog = "test-resources/unique-catalog.xml";
 
     /**
-     * Test Service.create(QName) with no composite specified 
+     * Test Service.create(QName) with no composite specified
      */
     public void test1ArgServiceWithoutComposite() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
@@ -77,10 +77,10 @@ public class ClientMetadataTest extends TestCase {
         // Since this is a generic Service with no overrides, there will be no WebServiceClient annotation
         WebServiceClient wsClient = dbcInServiceDesc.getWebServiceClientAnnot();
         assertNull(wsClient);
-        
+
         // No WSDL should have been used, so no Ports should be found
         assertTrue("Wrong WSDL used", validatePort(service, null));
-    }    
+    }
 
     /**
      * Service.create(URL, QName) with no composite specified
@@ -104,9 +104,9 @@ public class ClientMetadataTest extends TestCase {
         // WSDL was specified on the create, so make sure the right one was used by checking the ports
         assertTrue("Wrong WSDL used", validatePort(service, otherWsdl_portLocalPart));
     }
-    
+
     /**
-     * Service.create(QName) with a composite specified but no override in the composite 
+     * Service.create(QName) with a composite specified but no override in the composite
      */
     public void test1ArgServiceWithComposite() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
@@ -114,10 +114,10 @@ public class ClientMetadataTest extends TestCase {
         assertNull(ServiceDelegate.getServiceMetadata());
         // Use the proprietary SPI to create a service with additional metadata specified
         ServiceDelegate.setServiceMetadata(composite);
-        
+
         Service service = Service.create(serviceQName);
         assertNotNull(service);
-        
+
         // Verify that the composite has been reset so that it would not affect the next Service
         assertNull(ServiceDelegate.getServiceMetadata());
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
@@ -130,14 +130,14 @@ public class ClientMetadataTest extends TestCase {
         // Since this is a generic Service with no overrides, there will be no WebServiceClient annotation
         WebServiceClient wsClient = dbcInServiceDesc.getWebServiceClientAnnot();
         assertNull(wsClient);
-        
+
         // No WSDL should have been used, so no Ports should be found
         assertTrue("Wrong WSDL used", validatePort(service, null));
 
     }
-    
+
     /**
-     * Service.create(URL, QName) with a composite specified but no override in the composite 
+     * Service.create(URL, QName) with a composite specified but no override in the composite
      */
     public void test2ArgServiceWithComposite() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
@@ -160,13 +160,13 @@ public class ClientMetadataTest extends TestCase {
         // Since this is a generic Service with no overrides, there will be no WebServiceClient annotation
         WebServiceClient wsClient = dbcInServiceDesc.getWebServiceClientAnnot();
         assertNull(wsClient);
-        
+
         // WSDL was specified on the create, so make sure the right one was used by checking the ports
         assertTrue("Wrong WSDL used", validatePort(service, otherWsdl_portLocalPart));
     }
-    
+
     /**
-     * Generated service constructor() with no composite specified 
+     * Generated service constructor() with no composite specified
      */
     public void testNoArgGeneratedService() {
         Service service = new ClientMetadataGeneratedService();
@@ -184,17 +184,17 @@ public class ClientMetadataTest extends TestCase {
         assertEquals(originalWsdl, wsClient.wsdlLocation());
         assertEquals("originalTNS", wsClient.targetNamespace());
         assertEquals("", wsClient.name());
-        
+
         // WSDL not specified, so generated Service should use the annotation value
         assertTrue("Wrong WSDL Used", validatePort(service, originalWsdl_portLocalPart));
     }
-    
+
     /**
-     * Generated service constructor(URL, QName) with no composite specified 
+     * Generated service constructor(URL, QName) with no composite specified
      */
     public void test2ArgGeneratedService() {
-        
-        Service service = new ClientMetadataGeneratedService(getWsdlURL(otherWsdl), 
+
+        Service service = new ClientMetadataGeneratedService(getWsdlURL(otherWsdl),
                                                               new QName(namespaceURI, svcLocalPart));
         assertNotNull(service);
 
@@ -212,13 +212,13 @@ public class ClientMetadataTest extends TestCase {
         assertEquals("originalTNS", wsClient.targetNamespace());
         assertEquals("", wsClient.name());
 
-        // WSDL was specified on the generated Service constructor, 
+        // WSDL was specified on the generated Service constructor,
         // so make sure the right one was used by checking the ports
         assertTrue("Wrong WSDL used", validatePort(service, otherWsdl_portLocalPart));
     }
-    
+
     /**
-     * Generated service constructor() with composite specified but no override in composite 
+     * Generated service constructor() with composite specified but no override in composite
      */
     public void testNoArgGeneratedServiceWithComposite() {
         DescriptionBuilderComposite composite = new DescriptionBuilderComposite();
@@ -227,7 +227,7 @@ public class ClientMetadataTest extends TestCase {
         Service service = new ClientMetadataGeneratedService();
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -241,14 +241,14 @@ public class ClientMetadataTest extends TestCase {
         assertEquals(originalWsdl, wsClient.wsdlLocation());
         assertEquals("originalTNS", wsClient.targetNamespace());
         assertEquals("", wsClient.name());
-        
+
         // No WSDL override specified in the composite, so generated Service should use the annotation value
         assertTrue("Wrong WSDL Used", validatePort(service, originalWsdl_portLocalPart));
 
     }
 
     /**
-     * Generated service constructor(URL, QName) with composite specified but no override in composite 
+     * Generated service constructor(URL, QName) with composite specified but no override in composite
      */
     public void test2ArgGeneratedServiceWithComposite() {
         DescriptionBuilderComposite composite = new DescriptionBuilderComposite();
@@ -258,7 +258,7 @@ public class ClientMetadataTest extends TestCase {
                                                              new QName(namespaceURI, svcLocalPart));
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -277,21 +277,21 @@ public class ClientMetadataTest extends TestCase {
         // so should get the WSDL specified on the constructor
         assertTrue("Wrong WSDL used", validatePort(service, otherWsdl_portLocalPart));
     }
-    
+
     /**
-     * Service.create(QName) with a composite that specifies a wsdlLocation override 
+     * Service.create(QName) with a composite that specifies a wsdlLocation override
      */
     public void test1ArgServiceOverrideWsdlLocation() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
         DescriptionBuilderComposite composite = new DescriptionBuilderComposite();
-        WebServiceClientAnnot wsClientAnno = 
+        WebServiceClientAnnot wsClientAnno =
             WebServiceClientAnnot.createWebServiceClientAnnotImpl(null, null, getWsdlLocation(overridenWsdl));
         composite.setWebServiceClientAnnot(wsClientAnno);
         // Use the proprietary SPI to create a service with additional metadata specified
         ServiceDelegate.setServiceMetadata(composite);
-        
+
         Service service = Service.create(serviceQName);
-        
+
         assertNotNull(service);
         // Verify that the composite has been reset so that it would not affect the next Service
         assertNull(ServiceDelegate.getServiceMetadata());
@@ -310,11 +310,11 @@ public class ClientMetadataTest extends TestCase {
         assertEquals(getWsdlLocation(overridenWsdl), wsClient.wsdlLocation());
         assertNull(wsClient.targetNamespace());
         assertNull(wsClient.name());
-        
+
         // WSDL override specified in the composite
         assertTrue("Wrong WSDL used", validatePort(service, overridenWsdl_portLocalPart));
     }
-    
+
     /**
      * Service.create(QName) with a composite that overrides the TargetNamespace.  Most of the
      * other tests override the WSDL Location since that is what a JSR-109 DD can specify.  This
@@ -323,14 +323,14 @@ public class ClientMetadataTest extends TestCase {
     public void test1ArgServiceOverrideTNS() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
         DescriptionBuilderComposite composite = new DescriptionBuilderComposite();
-        WebServiceClientAnnot wsClientAnno = 
+        WebServiceClientAnnot wsClientAnno =
             WebServiceClientAnnot.createWebServiceClientAnnotImpl(null, "overrideTNS", null);
         composite.setWebServiceClientAnnot(wsClientAnno);
         // Use the proprietary SPI to create a service with additional metadata specified
         ServiceDelegate.setServiceMetadata(composite);
-        
+
         Service service = Service.create(serviceQName);
-        
+
         assertNotNull(service);
         // Verify that the composite has been reset so that it would not affect the next Service
         assertNull(ServiceDelegate.getServiceMetadata());
@@ -345,7 +345,7 @@ public class ClientMetadataTest extends TestCase {
         // no key.
         WebServiceClient wsClient = dbcInServiceDesc.getWebServiceClientAnnot();
         assertNull(wsClient);
-        
+
         WebServiceClient wsClientKeyed = dbcInServiceDesc.getWebServiceClientAnnot(serviceDelegate);
         assertNotNull(wsClientKeyed);
         assertNull(wsClientKeyed.wsdlLocation());
@@ -353,9 +353,9 @@ public class ClientMetadataTest extends TestCase {
         assertNull(wsClientKeyed.name());
 
     }
-    
+
     /**
-     * Service.create(QName) with a composite that specifies a CatalogManager override 
+     * Service.create(QName) with a composite that specifies a CatalogManager override
      */
     public void test1ArgServiceOverrideCatalogManager() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
@@ -366,7 +366,7 @@ public class ClientMetadataTest extends TestCase {
         // Use the proprietary SPI to create a service with additional metadata specified
         ServiceDelegate.setServiceMetadata(composite);
         Service service = Service.create(serviceQName);
-        
+
         assertNotNull(service);
         // Verify that the composite has been reset so that it would not affect the next Service
         assertNull(ServiceDelegate.getServiceMetadata());
@@ -381,9 +381,9 @@ public class ClientMetadataTest extends TestCase {
         String serviceCatalogFile = (String) dbcInServiceDesc.getSparseComposite(serviceDelegate).getCatalogManager().getCatalogFiles().get(0);
         assertEquals(serviceCatalogFile, getCatalogLocation(uniqueCatalog));
     }
-    
+
     /**
-     * Service.create(URL, QName) with a composite that specifies a wsdlLocation override 
+     * Service.create(URL, QName) with a composite that specifies a wsdlLocation override
      */
     public void test2ArgServiceOverrideWsdlLocation() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
@@ -394,7 +394,7 @@ public class ClientMetadataTest extends TestCase {
         // Use the proprietary SPI to create a service with additional metadata specified
         ServiceDelegate.setServiceMetadata(composite);
         Service service = Service.create(wsdlUrl, serviceQName);
-        
+
         assertNotNull(service);
         // Verify that the composite has been reset so that it would not affect the next Service
         assertNull(ServiceDelegate.getServiceMetadata());
@@ -418,9 +418,9 @@ public class ClientMetadataTest extends TestCase {
         assertTrue("Wrong WSDL used", validatePort(service, overridenWsdl_portLocalPart));
 
     }
-    
+
     /**
-     * Service.create(URL, QName) with a composite that specifies a CatalogManager override 
+     * Service.create(URL, QName) with a composite that specifies a CatalogManager override
      */
     public void test2ArgServiceOverrideCatalogManager() {
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
@@ -432,7 +432,7 @@ public class ClientMetadataTest extends TestCase {
         // Use the proprietary SPI to create a service with additional metadata specified
         ServiceDelegate.setServiceMetadata(composite);
         Service service = Service.create(wsdlUrl, serviceQName);
-        
+
         assertNotNull(service);
         // Verify that the composite has been reset so that it would not affect the next Service
         assertNull(ServiceDelegate.getServiceMetadata());
@@ -462,7 +462,7 @@ public class ClientMetadataTest extends TestCase {
 
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -477,17 +477,17 @@ public class ClientMetadataTest extends TestCase {
         assertEquals(originalWsdl, wsClient.wsdlLocation());
         assertEquals("originalTNS", wsClient.targetNamespace());
         assertEquals("", wsClient.name());
-        
+
         WebServiceClient wsClientKeyed = dbcInServiceDesc.getWebServiceClientAnnot(serviceDelegate);
         assertNotSame(wsClient, wsClientKeyed);
         assertEquals(getWsdlLocation(overridenWsdl), wsClientKeyed.wsdlLocation());
         assertEquals("originalTNS", wsClientKeyed.targetNamespace());
         assertEquals("", wsClientKeyed.name());
-        
+
         // WSDL override specified in the composite
         assertTrue("Wrong WSDL used", validatePort(service, overridenWsdl_portLocalPart));
     }
-    
+
     /**
      * Generated service constructor() with a composite that specifies a CatalogManager override
      */
@@ -502,7 +502,7 @@ public class ClientMetadataTest extends TestCase {
 
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -515,7 +515,7 @@ public class ClientMetadataTest extends TestCase {
         String serviceCatalogFile = (String) dbcInServiceDesc.getSparseComposite(serviceDelegate).getCatalogManager().getCatalogFiles().get(0);
         assertEquals(serviceCatalogFile, getCatalogLocation(uniqueCatalog));
     }
-    
+
     /**
      * Generated service constructor(URL, QName) with a composite that specifies a wsdlLocation override
      */
@@ -530,7 +530,7 @@ public class ClientMetadataTest extends TestCase {
 
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -548,7 +548,7 @@ public class ClientMetadataTest extends TestCase {
 
         WebServiceClient wsClientKeyed = dbcInServiceDesc.getWebServiceClientAnnot(serviceDelegate);
         assertNotSame(wsClient, wsClientKeyed);
-        
+
         assertEquals(getWsdlLocation(overridenWsdl), wsClientKeyed.wsdlLocation());
         assertEquals("originalTNS", wsClientKeyed.targetNamespace());
         assertEquals("", wsClientKeyed.name());
@@ -556,9 +556,9 @@ public class ClientMetadataTest extends TestCase {
         // WSDL override specified in the composite
         assertTrue("Wrong WSDL used", validatePort(service, overridenWsdl_portLocalPart));
     }
-    
+
     /**
-     * Generated service constructor(URL, QName) with a composite that specifies a 
+     * Generated service constructor(URL, QName) with a composite that specifies a
      * target Namespace override.  Most of the other tests are based on wsdlLocation since
      * that is what JSR-109 DDs override.  This test verifies that other members can also
      * be override.
@@ -574,7 +574,7 @@ public class ClientMetadataTest extends TestCase {
 
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -592,7 +592,7 @@ public class ClientMetadataTest extends TestCase {
 
         WebServiceClient wsClientKeyed = dbcInServiceDesc.getWebServiceClientAnnot(serviceDelegate);
         assertNotSame(wsClient, wsClientKeyed);
-        
+
         assertEquals(getWsdlLocation(overridenWsdl), wsClientKeyed.wsdlLocation());
         assertEquals("overrideTNS", wsClientKeyed.targetNamespace());
         assertEquals("", wsClientKeyed.name());
@@ -600,10 +600,10 @@ public class ClientMetadataTest extends TestCase {
         // WSDL override specified in the composite
         assertTrue("Wrong WSDL used", validatePort(service, overridenWsdl_portLocalPart));
     }
-    
+
     /**
-     * Generated service constructor(URL, QName) with a composite that specifies a 
-     * Catalog Manager override.  
+     * Generated service constructor(URL, QName) with a composite that specifies a
+     * Catalog Manager override.
      */
     public void test2ArgGeneratedServiceOverrideCatalogManager() {
         DescriptionBuilderComposite composite = new DescriptionBuilderComposite();
@@ -617,7 +617,7 @@ public class ClientMetadataTest extends TestCase {
 
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -643,7 +643,7 @@ public class ClientMetadataTest extends TestCase {
         String wsdlLocation = getWsdlLocation(overridenWsdl);
         // This check is necessary because Unix/Linux file paths begin
         // with a '/'. When adding the prefix 'jar:file:/' we may end
-        // up with '//' after the 'file:' part. This causes the URL 
+        // up with '//' after the 'file:' part. This causes the URL
         // object to treat this like a remote resource
         if(wsdlLocation.indexOf("/") == 0) {
             wsdlLocation = wsdlLocation.substring(1, wsdlLocation.length());
@@ -659,7 +659,7 @@ public class ClientMetadataTest extends TestCase {
 
         assertNotNull(service);
         assertNull(ServiceDelegate.getServiceMetadata());
-        
+
         ServiceDelegate serviceDelegate = DescriptionTestUtils2.getServiceDelegate(service);
         assertNotNull(serviceDelegate);
         ServiceDescription serviceDesc = serviceDelegate.getServiceDescription();
@@ -684,7 +684,7 @@ public class ClientMetadataTest extends TestCase {
         // WSDL override specified in the composite
         assertTrue("Wrong WSDL used", validatePort(service, overridenWsdl_portLocalPart));
     }
-    
+
     /**
      * Test override WSDL file that is full specified
      */
@@ -693,14 +693,14 @@ public class ClientMetadataTest extends TestCase {
         String wsdlLocation = getWsdlLocation("InvalidFileName.wsdl");
         // This check is necessary because Unix/Linux file paths begin
         // with a '/'. When adding the prefix 'jar:file:/' we may end
-        // up with '//' after the 'file:' part. This causes the URL 
+        // up with '//' after the 'file:' part. This causes the URL
         // object to treat this like a remote resource
         if(wsdlLocation.indexOf("/") == 0) {
             wsdlLocation = wsdlLocation.substring(1, wsdlLocation.length());
         }
 
         String fullWsdlLocation = "http:/" + wsdlLocation;
-        
+
         WebServiceClientAnnot wsClientAnno = WebServiceClientAnnot.createWebServiceClientAnnotImpl(null, null, fullWsdlLocation);
         composite.setWebServiceClientAnnot(wsClientAnno);
         ServiceDelegate.setServiceMetadata(composite);
@@ -714,7 +714,7 @@ public class ClientMetadataTest extends TestCase {
     }
 
     /**
-     * The overide WSDL file doesn't exist; should catch an error 
+     * The overide WSDL file doesn't exist; should catch an error
      */
     public void testInvalidWsdlLocationOverride() {
         DescriptionBuilderComposite composite = new DescriptionBuilderComposite();
@@ -743,67 +743,67 @@ public class ClientMetadataTest extends TestCase {
             QName portQN = new QName(namespaceURI, otherWsdl_portLocalPart);
             URL wsdlUrl = ClientMetadataTest.getWsdlURL(otherWsdl);
 
-            // Create the first service 
+            // Create the first service
             Service service1 = Service.create(wsdlUrl, serviceQName);
             ServiceDelegate serviceDelegate1 = DescriptionTestUtils2.getServiceDelegate(service1);
             assertNull(ServiceDelegate.getServiceMetadata());
             ServiceDescription serviceDesc1 = serviceDelegate1.getServiceDescription();
             validatePort(service1, otherWsdl_portLocalPart);
-            
-            // Create the second service 
+
+            // Create the second service
             Service service2 = Service.create(wsdlUrl, serviceQName);
             ServiceDelegate serviceDelegate2 = DescriptionTestUtils2.getServiceDelegate(service2);
             assertNull(ServiceDelegate.getServiceMetadata());
             ServiceDescription serviceDesc2 = serviceDelegate2.getServiceDescription();
             validatePort(service2, otherWsdl_portLocalPart);
-            
+
             assertNotSame(serviceDelegate1, serviceDelegate2);
             // Since we installed a caching factory, the service descriptions WILL be cached.
             // Without that factory, they would not have been cached.  The reason is that the
-            // AxisConfiguration instance is part of the key.  The default factory in this 
+            // AxisConfiguration instance is part of the key.  The default factory in this
             // environment always returns a new instance.  The test factory does not.
             assertSame(serviceDesc1, serviceDesc2);
         } finally {
             restoreOriginalFactory();
         }
-        
+
         // Sanity check that the factory WAS restored.  Do the same thing as above, but this time
         // the service descs should NOT be the same since they weren't cached.
         QName serviceQName = new QName(namespaceURI, svcLocalPart);
         QName portQN = new QName(namespaceURI, otherWsdl_portLocalPart);
         URL wsdlUrl = ClientMetadataTest.getWsdlURL(otherWsdl);
 
-        // Create the first service 
+        // Create the first service
         Service service1 = Service.create(wsdlUrl, serviceQName);
         ServiceDelegate serviceDelegate1 = DescriptionTestUtils2.getServiceDelegate(service1);
         assertNull(ServiceDelegate.getServiceMetadata());
         ServiceDescription serviceDesc1 = serviceDelegate1.getServiceDescription();
         validatePort(service1, otherWsdl_portLocalPart);
-        
-        // Create the second service 
+
+        // Create the second service
         Service service2 = Service.create(wsdlUrl, serviceQName);
         ServiceDelegate serviceDelegate2 = DescriptionTestUtils2.getServiceDelegate(service2);
         assertNull(ServiceDelegate.getServiceMetadata());
         ServiceDescription serviceDesc2 = serviceDelegate2.getServiceDescription();
         validatePort(service2, otherWsdl_portLocalPart);
-        
+
         assertNotSame(serviceDelegate1, serviceDelegate2);
         assertNotSame("Client Configuration factory NOT restored; subsequent tests may be affected!", serviceDesc1, serviceDesc2);
     }
-    
+
     /**
      * Create two services such that the ServiceDescriptions should be cached and shared.
-     * Create the first without a composite, the second with a composite, then validate the second 
+     * Create the first without a composite, the second with a composite, then validate the second
      * service's composite.  Note that we have to use a special factory so that the service
-     * descriptions are cached.  
+     * descriptions are cached.
      */
     public void testMultipleServicesMixedComposite() {
         try {
             installCachingFactory();
             QName serviceQName = new QName(namespaceURI, svcLocalPart);
             URL wsdlUrl = ClientMetadataTest.getWsdlURL(otherWsdl);
-            
-            // Create the first service 
+
+            // Create the first service
             Service service1 = Service.create(wsdlUrl, serviceQName);
             ServiceDelegate serviceDelegate1 = DescriptionTestUtils2.getServiceDelegate(service1);
             assertNull(ServiceDelegate.getServiceMetadata());
@@ -818,14 +818,14 @@ public class ClientMetadataTest extends TestCase {
             assertNull(ServiceDelegate.getServiceMetadata());
             ServiceDescription serviceDesc2 = serviceDelegate2.getServiceDescription();
             validatePort(service2, otherWsdl_portLocalPart);
-            
+
             assertNotSame(serviceDelegate1, serviceDelegate2);
             // Since we installed a caching factory, the service descriptions WILL be cached.
             // Without that factory, they would not have been cached.  The reason is that the
-            // AxisConfiguration instance is part of the key.  The default factory in this 
+            // AxisConfiguration instance is part of the key.  The default factory in this
             // environment always returns a new instance.  The test factory does not.
             assertSame(serviceDesc1, serviceDesc2);
-            
+
             // There should not be a sparse composite for the first service delegate and there
             // should be one for the second service delegate
             assertNull(DescriptionTestUtils2.getServiceDescriptionComposite(serviceDesc2).getSparseComposite(serviceDelegate1));
@@ -833,22 +833,22 @@ public class ClientMetadataTest extends TestCase {
         } finally {
             restoreOriginalFactory();
         }
-        
+
     }
-    
+
     /**
      * Create two services such that the ServiceDescriptions should be cached and shared.
-     * Create the first with a composite, the second with a composite, then validate both 
+     * Create the first with a composite, the second with a composite, then validate both
      * composites.  Note that we have to use a special factory so that the service
-     * descriptions are cached.  
+     * descriptions are cached.
      */
     public void testMultipleServicesMultipleComposites() {
         try {
             installCachingFactory();
             QName serviceQName = new QName(namespaceURI, svcLocalPart);
             URL wsdlUrl = ClientMetadataTest.getWsdlURL(otherWsdl);
-            
-            // Create the first service 
+
+            // Create the first service
             DescriptionBuilderComposite sparseComposite1 = new DescriptionBuilderComposite();
             ServiceDelegate.setServiceMetadata(sparseComposite1);
             Service service1 = Service.create(wsdlUrl, serviceQName);
@@ -865,33 +865,33 @@ public class ClientMetadataTest extends TestCase {
             assertNull(ServiceDelegate.getServiceMetadata());
             ServiceDescription serviceDesc2 = serviceDelegate2.getServiceDescription();
             validatePort(service2, otherWsdl_portLocalPart);
-            
+
             assertNotSame(serviceDelegate1, serviceDelegate2);
             // Since we installed a caching factory, the service descriptions WILL be cached.
             // Without that factory, they would not have been cached.  The reason is that the
-            // AxisConfiguration instance is part of the key.  The default factory in this 
+            // AxisConfiguration instance is part of the key.  The default factory in this
             // environment always returns a new instance.  The test factory does not.
             assertSame(serviceDesc1, serviceDesc2);
-            
+
             // There should not be a sparse composite for the first service delegate and there
             // should be one for the second service delegate
             assertSame(sparseComposite1, DescriptionTestUtils2.getServiceDescriptionComposite(serviceDesc2).getSparseComposite(serviceDelegate1));
             assertSame(sparseComposite2, DescriptionTestUtils2.getServiceDescriptionComposite(serviceDesc2).getSparseComposite(serviceDelegate2));
         } finally {
             restoreOriginalFactory();
-        }        
+        }
     }
-    
+
     /**
      * Create two generated services such that the ServiceDescriptions should be cached and shared.
-     * Create the first with a composite, the second with a composite, then validate both 
+     * Create the first with a composite, the second with a composite, then validate both
      * composites.  Note that we have to use a special factory so that the service
-     * descriptions are cached.  
+     * descriptions are cached.
      */
     public void testMultipleGeneratedServiceWithMultipleComposite() {
         try {
             installCachingFactory();
-            
+
             // Create the first service with a sparse composite
             DescriptionBuilderComposite sparseComposite1 = new DescriptionBuilderComposite();
             ServiceDelegate.setServiceMetadata(sparseComposite1);
@@ -899,7 +899,7 @@ public class ClientMetadataTest extends TestCase {
                                                                  new QName(namespaceURI, svcLocalPart));
             assertNotNull(service1);
             assertNull(ServiceDelegate.getServiceMetadata());
-            
+
             // Create the second service with a sparse composite
             DescriptionBuilderComposite sparseComposite2 = new DescriptionBuilderComposite();
             ServiceDelegate.setServiceMetadata(sparseComposite2);
@@ -907,29 +907,29 @@ public class ClientMetadataTest extends TestCase {
                                                                  new QName(namespaceURI, svcLocalPart));
             assertNotNull(service2);
             assertNull(ServiceDelegate.getServiceMetadata());
-            
+
             // Verifiy the service delegates are different and the service descriptions are the same
             // since we installed a caching factory above.
             ServiceDelegate serviceDelegate1 = DescriptionTestUtils2.getServiceDelegate(service1);
             assertNotNull(serviceDelegate1);
             ServiceDescription serviceDesc1 = serviceDelegate1.getServiceDescription();
             assertNotNull(serviceDesc1);
-            
+
             ServiceDelegate serviceDelegate2 = DescriptionTestUtils2.getServiceDelegate(service2);
             assertNotNull(serviceDelegate2);
             ServiceDescription serviceDesc2 = serviceDelegate2.getServiceDescription();
             assertNotNull(serviceDesc2);
-            
+
             assertNotSame(serviceDelegate1, serviceDelegate2);
             assertSame(serviceDesc1, serviceDesc2);
 
             // There should be a sparse composite for the first service delegate and
             // one for the second service delegate
-            assertSame(sparseComposite1, 
+            assertSame(sparseComposite1,
                        DescriptionTestUtils2.getServiceDescriptionComposite(serviceDesc2).getSparseComposite(serviceDelegate1));
             assertSame(sparseComposite2, DescriptionTestUtils2.getServiceDescriptionComposite(serviceDesc2).getSparseComposite(serviceDelegate2));
 
-            
+
             DescriptionBuilderComposite dbcInServiceDesc = DescriptionTestUtils2.getServiceDescriptionComposite(serviceDesc1);
             assertEquals(ClientMetadataGeneratedService.class, dbcInServiceDesc.getCorrespondingClass());
 
@@ -937,16 +937,16 @@ public class ClientMetadataTest extends TestCase {
             // so should get the WSDL specified on the constructor
             assertTrue("Wrong WSDL used", validatePort(service1, otherWsdl_portLocalPart));
             assertTrue("Wrong WSDL used", validatePort(service2, otherWsdl_portLocalPart));
-            
-            
-            
-            
+
+
+
+
         } finally {
             restoreOriginalFactory();
-        }        
+        }
 
     }
-    
+
     // =============================================================================================
     // Utility methods
     // =============================================================================================
@@ -962,7 +962,7 @@ public class ClientMetadataTest extends TestCase {
         wsdlLocation = baseDir + "/test-resources/wsdl/" + wsdlFileName;
         return wsdlLocation;
     }
-    
+
     /**
      * Prepends the base directory and the path where the test Catalog lives to a filename.
      * @param catalogFileName
@@ -974,11 +974,11 @@ public class ClientMetadataTest extends TestCase {
         wsdlLocation = baseDir + "/test-resources/catalog/" + catalogFileName;
         return catalogFileName;
     }
-    
+
     /**
      * Given a simple file name (with no base dictory or path), returns a URL to the WSDL file
      * with the base directory and path prepended.
-     * 
+     *
      * @param wsdlFileName
      * @return
      */
@@ -987,17 +987,17 @@ public class ClientMetadataTest extends TestCase {
         String wsdlLocation = getWsdlLocation(wsdlFileName);
         try {
             File file = new File(wsdlLocation);
-            url = file.toURL();
+            url = file.toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
             fail("Exception converting WSDL file to URL: " + e.toString());
         }
         return url;
     }
-    
+
     /**
      * Validate that the Service contains the expected port.  If the portLocalPart is null then
-     * no ports are expected to exist under the service.  
+     * no ports are expected to exist under the service.
      * @param service The service to check for the specified port
      * @param portLocalPart If null means no ports are expected; otherwise the localname of the
      *    single port expected under the service
@@ -1009,12 +1009,12 @@ public class ClientMetadataTest extends TestCase {
         if (service == null) {
             return false;
         }
-        
+
         // Each service in the WSDLs for this test have a single port
         boolean portNameValid = false;
-        int expectedNumberOfPorts = 1;  
+        int expectedNumberOfPorts = 1;
         int numberOfPorts = 0;
-        
+
         Iterator<QName> portIterator = service.getPorts();
         while (portIterator.hasNext()) {
             numberOfPorts++;
@@ -1040,7 +1040,7 @@ public class ClientMetadataTest extends TestCase {
     /**
      * Methods to install a client configuration factory that will return the same AxisConfiguration
      * each time.  This is used so that the ServiceDescriptions will be cached in the DescriptionFactory.
-     * 
+     *
      * IMPORTANT!!!
      * If you install a caching factory, you MUST restore the original factory before your test
      * exits, otherwise it will remain installed when subsequent tests run and cause REALLY STRANGE
@@ -1052,7 +1052,7 @@ public class ClientMetadataTest extends TestCase {
         if (originalFactory != null) {
             throw new UnsupportedOperationException("Attempt to install the caching factory when the original factory has already been overwritten");
         }
-        originalFactory = 
+        originalFactory =
             (ClientConfigurationFactory)MetadataFactoryRegistry.getFactory(ClientConfigurationFactory.class);
         MetadataTestCachingClientContextFactory newFactory = new MetadataTestCachingClientContextFactory();
         MetadataFactoryRegistry.setFactory(ClientConfigurationFactory.class, newFactory);
@@ -1076,7 +1076,7 @@ public class ClientMetadataTest extends TestCase {
 //            throw new UnsupportedOperationException("Unable to reset client config factory; caught " + e);
 //        }
     }
-    
+
 }
 
 @WebServiceClient(targetNamespace="originalTNS", wsdlLocation=ClientMetadataTest.originalWsdl)
@@ -1093,7 +1093,7 @@ class ClientMetadataGeneratedService extends javax.xml.ws.Service {
 
 class MetadataTestCachingClientContextFactory extends ClientConfigurationFactory {
     ConfigurationContext context;
-    
+
     public ConfigurationContext getClientConfigurationContext() {
         if (context == null) {
             context = super.getClientConfigurationContext();
@@ -1101,7 +1101,7 @@ class MetadataTestCachingClientContextFactory extends ClientConfigurationFactory
 //        System.out.println("Test version of MetadataTestCachingClientContextFactory: " + context);
         return context;
     }
-    
+
     public void reset() {
         context = null;
     }
