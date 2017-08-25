@@ -58,7 +58,7 @@ import java.util.TreeMap;
  */
 final class AdminActions {
     private static final Log log = LogFactory.getLog(AbstractAgent.class);
-    
+
     private static final String WELCOME = "welcome";
     private static final String LOGOUT = "logout";
     private static final String INDEX = "index";
@@ -91,7 +91,7 @@ final class AdminActions {
         try {
             if (configContext.getAxisConfiguration().getRepository() != null) {
                 File repoDir =
-                        new File(configContext.getAxisConfiguration().getRepository().getFile());
+                        new File(configContext.getAxisConfiguration().getRepository().toURI());
                 serviceDir = new File(repoDir, "services");
                 if (!serviceDir.exists()) {
                     serviceDir.mkdirs();
