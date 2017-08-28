@@ -2,5 +2,9 @@
     <wb-module deploy-name="axis2-transport-http">
         <wb-resource deploy-path="/" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/target/maven-shared-archive-resources"/>
+        <wb-resource deploy-path="/" source-path="/test"/>
+        <wb-resource deploy-path="/" source-path="/test-resources"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/test-annotations"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-sources/annotations"/>
     </wb-module>
 </project-modules>

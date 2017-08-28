@@ -2,5 +2,9 @@
     <wb-module deploy-name="axis2-transport-mail">
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/target/maven-shared-archive-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/" source-path="/src/test/resources"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/test-annotations"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-sources/annotations"/>
     </wb-module>
 </project-modules>

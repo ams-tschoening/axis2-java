@@ -2,5 +2,6 @@
     <wb-module deploy-name="axis2-soapmonitor-servlet">
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/target/maven-shared-archive-resources"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-sources/annotations"/>
     </wb-module>
 </project-modules>
