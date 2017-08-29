@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/maven-shared-archive-resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
         <dependent-module archiveName="axis2-kernel-1.8.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/axis2-kernel/axis2-kernel">
             <dependency-type>uses</dependency-type>
         </dependent-module>
