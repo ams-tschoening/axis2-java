@@ -336,7 +336,7 @@
                         </goals>
                         <configuration>
                             <name>webapp</name>
-                            <value>%file%</value>
+                            <value>%url%</value>
                             <dependencySet>
                                 <scope>test</scope>
                                 <includes>
@@ -379,7 +379,7 @@
                                 <script>
                                     import java.util.jar.*
                                     
-                                    def jar = new JarInputStream(new FileInputStream("${webapp}"))
+                                    def jar = new JarInputStream(new FileInputStream(new File(new URI("${webapp}"))))
                                     def expected = new HashSet()
                                     def entry
                                     while(entry = jar.nextJarEntry) {
@@ -387,7 +387,9 @@
                                     }
                                     jar.close()
                                     
-                                    jar = new JarInputStream(new FileInputStream("${project.build.directory}/axis2-${project.version}/dist/axis2.war"))
+                                    // "project.basedir" is the project root, what's used now is "[...]/target/classes" and
+                                    // therefore looks a bit more correct than to hard code "target".
+                                    jar = new JarInputStream(new FileInputStream(new File(project.build.outputDirectory, "../axis2-${project.version}/dist/axis2.war")))
                                     while(entry = jar.nextJarEntry) {
                                         if (!expected.remove(entry.name)) {
                                             throw new Error("Unexpected entry in Web app: " + entry.name)
