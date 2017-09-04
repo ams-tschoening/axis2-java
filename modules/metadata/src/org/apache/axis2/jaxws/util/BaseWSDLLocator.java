@@ -127,7 +127,7 @@ public abstract class BaseWSDLLocator {
                     try{
                         File file = new File(relativeLocation);
                         absoluteURL = file.toURI().toURL();
-                        is = absoluteURL.openStream();
+                        is = absoluteURL.openStream();  
                         lastestImportURI = absoluteURL.toExternalForm();
                     }
                     catch(Throwable t){

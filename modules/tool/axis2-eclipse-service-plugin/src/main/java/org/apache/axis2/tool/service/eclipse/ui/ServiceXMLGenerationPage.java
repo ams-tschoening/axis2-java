@@ -223,7 +223,7 @@ public class ServiceXMLGenerationPage extends AbstractServiceWizardPage{
         try {
             String classFileLocation = getClassFileLocation();
             URL classFileURL = new File(classFileLocation).toURI().toURL();
-
+            
            ArrayList listofURLs = new ArrayList();
            listofURLs.add(classFileURL);
 

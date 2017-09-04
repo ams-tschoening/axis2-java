@@ -60,8 +60,8 @@ public class RPCProxyTests extends AbstractTestCase {
      * @throws MalformedURLException
      */
     public RPCLit getProxy() throws MalformedURLException {
-        File wsdl= new File(wsdlLocation);
-        URL wsdlUrl = wsdl.toURI().toURL();
+        File wsdl= new File(wsdlLocation); 
+        URL wsdlUrl = wsdl.toURI().toURL(); 
         Service service = Service.create(null, serviceName);
         Object proxy =service.getPort(portName, RPCLit.class);
         BindingProvider p = (BindingProvider)proxy;
@@ -76,8 +76,8 @@ public class RPCProxyTests extends AbstractTestCase {
      * @throws MalformedURLException
      */
     public Dispatch<String> getDispatch() throws MalformedURLException {
-        File wsdl= new File(wsdlLocation);
-        URL wsdlUrl = wsdl.toURI().toURL();
+        File wsdl= new File(wsdlLocation); 
+        URL wsdlUrl = wsdl.toURI().toURL(); 
         Service service = Service.create(null, serviceName);
         service.addPort(portName, null, axisEndpoint);
         Dispatch<String> dispatch = service.createDispatch(portName, String.class, Service.Mode.PAYLOAD);

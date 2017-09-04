@@ -48,7 +48,7 @@ public class SOAP12EchoService
             }
             File file = new File(wsdlLocation);
             url = file.toURI().toURL();
-
+            
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

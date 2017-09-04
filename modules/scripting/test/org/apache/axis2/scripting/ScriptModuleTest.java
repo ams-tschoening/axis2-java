@@ -64,7 +64,7 @@ public class ScriptModuleTest extends TestCase {
         File dir = Utils.toFile(url).getParentFile();
         axisConfig.setRepository(dir.getParentFile().toURI().toURL());
         axisConfig.addParameter(new Parameter("scriptServicesDir", dir.getName()));
-        assertEquals(dir.toURL(), module.getScriptServicesDirectory(axisConfig).toURI().toURL());
+        assertEquals(dir.toURI().toURL(), module.getScriptServicesDirectory(axisConfig).toURI().toURL());
     }
 
 //    public void testCreateService() throws AxisFault {
