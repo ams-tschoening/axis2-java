@@ -65,8 +65,8 @@ public class PluginClassLoader extends URLClassLoader {
          * is created by Deployment , so there wont be any chance to have more the one urls for
          * the URL array list
          */
-        File file = new File(urls[0].getFile());
         try {
+            File file = new File(urls[0].toURI());
             ZipInputStream zin = new ZipInputStream(new FileInputStream(file));
             ZipEntry entry;
             String entryName = "";

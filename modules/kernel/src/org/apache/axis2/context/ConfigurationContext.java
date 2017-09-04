@@ -44,6 +44,7 @@ import org.apache.axis2.util.threadpool.ThreadFactory;
 import org.apache.axis2.util.threadpool.ThreadPool;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
@@ -505,8 +506,12 @@ public class ConfigurationContext extends AbstractContext {
     public File getRealPath(String path) {
         URL repository = axisConfiguration.getRepository();
         if (repository != null) {
-            File repo = new File(repository.getFile());
-            return new File(repo, path);
+            try {
+                File repo = new File(repository.toURI());
+                return new File(repo, path);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
         }
         return null;
     }

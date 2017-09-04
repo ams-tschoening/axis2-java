@@ -53,6 +53,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLConnection;
@@ -1462,7 +1463,12 @@ public class WSDLWrapperReloadImpl implements WSDLWrapperImpl {
 
             if ("file".equals(url.getProtocol())) {
 
-                File f = new File(url.getPath());
+                File f;
+                try {
+                    f = new File(url.toURI());
+                } catch (URISyntaxException e1) {
+                    throw new RuntimeException(e1);
+                }
 
                 //If file is not of type directory then its a jar file
                 if (f.exists() && !f.isDirectory()) {

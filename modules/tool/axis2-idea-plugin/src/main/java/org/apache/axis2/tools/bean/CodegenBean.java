@@ -43,6 +43,7 @@ import javax.xml.namespace.QName;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -260,7 +261,7 @@ public class CodegenBean {
 
             String baseUri;
             if ("file".equals(url.getProtocol())) {
-                baseUri = new File(url.getFile()).getParentFile().toURI().toURL().toExternalForm();
+                baseUri = new File(url.toURI()).getParentFile().toURI().toURL().toExternalForm();
             } else {
                 baseUri = url.toExternalForm().substring(0,
                         url.toExternalForm().lastIndexOf("/")
@@ -269,7 +270,7 @@ public class CodegenBean {
 
 
             return baseUri;
-        } catch (MalformedURLException e) {
+        } catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

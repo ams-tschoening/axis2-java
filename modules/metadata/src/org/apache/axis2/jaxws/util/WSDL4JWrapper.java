@@ -52,6 +52,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ConnectException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLConnection;
@@ -398,8 +399,13 @@ public class WSDL4JWrapper implements WSDLWrapper {
 
         for (URL url : urlList) {
             if ("file".equals(url.getProtocol())) {
-                // Insure that Windows spaces are properly handled in the URL
-                final File f = new File(url.getPath().replaceAll("%20", " "));
+                final File f;
+                try {
+                    f = new File(url.toURI());
+                } catch (URISyntaxException e1) {
+                    throw new RuntimeException(e1);
+                }
+
                 // If file is not of type directory then its a jar file
                 if (isAFile(f)) { 
                     try {

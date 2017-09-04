@@ -24,6 +24,7 @@ import org.apache.tools.ant.taskdefs.Javac;
 import org.apache.tools.ant.types.Path;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -54,7 +55,15 @@ public class SrcCompiler extends Javac {
           this.setDestdir(destDir);
           this.setIncludes("**" + File.separator + "*.java, *.java");
           URL url = getClass().getResource("/icons");
-          File lib = new File(url.getPath() + File.separator + ".." + File.separator + ".." + File.separator + "lib");
+          
+          String relLibDir = String.format("..%s..%slib", File.separator, File.separator);
+          File lib;
+          try {
+              lib = new File(new File(url.toURI()), relLibDir);
+          } catch (URISyntaxException e) {
+              throw new RuntimeException(e);
+          }
+          
           File[] files;
           files = lib.listFiles();
 

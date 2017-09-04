@@ -61,6 +61,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLDecoder;
@@ -630,8 +631,14 @@ public class JAXWSRIWSDLGenerator implements SchemaSupplier, WSDLSupplier {
                         path = path.substring(1);
                     addPath(classpath, URLDecoder.decode(path));
 
+                    File file;
+                    try {
+                        file = new File(urls[i].toURI());
+                    } catch (URISyntaxException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     // if its a jar extract Class-Path entries from manifest
-                    File file = new File(urls[i].getFile());
                     if (file.isFile()) {
                         FileInputStream fis = null;
                         try {
