@@ -59,12 +59,12 @@ public class DescriptionTestUtils2 {
     
     static public URL getWSDLURL(String wsdlFileName) {
         URL wsdlURL = null;
-        String urlString = getWSDLLocation(wsdlFileName);
+        String pathString = getWSDLLocation(wsdlFileName);
         try {
-            wsdlURL = new File(new URL(urlString).toURI()).getAbsoluteFile().toURI().toURL();
+            wsdlURL = new File(pathString).getAbsoluteFile().toURI().toURL();
         } catch (Exception e) {
             TestLogger.logger.debug(
-                    "Caught exception creating WSDL URL :" + urlString + "; exception: " +
+                    "Caught exception creating WSDL URL :" + pathString + "; exception: " +
                             e.toString());
         }
         return wsdlURL;
