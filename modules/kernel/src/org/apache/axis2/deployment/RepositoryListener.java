@@ -118,38 +118,39 @@ public class RepositoryListener implements DeploymentConstants {
         try {
             Enumeration moduleURLs = loader.getResources("META-INF/module.xml");
             while (moduleURLs.hasMoreElements()) {
-                try {
-                    URL url = (URL)moduleURLs.nextElement();
-                    URI moduleURI;
-                    if (url.getProtocol().equals("file")) {
-                        String urlString = url.toString();
-                        moduleURI = new URI(urlString.substring(0,
-                                urlString.lastIndexOf("/META-INF/module.xml")));
-                    } else {
-                        // Check if the URL refers to an archive (such as
-                        // jar:file:/dir/some.jar!/META-INF/module.xml) and extract the
-                        // URL of the archive. In general the protocol will be "jar", but
-                        // some containers may use other protocols, e.g. WebSphere uses
-                        // "wsjar" (AXIS2-4258).
-                        String path = url.getPath();
-                        int idx = path.lastIndexOf("!/");
-                        if (idx != -1 && path.substring(idx+2).equals("META-INF/module.xml")) {
-                            moduleURI = new File(path.substring(0, idx)).toURI();
-                            if (!moduleURI.getScheme().equals("file")) {
-                                continue;
-                            }
-                        } else {
-                            continue;
-                        }
-                    }
-    
-                    log.debug("Deploying module from classpath at '" + moduleURI + "'");
-                    File f = new File(moduleURI);
-                    addFileToDeploy(f, deployer, WSInfo.TYPE_MODULE);
+                URL url = (URL)moduleURLs.nextElement();
+                URI moduleURI;
 
-                } catch (URISyntaxException e) {
-                    log.info(e);
+                // The URLs from the classloader are always only prefixed paths and e.g. contain
+                // spaces instead of %20, so it's safe to use "File" on substrings.
+                if (url.getProtocol().equals("file")) {
+                    String urlString = url.toString();
+                    moduleURI = new File(urlString.substring(0,
+                            urlString.lastIndexOf("/META-INF/module.xml"))).toURI();
+                } else {
+                    // Check if the URL refers to an archive (such as
+                    // jar:file:/dir/some.jar!/META-INF/module.xml) and extract the
+                    // URL of the archive. In general the protocol will be "jar", but
+                    // some containers may use other protocols, e.g. WebSphere uses
+                    // "wsjar" (AXIS2-4258).
+                    String path = url.getPath();
+                    if (!path.startsWith("file:")) {
+                        continue;
+                    }
+
+                    path = new URL(path).getPath();
+                    int idx = path.lastIndexOf("!/");
+
+                    if (idx != -1 && path.substring(idx+2).equals("META-INF/module.xml")) {
+                        moduleURI = new File(path.substring(0, idx)).toURI();
+                    } else {
+                        continue;
+                    }
                 }
+
+                log.debug("Deploying module from classpath at '" + moduleURI + "'");
+                File f = new File(moduleURI);
+                addFileToDeploy(f, deployer, WSInfo.TYPE_MODULE);
             }
         } catch (Exception e) {
             // Oh well, log the problem
