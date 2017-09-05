@@ -54,12 +54,12 @@ public class DescriptionTestUtils {
 
     static public URL getWSDLURL(String wsdlFileName) {
         URL wsdlURL = null;
-        String urlString = getWSDLLocation(wsdlFileName);
+        String pathString = getWSDLLocation(wsdlFileName);
         // Get the URL to the WSDL file.  Note that 'basedir' is setup by Maven
         try {
-            wsdlURL = new File(new URL(urlString).toURI()).getAbsoluteFile().toURI().toURL();
+            wsdlURL = new File(pathString).getAbsoluteFile().toURI().toURL();
         } catch (Exception e) {
-            System.out.println("Caught exception creating WSDL URL :" + urlString +
+            System.out.println("Caught exception creating WSDL URL :" + pathString +
                     "; exception: " + e.toString());
         }
         return wsdlURL;
