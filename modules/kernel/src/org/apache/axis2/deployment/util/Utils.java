@@ -1832,8 +1832,6 @@ public class Utils {
      * @return formatted file path
      */
     public static String formatPath(String path) {
-        // removing white spaces
-        path = path.replaceAll("\\b\\s+\\b", "%20");
         // replacing all "\" with "/"
         return path.replace('\\', '/');
     }

@@ -134,7 +134,7 @@ public class RepositoryListener implements DeploymentConstants {
                         String path = url.getPath();
                         int idx = path.lastIndexOf("!/");
                         if (idx != -1 && path.substring(idx+2).equals("META-INF/module.xml")) {
-                            moduleURI = new URI(path.substring(0, idx).replaceAll(" ", "%20"));
+                            moduleURI = new File(path.substring(0, idx)).toURI();
                             if (!moduleURI.getScheme().equals("file")) {
                                 continue;
                             }
