@@ -123,6 +123,11 @@ public class RepositoryListener implements DeploymentConstants {
 
                 // The URLs from the classloader are always only prefixed paths and e.g. contain
                 // spaces instead of %20, so it's safe to use "File" on substrings.
+                // TODO This seems to be true only for Eclipse, not running outside using e.g. 
+                // Maven, in which case we get properly formatted URLs using %20 instead of spaces.
+                // In such a case the current logic fails, because %20 gets encoded to %2520 and is
+                // therefore kept in the path as is, which is not what we want. We need normalized
+                // input, either always paths or always proper URLs.
                 if (url.getProtocol().equals("file")) {
                     String pathString = url.getPath();
                     moduleURI = new File(pathString.substring(0,
