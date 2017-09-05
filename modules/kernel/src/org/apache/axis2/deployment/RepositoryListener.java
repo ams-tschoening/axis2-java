@@ -124,9 +124,9 @@ public class RepositoryListener implements DeploymentConstants {
                 // The URLs from the classloader are always only prefixed paths and e.g. contain
                 // spaces instead of %20, so it's safe to use "File" on substrings.
                 if (url.getProtocol().equals("file")) {
-                    String urlString = url.toString();
-                    moduleURI = new File(urlString.substring(0,
-                            urlString.lastIndexOf("/META-INF/module.xml"))).toURI();
+                    String pathString = url.getPath();
+                    moduleURI = new File(pathString.substring(0,
+                            pathString.lastIndexOf("/META-INF/module.xml"))).toURI();
                 } else {
                     // Check if the URL refers to an archive (such as
                     // jar:file:/dir/some.jar!/META-INF/module.xml) and extract the
