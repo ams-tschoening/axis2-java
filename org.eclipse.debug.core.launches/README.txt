@@ -26,3 +26,11 @@ Additionally, it is important ot only add individual "Java Project"s as source f
 whole workspace and not the main project "axis2", which is no Java project. The reasion is that
 otherwise source code is found during debugging, but because it's not of a Java project, one doesn't
 get any Javadoc, runtime data in hovering text etc. without that debugging is unnecessary difficult.
+
+== Custom launch configuration is not part of the context menu! ==
+
+The custom launch configuration is not part of the context menu for Maven projects of Eclipse, but
+needs to be manually chosen using "Debug As/Debug Configurations/Maven Build". I didn't find a way
+yet to add it to the context menu, if possible at all.
+
+Keep in mind that one needs to choose/execute the config at project level!
