@@ -21,6 +21,8 @@ package org.apache.axis2.metadata.resource.impl;
 
 import org.apache.axis2.metadata.resource.ResourceFinder;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -31,11 +33,34 @@ public class ResourceFinderImpl implements ResourceFinder {
      * @see org.apache.axis2.metadata.resource.ResourceFinder#getURLs(java.lang.ClassLoader)
      */
     public URL[] getURLs(ClassLoader cl) {
-        if(cl instanceof URLClassLoader){
-            URLClassLoader urlLoader = (URLClassLoader)cl;
-            return urlLoader.getURLs();
+        if(!(cl instanceof URLClassLoader)) {
+            return null;
         }
-         return null;
+
+        URLClassLoader urlLoader = (URLClassLoader) cl;
+        URL[] urls = urlLoader.getURLs();
+
+        if ((urls == null) || (urls.length == 0)) {
+            return urls;
+        }
+
+        // The provided URLs might be invalid in case of a file-URL with paths with spaces, because
+        // those spaces would need to be encoded to "%20", which is not the case by default. Users
+        // should not care about those legacy problems, so we convert to true URLs as needed.
+        for (int i = 0; i < urls.length; ++i) {
+            URL url = urls[i];
+            if (! "file".equals(url.getProtocol())) {
+                continue;
+            }
+            
+            try {
+                urls[i] = new File(url.getPath()).toURI().toURL();
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+         return urls;
     }
 
 }
