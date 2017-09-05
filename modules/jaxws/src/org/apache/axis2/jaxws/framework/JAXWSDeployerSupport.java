@@ -19,6 +19,8 @@
 
 package org.apache.axis2.jaxws.framework;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -152,12 +154,14 @@ public class JAXWSDeployerSupport {
      *             the illegal access exception
      * @throws AxisFault
      *             the axis fault
+     * @throws URISyntaxException 
      */
     protected AxisServiceGroup deployClasses(String groupName, URL location,
             ClassLoader classLoader, List<String> classList) throws ClassNotFoundException,
-            InstantiationException, IllegalAccessException, AxisFault {
+            InstantiationException, IllegalAccessException, AxisFault, URISyntaxException {
 
-        String serviceHierarchy = Utils.getServiceHierarchy(location.getPath(), this.directory);
+        File locationPath = new File(location.toURI());
+        String serviceHierarchy = Utils.getServiceHierarchy(locationPath.toString(), this.directory);
         Collection<AxisService> axisServiceList = deployClasses(location, classLoader, classList)
                 .values();
         // creating service group by considering the hierarchical path also
@@ -194,14 +198,16 @@ public class JAXWSDeployerSupport {
      *             the illegal access exception
      * @throws AxisFault
      *             the axis fault
+     * @throws URISyntaxException 
      */
     protected HashMap<String, AxisService> deployClasses(URL location, ClassLoader classLoader,
             List<String> classList) throws ClassNotFoundException, InstantiationException,
-            IllegalAccessException, AxisFault {
+            IllegalAccessException, AxisFault, URISyntaxException {
         HashMap<String, AxisService> services = new HashMap<String, AxisService>();
         // Get the hierarchical path of the service
 
-        String serviceHierarchy = Utils.getServiceHierarchy(location.getPath(), getDirectory());
+        File locationPath = new File(location.toURI());
+        String serviceHierarchy = Utils.getServiceHierarchy(locationPath.toString(), getDirectory());
         for (String className : classList) {
             Class<?> pojoClass;
             try {

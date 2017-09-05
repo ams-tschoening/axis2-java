@@ -20,6 +20,7 @@
 package org.apache.axis2.jaxws.framework;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +119,8 @@ public class JAXWSServiceBuilderExtension extends AbstractServiceBuilderExtensio
             } catch (InstantiationException e) {
                 log.error(e);
             } catch (IllegalAccessException e) {
+                log.error(e);
+            } catch (URISyntaxException e) {
                 log.error(e);
             }
         } finally {
