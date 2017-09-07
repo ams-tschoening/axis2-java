@@ -34,9 +34,9 @@ public class Token extends NormalizedString {
     }
 
     /**
-     * ctor for Token
+     * CTOR for Token.
      *
-     * @throws IllegalArgumentException will be thrown if validation fails
+     * @throws IllegalArgumentException will be thrown if validation fails.
      */
     public Token(String stValue) throws IllegalArgumentException {
         try {
@@ -51,13 +51,16 @@ public class Token extends NormalizedString {
     }
 
     /**
-     * validate the value against the xsd definition
-     * <p/>
+     * Validate the value against the xsd definition.
+     * <p>
      * The value space of token is the set of strings that do not contain the line feed (#xA) nor
      * tab (#x9) characters, that have no leading or trailing spaces (#x20) and that have no
      * internal sequences of two or more spaces. The lexical space of token is the set of strings
      * that do not contain the line feed (#xA) nor tab (#x9) characters, that have no leading or
      * trailing spaces (#x20) and that have no internal sequences of two or more spaces.
+     * </p>
+     * @param stValue The value to validate.
+     * @return {@code true} if the given value is valid, {@code false} otherwise.
      */
     public static boolean isValid(String stValue) {
         int scan;
@@ -93,10 +96,10 @@ public class Token extends NormalizedString {
     }
 
     /**
-     * validates the data and sets the value for the object.
+     * Validates the data and sets the value for the object.
      *
-     * @param stValue String value
-     * @throws IllegalArgumentException if invalid format
+     * @param stValue The value to store.
+     * @throws IllegalArgumentException if invalid format.
      */
     public void setValue(String stValue) throws IllegalArgumentException {
         if (!Token.isValid(stValue))

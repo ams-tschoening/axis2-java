@@ -26,11 +26,11 @@ import java.util.Random;
 
 /**
  * Custom class for supporting primitive XSD data type positiveInteger
- * <p/>
+ * <p>
  * positiveInteger is derived from nonNegativeInteger by setting the value of minInclusive to be 1.
  * This results in the standard mathematical concept of the positive integer numbers. The value
  * space of positiveInteger is the infinite set {1,2,...}.
- *
+ * </p>
  * @see <a href="http://www.w3.org/TR/xmlschema-2/#positiveInteger">XML Schema 3.3.25</a>
  */
 public class PositiveInteger extends NonNegativeInteger {
@@ -67,9 +67,9 @@ public class PositiveInteger extends NonNegativeInteger {
         checkValidity();
     } // ctor
 
-    /** validate the value against the xsd definition */
     private BigInteger iMinInclusive = new BigInteger("1");
 
+    /** validate the value against the xsd definition */
     private void checkValidity() {
         if (compareTo(iMinInclusive) < 0) {
             throw new NumberFormatException(

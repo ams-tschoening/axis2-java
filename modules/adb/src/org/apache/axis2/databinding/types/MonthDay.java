@@ -35,22 +35,35 @@ public class MonthDay implements java.io.Serializable {
     int day;
     String timezone;
 
-    /** Constructs a MonthDay with the given values No timezone is specified */
+    /**
+     * Constructs a MonthDay with the given value and no timezone is specified.
+     *
+     * @param month The month to use.
+     * @param day The day to use.
+     */
     public MonthDay(int month, int day)
             throws NumberFormatException {
         setValue(month, day);
     }
 
     /**
-     * Constructs a MonthDay with the given values, including a timezone string The timezone is
-     * validated but not used.
+     * Constructs a MonthDay with the given value, including a timezone string. The timezone is validated
+     * but not used.
+     *
+     * @param month The month to use.
+     * @param day The day to use.
+     * @param timezone The timezone the month and day are expected to be in.
      */
     public MonthDay(int month, int day, String timezone)
             throws NumberFormatException {
         setValue(month, day, timezone);
     }
 
-    /** Construct a MonthDay from a String in the format --MM-DD[timezone] */
+    /**
+     * Constructs a MonthDay from a String.
+     *
+     * @param source The string to parse the day to use from in the format "--MM-DD[timezone]".
+     */
     public MonthDay(String source) throws NumberFormatException {
         if (source.length() < 6) {
             throw new NumberFormatException();
@@ -86,7 +99,11 @@ public class MonthDay implements java.io.Serializable {
         return day;
     }
 
-    /** Set the day NOTE: if the month isn't set yet, the day isn't validated */
+    /**
+     * Set the day. NOTE: If the month isn't set yet, the day isn't validated.
+     *
+     * @param day The day to store.
+     */
     public void setDay(int day) {
         // validate day
         if (day < 1 || day > 31) {

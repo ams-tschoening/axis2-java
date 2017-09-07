@@ -45,13 +45,15 @@ public class Duration implements Serializable {
     }
 
     /**
-     * @param negative
-     * @param aYears
-     * @param aMonths
-     * @param aDays
-     * @param aHours
-     * @param aMinutes
-     * @param aSeconds
+     * Construct a new Duration.
+     * 
+     * @param negative Negative or positive duration?
+     * @param aYears How many years the duration spans.
+     * @param aMonths How many months the duration spans.
+     * @param aDays How many days the duration spans.
+     * @param aHours How many hours the duration spans.
+     * @param aMinutes How many minutes the duration spans.
+     * @param aSeconds How many seconds the duration spans.
      */
     public Duration(boolean negative, int aYears, int aMonths, int aDays,
                     int aHours, int aMinutes, double aSeconds) {
@@ -65,9 +67,9 @@ public class Duration implements Serializable {
     }
 
     /**
-     * Constructs Duration from a String in an xsd:duration format - PnYnMnDTnHnMnS.
+     * Constructs Duration from a String in an xsd:duration format.
      *
-     * @param duration String
+     * @param duration Duration to parse in the format "PnYnMnDTnHnMnS".
      * @throws IllegalArgumentException if the string doesn't parse correctly.
      */
     public Duration(String duration) throws IllegalArgumentException {
@@ -108,7 +110,8 @@ public class Duration implements Serializable {
     /**
      * Constructs Duration from a Calendar.
      *
-     * @param calendar Calendar
+     * @param negative Negative or positive duration?
+     * @param calendar Calendar to get the individual values for the duration from.
      * @throws IllegalArgumentException if the calendar object does not represent any date nor
      *                                  time.
      */
@@ -130,10 +133,10 @@ public class Duration implements Serializable {
     }
 
     /**
-     * This method parses the time portion of a String that represents xsd:duration - nHnMnS.
+     * This method parses the time portion of a String that represents xsd:duration.
      *
-     * @param time
-     * @throws IllegalArgumentException if time does not match pattern
+     * @param time Duration to parse the time from in the format "nHnMnS". 
+     * @throws IllegalArgumentException if time does not match pattern.
      */
     public void parseTime(String time) throws IllegalArgumentException {
         if (time.length() == 0 || time.indexOf("-") != -1) {
@@ -197,10 +200,10 @@ public class Duration implements Serializable {
     }
 
     /**
-     * This method parses the date portion of a String that represents xsd:duration - nYnMnD.
+     * This method parses the date portion of a String that represents xsd:duration.
      *
-     * @param date
-     * @throws IllegalArgumentException if date does not match pattern
+     * @param date Duration to parse the date from in the format "nYnMnD".
+     * @throws IllegalArgumentException if date does not match pattern.
      */
     public void parseDate(String date) throws IllegalArgumentException {
         if (date.length() == 0 || date.indexOf("-") != -1) {
@@ -261,102 +264,147 @@ public class Duration implements Serializable {
     }
 
     /**
-     *
+     * Is this duration negative?
+     * 
+     * @return {@code true} if duration is negative, {@code false} else.
      */
     public boolean isNegative() {
         return isNegative;
     }
 
     /**
-     *
+     * Gets the number of years this duration spans.
+     * 
+     * @return Number of years.
      */
     public int getYears() {
         return years;
     }
 
     /**
-     *
+     * Gets the number of months this duration spans.
+     * 
+     * @return Number of months.
      */
     public int getMonths() {
         return months;
     }
 
     /**
-     *
+     * Gets the number of days this duration spans.
+     * 
+     * @return Number of days.
      */
     public int getDays() {
         return days;
     }
 
     /**
-     *
+     * Gets the number of hours this duration spans.
+     * 
+     * @return Number of hours.
      */
     public int getHours() {
         return hours;
     }
 
     /**
-     *
+     * Gets the number of minutes this duration spans.
+     * 
+     * @return Number of minutes.
      */
     public int getMinutes() {
         return minutes;
     }
 
     /**
-     *
+     * Gets the number of seconds this duration spans.
+     * 
+     * @return Number of seconds.
      */
     public double getSeconds() {
         return seconds;
     }
 
-    /** @param negative  */
+    /**
+     * Should this duration be negative?
+     *
+     * @param negative {@code true} if the duration is negative, {@code false} otherwise.
+     */
     public void setNegative(boolean negative) {
         isNegative = negative;
     }
 
-    /** @param years  */
+    /**
+     * Sets the number of years this duration spans.
+     *
+     * @param years Number of years.
+     */
     public void setYears(int years) {
         this.years = years;
     }
 
-    /** @param months  */
+    /**
+     * Sets the number of months this duration spans.
+     *
+     * @param months Number of months.
+     */
     public void setMonths(int months) {
         this.months = months;
     }
 
-    /** @param days  */
+    /**
+     * Sets the number of days this duration spans.
+     *
+     * @param days Number of days.
+     */
     public void setDays(int days) {
         this.days = days;
     }
 
-    /** @param hours  */
+    /**
+     * Sets the number of hours this duration spans.
+     *
+     * @param hours Number of hours.
+     */
     public void setHours(int hours) {
         this.hours = hours;
     }
 
-    /** @param minutes  */
+    /**
+     * Sets the number of minutes this duration spans.
+     *
+     * @param minutes Number of minutes.
+     */
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
 
     /**
-     * @param seconds
-     * @deprecated use {@link #setSeconds(double) setSeconds(double)} instead
+     * Sets the number of seconds this duration spans.
+     *
+     * @param seconds Number of seconds.
+     * @deprecated Use {@link #setSeconds(double)} instead.
      */
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
 
     /**
-     * Sets the seconds. NOTE: The fractional value of seconds is rounded up to milliseconds.
+     * Sets the number of seconds this duration spans.
+     * NOTE: The fractional value of seconds is rounded up to milliseconds.
      *
-     * @param seconds double
+     * @param seconds Number of seconds.
      */
     public void setSeconds(double seconds) {
         this.seconds = ((double)(Math.round(seconds * 100))) / 100;
     }
 
-    /** This returns the xml representation of an xsd:duration object. */
+    /**
+     * This returns the XML representation of an xsd:duration object.
+     * 
+     * @return XML representation
+     */
     public String toString() {
         StringBuffer duration = new StringBuffer();
 
@@ -407,7 +455,8 @@ public class Duration implements Serializable {
      * representation. Hence, a duration object representing 65 minutes is considered equal to a
      * duration object representing 1 hour and 5 minutes.
      *
-     * @param object
+     * @param object Other Duration to compare with.
+     * @return {@code true} if the other object is a Duration and holds the same time span.
      */
     public boolean equals(Object object) {
         if (!(object instanceof Duration)) {
@@ -460,7 +509,7 @@ public class Duration implements Serializable {
      * Duration's object getMonths returns 20, a similar call on a Calendar object will return 1
      * year and 8 months.
      *
-     * @param startTime Calendar
+     * @param startTime Calendar with default data.
      * @return Calendar
      */
     public Calendar getAsCalendar(Calendar startTime) {

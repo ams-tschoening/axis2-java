@@ -38,9 +38,10 @@ public class Name extends Token {
     }
 
     /**
-     * ctor for Name
+     * CTOR for Name.
      *
-     * @throws IllegalArgumentException will be thrown if validation fails
+     * @param stValue The value to store.
+     * @throws IllegalArgumentException will be thrown if validation fails.
      */
     public Name(String stValue) throws IllegalArgumentException {
         try {
@@ -55,10 +56,10 @@ public class Name extends Token {
     }
 
     /**
-     * validates the data and sets the value for the object.
+     * Validates the data and sets the value for the object.
      *
-     * @param stValue String value
-     * @throws IllegalArgumentException if invalid format
+     * @param stValue The value to store.
+     * @throws IllegalArgumentException if invalid format.
      */
     public void setValue(String stValue) throws IllegalArgumentException {
         if (!Name.isValid(stValue))
@@ -69,11 +70,14 @@ public class Name extends Token {
     }
 
     /**
-     * validate the value against the xsd definition Name    ::=    (Letter | '_' | ':') (
+     * Validate the value against the xsd definition Name    ::=    (Letter | '_' | ':') (
      * NameChar)* NameChar    ::=     Letter | Digit | '.' | '-' | '_' | ':' | CombiningChar |
      * Extender
+     * 
+     * @param stValue The value to validate.
+     * @return {@code true} if the given value is valid, {@code false} otherwise.
      */
-    //todo - Fix this
+    // TODO - Fix this
     public static boolean isValid(String stValue) {
         int scan;
         boolean bValid = true;

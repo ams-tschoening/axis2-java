@@ -34,9 +34,10 @@ public class IDRef extends NCName {
     }
 
     /**
-     * ctor for IDRef
+     * CTOR for IDRef.
      *
-     * @throws IllegalArgumentException will be thrown if validation fails
+     * @param stValue The value to store.
+     * @throws IllegalArgumentException will be thrown if validation fails.
      */
     public IDRef(String stValue) throws IllegalArgumentException {
         super(stValue);

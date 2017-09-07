@@ -36,7 +36,8 @@ public class Id extends NCName {
     /**
      * Constructor for Id.
      *
-     * @throws IllegalArgumentException will be thrown if validation fails
+     * @param stValue The value to store.
+     * @throws IllegalArgumentException will be thrown if validation fails.
      */
     public Id(String stValue) throws IllegalArgumentException {
         try {
@@ -53,8 +54,8 @@ public class Id extends NCName {
     /**
      * Validates the data and sets the value for the object.
      *
-     * @param stValue String value
-     * @throws IllegalArgumentException if invalid format
+     * @param stValue The value to store.
+     * @throws IllegalArgumentException if invalid format.
      */
     public void setValue(String stValue) throws IllegalArgumentException {
         if (!Id.isValid(stValue))
@@ -66,8 +67,11 @@ public class Id extends NCName {
 
     /**
      * Validates the value against the xsd definition.
-     * <p/>
-     * Same validation as NCName for the time being
+     * <p>
+     * Same validation as NCName for the time being.
+     * </p>
+     * @param stValue The Value to validate.
+     * @return {@code true} if the given value is valid, {@code false} otherwise.
      */
     public static boolean isValid(String stValue) {
         return NCName.isValid(stValue);

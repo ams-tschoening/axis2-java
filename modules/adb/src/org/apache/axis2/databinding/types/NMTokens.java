@@ -34,9 +34,10 @@ public class NMTokens extends NCName {
     }
 
     /**
-     * ctor for NMTokens
+     * CTOR for NMTokens.
      *
-     * @throws IllegalArgumentException will be thrown if validation fails
+     * @param stValue The value to store.
+     * @throws IllegalArgumentException will be thrown if validation fails.
      */
     public NMTokens(String stValue) throws IllegalArgumentException {
         setValue(stValue);

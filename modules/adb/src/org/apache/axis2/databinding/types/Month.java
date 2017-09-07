@@ -34,21 +34,32 @@ public class Month implements java.io.Serializable {
     int month;
     String timezone;
 
-    /** Constructs a Month with the given values No timezone is specified */
+    /**
+     * Constructs a Month with the given value and no timezone is specified.
+     *
+     * @param month The month to use.
+     */
     public Month(int month) throws NumberFormatException {
         setValue(month);
     }
 
     /**
-     * Constructs a Month with the given values, including a timezone string The timezone is
-     * validated but not used.
+     * Constructs a Month with the given value, including a timezone string. The timezone is validated
+     * but not used.
+     *
+     * @param month The month to use.
+     * @param timezone The timezone the month is expected to be in.
      */
     public Month(int month, String timezone)
             throws NumberFormatException {
         setValue(month, timezone);
     }
 
-    /** Construct a Month from a String in the format --MM--[timezone] */
+    /**
+     * Constructs a Month from a String.
+     *
+     * @param source The string to parse the day to use from in the format "--MM--[timezone]".
+     */
     public Month(String source) throws NumberFormatException {
         if (source.length() < (6)) {
             throw new NumberFormatException();
