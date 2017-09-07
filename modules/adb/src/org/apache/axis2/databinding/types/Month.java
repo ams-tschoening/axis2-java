@@ -58,7 +58,7 @@ public class Month implements java.io.Serializable {
     /**
      * Constructs a Month from a String.
      *
-     * @param source The string to parse the day to use from in the format "--MM--[timezone]".
+     * @param source The string to parse the month to use from in the format "--MM--[timezone]".
      */
     public Month(String source) throws NumberFormatException {
         if (source.length() < (6)) {

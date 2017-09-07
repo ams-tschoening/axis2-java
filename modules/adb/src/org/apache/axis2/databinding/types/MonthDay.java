@@ -62,7 +62,7 @@ public class MonthDay implements java.io.Serializable {
     /**
      * Constructs a MonthDay from a String.
      *
-     * @param source The string to parse the day to use from in the format "--MM-DD[timezone]".
+     * @param source The string to parse the MonthDay to use from in the format "--MM-DD[timezone]".
      */
     public MonthDay(String source) throws NumberFormatException {
         if (source.length() < 6) {
