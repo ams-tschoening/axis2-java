@@ -46,16 +46,14 @@ public class JSONMessageHandler extends AbstractHandler {
      * needs to be processed.  If the message processing is paused by the
      * handler, then this method will be called again for the handler that
      * paused the processing once it is resumed.
-     * <p>
+     * <p/>
      * This method may be called concurrently from multiple threads.
-     * </p>
-     * <p>
+     * <p/>
      * Handlers that want to determine the type of message that is to be
      * processed (e.g. response vs request, inbound vs. outbound, etc.) can
      * retrieve that information from the MessageContext via
      * MessageContext.getFLOW() and
      * MessageContext.getAxisOperation().getMessageExchangePattern() APIs.
-     * </p>
      *
      * @param msgContext the <code>MessageContext</code> to process with this
      *                   <code>Handler</code>.

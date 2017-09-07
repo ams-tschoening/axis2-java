@@ -26,37 +26,29 @@ import javax.xml.ws.Response;
 import java.util.concurrent.Future;
 
 /**
- * <p>
  * The <tt>InvocationController</tt> is an interface modeling the invocation of a
  * target web service.  All of the information that the InvocationController needs 
  * should exist within the InvocatonContext that is passed in to the various invoke 
  * methods.
- * </p>
- * <p>
+ * <p/>
  * The request information is passed in within the InvocationContext.  The InvocationController
  * assumes that there is a MessageContext within that InvocationContext that is populated with all
  * of the information that it needs to invoke.  If not, an error will be returned.  Once the
  * response comes back, the information for that response will be held inside of the MessageContext
  * representing the response, that exists in the InvocationContext.
- * </p>
- * <p>
+ * <p/>
  * The InvocationController supports four different invocation patterns:
- * </p>
- * <p>
+ * <p/>
  * 1) synchronous - This is represented by the {@link #invoke(InvocationContext)} method.  This is a
  * blocking, request/response call to the web service.
- * </p>
- * <p>
+ * <p/>
  * 2) one-way - This is represented by the {@link #invokeOneWay(InvocationContext)} method.  This is
  * a one-way invocation that only returns errors related to sending the message.  If an error occurs
  * while processing, the client will not be notified.
- * </p>
- * <p>
+ * <p/>
  * 3) asynchronous (callback) - {@link #invokeAsync(InvocationContext, AsyncHandler)}
- * </p>
- * <p>
+ * <p/>
  * 4) asynchronous (polling) - {@link #invokeAsync(InvocationContext)}
- * </p>
  */
 public interface InvocationController {
 

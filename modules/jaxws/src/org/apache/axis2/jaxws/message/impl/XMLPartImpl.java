@@ -32,10 +32,9 @@ import javax.xml.ws.WebServiceException;
 
 /**
  * XMLPartImpl
- * <p>
+ * <p/>
  * This class extends the implementation of the XMLPartBase so that it can define the
  * transformations between OM, SAAJ SOAPEnvelope and XMLSpine.
- * </p>
  *
  * @see org.apache.axis2.jaxws.impl.XMLPartBase
  */

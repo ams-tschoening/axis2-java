@@ -27,14 +27,12 @@ import java.util.Map;
  * The ContextPropertyMigrator is a utility interface that can be implemented to handle any
  * transformation or migration that needs to happen between the internal JAX-WS MessageContext for a
  * request or a response and the associated context for the client or the server.
- * <p>
+ * <p/>
  * client - On the client side, this will be called with the request or response context from the
  * BindingProvider instance.
- * </p>
- * <p>
+ * <p/>
  * server - On the server side, this will be called with the javax.xml.ws.handler.MessageContext
  * instance that the service endpoint will see.  This is the same context that will be injected
- * </p>
  */
 public interface ApplicationContextMigrator {
 

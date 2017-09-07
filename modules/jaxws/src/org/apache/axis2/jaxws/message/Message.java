@@ -30,13 +30,11 @@ import java.util.Map;
 
 /**
  * Message
- * <p>
+ * <p/>
  * A Message represents the XML + Attachments
- * </p>
- * <p>
+ * <p/>
  * Most of the methods available on a message are only applicable to the XML part of the Message.
  * See the XMLPart interface for an explantation of these methods.
- * </p>
  *
  * @see XMLPart
  * @see Attachment

@@ -40,28 +40,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.lang.reflect.Array;
 
 /**
- * <p>
  * This is the new implementation of the ADBpullaparser. The approach here is simple When the pull
  * parser needs to generate events for a particular name-value(s) pair it always handes over
  * (delegates) the task to another pull parser which knows how to deal with it The common types of
  * name value pairs we'll come across are 1. String name/QName name - String value 2. String
  * name/QName name - String[] value 3. OMElementkey - OMElement value 4. QName name/String name  -
  * ADBBean value 5. QName name/String name  - Java bean 5. QName name/String name  - Datahandler
- * </p>
- * <p>
+ * <p/>
  * As for the attributes, these are the possible combinations in the array 1. String name/QName name
  * - String value 2. OMAttributeKey - OMAttribute
- * </p>
- * <p>
+ * <p/>
  * Note that certain array methods have  been deliberately removed to avoid complications. The
  * generated code will take the trouble to lay the elements of the array in the correct order
- * </p>
- * <p>
+ * <p/>
+ * <p/>
  * Hence there will be a parser impl that knows how to handle these types, and this parent parser
  * will always delegate these tasks to the child pullparasers in effect this is one huge state
  * machine that has only a few states and delegates things down to the child parsers whenever
  * possible
- * </p>
+ * <p/>
  */
 public class ADBXMLStreamReaderImpl implements ADBXMLStreamReader, DataHandlerReader {
     private static final AtomicInteger nsPrefix = new AtomicInteger();

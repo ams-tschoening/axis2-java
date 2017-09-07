@@ -29,18 +29,15 @@ import javax.xml.ws.WebServiceException;
 
 /**
  * BlockFactory
- * <p>
+ * <p/>
  * Interface to create Block objects An object is created from either a reader, another Block or the
  * BusinessObject. Some business objects (like JAXB) have an associated context object
  * (JAXBContext), these are also passed to the createMethods.
- * </p>
- * <p>
+ * <p/>
  * The implementation of BlockFactories should always be singleton objects and never carry any
  * instance data.
- * </p>
- * <p>
+ * <p/>
  * The FactoryRegistry should be used to get access to a Factory
- * </p>
  *
  * @see org.apache.axis2.jaxws.registry.FactoryRegistry
  */

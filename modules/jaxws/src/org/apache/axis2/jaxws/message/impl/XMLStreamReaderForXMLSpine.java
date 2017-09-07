@@ -32,16 +32,14 @@ import java.util.List;
 
 /**
  * XMLStreamReaderForXMLSpine
- * <p>
+ * <p/>
  * An XMLSpine is composed of many different parts: a sparse OM tree, header blocks, body blocks,
  * etc.
- * </p>
- * <p>
+ * <p/>
  * The XMLStreamReaderForXMLSpine provides an XMLStreamReader that over all of these combined
  * objects (without building a full OM tree). It does this by using a StackableXMLStreamReader for
  * the underlying implementation and pushing the XMLStreamReaders for the blocks onto the stack at
  * the appropriate points in the message.
- * </p>
  */
 public class XMLStreamReaderForXMLSpine extends XMLStreamReaderFilter {
 

@@ -67,15 +67,12 @@ import java.net.URL;
 import java.util.concurrent.Future;
 
 /**
- * <p>
  * The <tt>AxisInvocationController</tt> is an implementation of the {@link
  * org.apache.axis2.jaxws.core.controller.InvocationController} interface.  This implemenation uses
  * the Axis2 engine to drive the request to the target service.
- * </p>
- * <p>
+ * <p/>
  * For more information on how to invoke this class, please see the InvocationController interface
  * comments.
- * </p>
  */
 public class AxisInvocationController extends InvocationControllerImpl {
 

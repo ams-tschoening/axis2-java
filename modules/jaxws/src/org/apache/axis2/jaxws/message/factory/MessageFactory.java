@@ -31,14 +31,12 @@ import javax.xml.ws.WebServiceException;
 
 /**
  * MessageFactory
- * <p>
+ * <p/>
  * Creates a Message object.  The common patterns are: - Create an empty message for a specific
  * protocol - Create a message with the xml sourced from OM (XMLStreamReader) - Create a message
  * (xml + attachments) from a SOAPMessage
- * </p>
- * <p>
+ * <p/>
  * The FactoryRegistry should be used to get access to the Factory
- * </p>
  *
  * @see org.apache.axis2.jaxws.registry.FactoryRegistry
  */

@@ -49,19 +49,16 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * BlockImpl Abstract Base class for various Block Implementations.
- * <p>
+ * <p/>
  * The base class takes care of controlling the transformations between BusinessObject,
  * XMLStreamReader and SOAPElement A derived class must minimally define the following:
  * _getBOFromReader _getReaderFromBO _outputFromBO
- * </p>
- * <p>
+ * <p/>
  * In addtion, the derived class may want to override the following: _getBOFromBO ...if the
  * BusinessObject is consumed when read (i.e. it is an InputSource)
- * </p>
- * <p>
+ * <p/>
  * The derived classes don't have direct access to the instance data. This ensures that BlockImpl
  * controls the transformations.
- * </p>
  */
 public abstract class BlockImpl<T,C> extends AbstractOMDataSource implements Block<T,C> {
 

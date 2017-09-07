@@ -41,17 +41,14 @@ import java.io.OutputStream;
 public class FastInfosetInputOutputTest {
 
     /**
-     * <p>
      * This is to test how fast infoset interoperate with Axiom.
      * This is how this test is organized.
      * <pre>
      *      de-ser(wstx)        ser(fast-info)             de-ser(fast-info)       ser(wstx)
      * XML  -------->     Axiom     ------>    binary file -------------->   Axiom ---------> XML
      * </pre>
-     * </p>
-     * <p>
+     * <p/>
      * Then the initial XML file and the last XML will be compared to see whether they are the same.
-     * </p>
      */
     @Test
     public void testInputOutput() throws Exception {

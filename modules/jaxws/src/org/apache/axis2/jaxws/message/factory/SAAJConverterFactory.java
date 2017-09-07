@@ -24,9 +24,8 @@ import org.apache.axis2.jaxws.message.util.SAAJConverter;
 /**
  * SAAJConverterFactory Creates an SAAJConverter object A factory is necessary because
  * implementations may need to plug in their own SAAJ or OM implementations.
- * <p>
+ * <p/>
  * Factories are obtained from the FactoryRegistry
- * </p>
  *
  * @see org.apache.axis2.jaxws.registry.FactoryRegistry
  */

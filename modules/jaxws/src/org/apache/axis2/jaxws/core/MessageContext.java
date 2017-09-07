@@ -41,18 +41,15 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * <p>
  * The <code>org.apache.axis2.jaxws.core.MessageContext</code> is an interface that extends the
  * JAX-WS 2.0 <code>javax.xml.ws.handler.MessageContext</code> defined in the spec.  This
  * encapsulates all of the functionality needed of the MessageContext for the other JAX-WS spec
  * pieces (the handlers for example) and also provides the needed bits of contextual information for
  * the rest of the JAX-WS implementation.
- * </p>
- * <p>
+ * <p/>
  * Specifically, this is responsible for providing APIs so that the client and server implementation
  * portions can get to the Message, defined by the Message Model format and also any metadata that
  * is available.
- * </p>
  */
 public class MessageContext {
     private InvocationContext invocationCtx;

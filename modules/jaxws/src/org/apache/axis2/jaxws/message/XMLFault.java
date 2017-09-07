@@ -28,10 +28,9 @@ import org.apache.commons.logging.LogFactory;
 /**
  * This is a value class that is an agnostic representation of a fault. The XMLFault can be added to
  * or queried from a Message/XMLPart.
- * <p>
+ * <p/>
  * Even though XMLFault is SOAP 1.1/SOAP 1.2 agnostic, SOAP 1.2 terms will be used. For example,
  * "reason" means SOAP 1.2 Reason or SOAP 1.1 faultstring.
- * </p>
  *
  * @see XMLFaultUtils
  */

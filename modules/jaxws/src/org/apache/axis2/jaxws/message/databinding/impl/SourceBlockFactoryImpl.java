@@ -31,9 +31,8 @@ import javax.xml.ws.WebServiceException;
 
 /**
  * SourceBlockFactoryImpl
- * <p>
+ * <p/>
  * Creates a SourceBlock
- * </p>
  */
 public class SourceBlockFactoryImpl extends BlockFactoryImpl implements SourceBlockFactory {
 

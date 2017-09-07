@@ -38,10 +38,9 @@ import java.util.Set;
 
 /**
  * XMLSpine
- * <p>
+ * <p/>
  * An XMLSpine is an optimized form of the xml part of the message. Currently there is only one
  * implementation (XMLSpineImpl).
- * </p>
  *
  * @see XMLSpineImpl for more details
  */

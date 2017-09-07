@@ -22,12 +22,10 @@ package org.apache.axis2.jaxws.message.factory;
 
 /**
  * XMLStringBlockFactory
- * <p>
+ * <p/>
  * Creates a XMLStringBlock
- * </p>
- * <p>
+ * <p/>
  * The FactoryRegistry should be used to get access to the Factory
- * </p>
  *
  * @see org.apache.axis2.jaxws.registry.FactoryRegistry
  */

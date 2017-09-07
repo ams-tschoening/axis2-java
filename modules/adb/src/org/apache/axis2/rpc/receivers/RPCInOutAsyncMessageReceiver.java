@@ -45,26 +45,22 @@ public class RPCInOutAsyncMessageReceiver extends AbstractMessageReceiver {
     private static Log log = LogFactory.getLog(RPCInOnlyMessageReceiver.class);
 
     /**
-     * <p>
-     * Reflect and get the Java method - for each i'th param in the java method - get the first
+     * reflect and get the Java method - for each i'th param in the java method - get the first
      * child's i'th child -if the elem has an xsi:type attr then find the deserializer for it - if
      * not found, lookup deser for th i'th param (java type) - error if not found - deserialize &
      * save in an object array - end for
-     * </p>
-     * <p>
+     * <p/>
      * - invoke method and get the return value
-     * </p>
-     * <p>
+     * <p/>
      * - look up serializer for return value based on the value and type
-     * </p>
-     * <p>
+     * <p/>
      * - create response msg and add return value as grand child of <soap:body>
-     * </p>
      *
      * @param inMessage
      * @param outMessage
      * @throws AxisFault
      */
+
     public void invokeBusinessLogic(MessageContext inMessage, MessageContext outMessage)
             throws AxisFault {
         Method method = null;

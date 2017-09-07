@@ -54,22 +54,18 @@ import java.io.OutputStream;
 
 /**
  * SourceBlock
- * <p>
+ * <p/>
  * Block containing a business object that is a javax.xml.transform.Source.
- * </p>
- * <p>
+ * <p/>
  * The javax.xml.transform.Source is an interface.  The actual concrete class may be one of the
  * following: - StreamSource - DOMSource - JAXBSource - SAXSource - StAXSource
- * </p>
- * <p>
+ * <p/>
  * During processing of the block, the block is free to change the representation from one source
  * to another.  (i.e. if you initially seed this with a SAXSource, but a later access may give you
  * a StAXSource).
- * </p>
- * <p>
+ * <p/>
  * A Source is consumed when read.  The block will make a copy of the source if a non-consumable
  * request is made.
- * </p>
  */
 public class SourceBlockImpl extends BlockImpl<Source,Void> implements SourceBlock {
 

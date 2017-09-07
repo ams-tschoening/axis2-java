@@ -35,15 +35,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
- * <p>
  * The purpose of this extension is to populate the type mapper from the type mapping file. The
  * format of the type mapping file is as follows <mappings dbf="adb"> <mapping> <qname
  * namespace="ns" prefix="p1">localName</qname> <value>type</value> </mapping> </mappings>
- * </p>
- * <p>
- * In any case it is best that the type mapper extension be after all the databinding extensions.
- * </p>
+ * <p/>
+ * In any case it is best that the type mapper extension be after all the databinding extensions
  */
+
 public class TypeMapperExtension implements CodeGenExtension {
 
 

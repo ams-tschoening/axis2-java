@@ -40,9 +40,8 @@ import java.io.StringReader;
 
 /**
  * XMLStringBlock
- * <p>
+ * <p/>
  * Block containing a business object that is a String of xml text
- * </p>
  */
 public class XMLStringBlockImpl extends BlockImpl<String,Void> implements XMLStringBlock {
 

@@ -46,9 +46,9 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * SourceBlock
- * <p>
+ * <p/>
  * Block containing a business object that is a javax.activation.DataSource
- * </p>
+ * <p/>
  */
 public class DataSourceBlockImpl extends BlockImpl<DataSource,Void> implements DataSourceBlock {
 

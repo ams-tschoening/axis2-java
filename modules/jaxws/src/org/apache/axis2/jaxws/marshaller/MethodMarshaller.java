@@ -29,38 +29,31 @@ import javax.xml.ws.WebServiceException;
 
 /**
  * This class marshals and unmarshals method invocations.
- * <p>
+ * <p/>
  * Here is the high-level view of marshalling: SIGNATURE_ARGS ---> Type Enabled Object  ----->
  * Element Enabled Object ---> MESSAGE (XML)
- * </p>
- * <p>
+ * <p/>
  * The Signature objects are the objects from the SEI method signature.  They may be values or
  * holders of values. The values are "type enabled objects" (i.e. String), which means that they
  * cannot be marshalled or unmarshalled.
- * </p>
  *
  * @see org.apache.axis2.jaxws.util.XMLRootElementUtils for details on Type Enabled and Element
  *      Enabled objects.
- *      <p>
+ *      <p/>
  *      The values are enhanced (if necessary) into Element Enabled Objects.  These can be
  *      marshalled or unmarshalled using JAXB.
- *      </p>
  * @see org.apache.axis2.jaxws.marshaller.impl.alt.PDElement
- *      <p>
+ *      <p/>
  *      The element enabled objects are put onto the message.
- *      </p>
- *      <p>
+ *      <p/>
  *      The high-level view of unmarshalling is the reverse. SIGNATURE_ARGS <---- Type Enabled
  *      Object  <----- Element Enabled Object <---- MESSAGE (XML)
- *      </p>
- *      <p>
+ *      <p/>
  *      See the specific MethodMarshaller implementations to see how doc/lit wrapped, doc/lit bare
  *      and rpc/lit affect the process of going from SIGNATURE_ARGS to the element enabled objects.
- *      </p>
- *      <p>
+ *      <p/>
  *      If there are any problems, a WebServiceException is thrown.  (Each of the methods is
  *      guranteed to catch any unchecked exception and wrap it in a WebServiceException).
- *      </p>
  */
 public interface MethodMarshaller {
 

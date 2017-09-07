@@ -29,9 +29,8 @@ import javax.xml.stream.XMLStreamException;
 
 /**
  * XMLStringFactoryImpl
- * <p>
+ * <p/>
  * Creates an XMLStringBlock
- * </p>
  */
 public class XMLStringBlockFactoryImpl extends BlockFactoryImpl implements XMLStringBlockFactory {
 

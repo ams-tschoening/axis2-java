@@ -47,11 +47,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 /**
- * JAXBBlockImpl
- * <p>
- * A Block containing a JAXB business object (either a JAXBElement or an object
+ * JAXBBlockImpl <p/> A Block containing a JAXB business object (either a JAXBElement or an object
  * with @XmlRootElement).
- * </p>
  */
 public class JAXBBlockImpl extends BlockImpl<Object,JAXBBlockContext> implements JAXBBlock {
 

@@ -72,11 +72,10 @@ import java.util.List;
  * The EndpointController is the server side equivalent to the InvocationController on the client
  * side.  It is an abstraction of the server side endpoint invocation that encapsulates all of the
  * Axis2 semantics.
- * <p>
+ * <p/>
  * Like the InvocationController, this class is responsible for invoking the JAX-WS application
  * handler chain along with taking all of the provided information and setting up what's needed to
  * perform the actual invocation of the endpoint.
- * </p>
  */
 public class EndpointController {
 
