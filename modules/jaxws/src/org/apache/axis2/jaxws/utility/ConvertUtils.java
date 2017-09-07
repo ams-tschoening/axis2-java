@@ -59,9 +59,10 @@ public class ConvertUtils {
 
     /**
      * This method should return true if the convert method will succeed.
-     * <p/>
+     * <p>
      * Note that any changes to isConvertable() must also be accompanied by similar changes to
      * convert()
+     * </p>
      *
      * @param obj  source object or class
      * @param dest destination class
@@ -164,12 +165,14 @@ public class ConvertUtils {
 
     /**
      * Utility function to convert an Object to some desired Class.
-     * <p/>
+     * <p>
      * Normally this is used for T[] to List<T> processing. Other conversions are also done (i.e.
      * HashMap <->Hashtable, etc.)
-     * <p/>
+     * </p>
+     * <p>
      * Use the isConvertable() method to determine if conversion is possible. Note that any changes
      * to convert() must also be accompanied by similar changes to isConvertable()
+     * </p>
      *
      * @param arg       the array to convert
      * @param destClass the actual class we want

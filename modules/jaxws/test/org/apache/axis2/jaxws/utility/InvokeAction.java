@@ -26,10 +26,11 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for invokeAction complex type.
- * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * Java class for invokeAction complex type.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * </p>
+ * <p>
  * <pre>
  * &lt;complexType name="invokeAction">
  *   &lt;complexContent>
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * </p>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "invokeAction", namespace = "http://utility.jaxws.axis2.apache.org/", propOrder = {

@@ -28,13 +28,15 @@ import java.util.Stack;
 
 /**
  * StackableReader A StackableStreamReader provides an additional method push(XMLStreamReader)
- * <p/>
+ * <p>
  * You can call push(...) to add a new XMLStreamReader.  The next event will use the pushed stream
  * reader. After the XMLStreamReader is consumed, it is automatically popped off of the stack.
- * <p/>
+ * </p>
+ * <p>
  * Note the information returned by the StackableReader is only applicable for the topmost
  * XMLStreamReader.  For example the NamespaceContext that is returned is not a combination of all
  * the namespace contexts on the stack.
+ * </p>
  */
 public class StackableReader implements XMLStreamReader {
 

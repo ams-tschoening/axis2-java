@@ -67,27 +67,33 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /**
+ * <p>
  * ProxyHandler is the java.lang.reflect.InvocationHandler implementation. When a JAX-WS client
  * calls the method on a proxy object, created by calling the ServiceDelegate.getPort(...) method,
  * the inovke method on the ProxyHandler is called.
- * <p/>
+ * </p>
+ * <p>
  * ProxyHandler uses EndpointInterfaceDescriptor and finds out if 1) The client call is Document
  * Literal or Rpc Literal 2) The WSDL is wrapped or unWrapped.
- * <p/>
+ * </p>
+ * <p>
  * ProxyHandler then reads OperationDescription using Method name called by Client From
  * OperationDescription it does the following 1) if the wsdl isWrapped() reads RequestWrapper Class
  * and responseWrapperClass 2) then reads the webParams for the Operation.
- * <p/>
+ * </p>
+ * <p>
  * isWrapped() = true  and DocLiteral then ProxyHandler then uses WrapperTool to create Request that
  * is a Wrapped JAXBObject. Creates JAXBBlock using JAXBBlockFactory Creates MessageContext->Message
  * and sets JAXBBlock to xmlPart as RequestMsgCtx in InvocationContext. Makes call to
  * InvocationController. Reads ResponseMsgCtx ->MessageCtx->Message->XMLPart. Converts that to
  * JAXBlock using JAXBBlockFactory and returns the BO from this JAXBBlock.
- * <p/>
+ * </p>
+ * <p>
  * isWrapped() != true and DocLiteral then ProxyHandler creates the JAXBBlock for the input request
  * creates a MessageContext that is then used by IbvocationController to invoke. Response is read
  * and return object is derived using @Webresult annotation. A JAXBBlock is created from the
  * Response and the BO from JAXBBlock is returned.
+ * </p>
  */
 
 public class JAXWSProxyHandler extends BindingProvider implements

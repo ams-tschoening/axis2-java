@@ -30,11 +30,13 @@ import javax.xml.ws.WebServiceException;
 
 /**
  * XMLPartFactory
- * <p/>
+ * <p>
  * Creates an XMLPart object.  The two common patterns are: - Create an empty message for a specific
  * protocol - Create a xmlPart sourced from OM (XMLStreamReader)
- * <p/>
+ * </p>
+ * <p>
  * The FactoryRegistry should be used to get access to the Factory
+ * </p>
  *
  * @see org.apache.axis2.jaxws.registry.FactoryRegistry
  */

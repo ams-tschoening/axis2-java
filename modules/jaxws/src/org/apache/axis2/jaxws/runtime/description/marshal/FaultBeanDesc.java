@@ -28,11 +28,12 @@ public interface FaultBeanDesc {
     /**
      * Get the class name of the fault bean for the FaultDescription. Note that the FaultBean may
      * not be a bean.  It can be a non-bean (i.e. String or int)
-     * <p/>
+     * <p>
      * Algorithm: 1) The class defined on @WebFault of the exception 2) If not present or invalid,
      * the class defined by getFaultInfo. 3) If not present, the class is found by looking for the a
      * class named <exceptionName>Bean in the interface's package. 4) If not present, the class is
      * found by looking for the a class named <exceptionName>Bean in the interface + jaxws package
+     * </p>
      *
      * @return
      */

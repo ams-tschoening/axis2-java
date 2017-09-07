@@ -61,12 +61,14 @@ import java.util.Set;
 
 /**
  * XMLSpineImpl
- * <p/>
+ * <p>
  * An XMLSpine consists is an OMEnvelope (either a default one or one create from an incoming
  * message). As Blocks are added or requested, they are placed in the tree as OMSourcedElements.
- * <p/>
+ * </p>
+ * <p>
  * NOTE: For XML/HTTP (REST) messages, a SOAP 1.1 envelope is built and the xml payload is 
  * placed in the body.  This purposely mimics the implementation used by Axis2.
+ * </p>
  */
 class XMLSpineImpl implements XMLSpine {
 

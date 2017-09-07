@@ -155,10 +155,11 @@ public class JAXBWrapperToolImpl implements JAXBWrapperTool {
     }
 
     /**
-     * wrap Creates a jaxb object that is initialized with one child object.
-     * <p/>
+     * Wrap Creates a jaxb object that is initialized with one child object.
+     * <p>
      * Note that the jaxbClass must be the class the represents the complexType. (It should never be
      * JAXBElement)
+     * </p>
      *
      * @param jaxbClass
      * @param childName     xml child name as String or null if no child
@@ -217,10 +218,11 @@ public class JAXBWrapperToolImpl implements JAXBWrapperTool {
     }
     
     /**
-     * wrap Creates a jaxb object that is initialized with the child objects.
-     * <p/>
+     * Wrap Creates a jaxb object that is initialized with the child objects.
+     * <p>
      * Note that the jaxbClass must be the class the represents the complexType. (It should never be
      * JAXBElement)
+     * </p>
      *
      * @param jaxbClass
      * @param childNames    list of xml child names as String

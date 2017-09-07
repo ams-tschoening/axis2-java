@@ -33,14 +33,18 @@ import javax.xml.ws.WebServiceException;
 import java.util.Arrays;
 
 /**
+ * <p>
  * Reader In many situations, you want the ability to reset an XMLStreamReader. (Or at least ask if
  * the XMLStreamReader is resettable).
- * <p/>
+ * </p>
+ * <p>
  * The Reader abstract class: - accepts an XMLStreamReader - provides reset() and isResettable()
  * methods Adds support resettable support to XMLStreamReader
- * <p/>
+ * </p>
+ * <p>
  * Derived classes must pass the initial reader to the constructor and indicate if it is resettable.
  * Derived classes must also provide an implementation of the newReader() method if resettable.
+ * </p>
  */
 public abstract class Reader implements XMLStreamReader {
     protected XMLStreamReader reader;

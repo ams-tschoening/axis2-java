@@ -710,10 +710,13 @@ public class TribesClusteringAgent implements ClusteringAgent {
     }
 
     /**
+     * <p>
      * Get some information from a neighbour. This information will be used by this node to
      * initialize itself
-     * <p/>
+     * </p>
+     * <p>
      * rpcInitChannel is The utility for sending RPC style messages to the channel
+     * </p>
      *
      * @param command The control command to send
      * @throws ClusteringFault If initialization code failed on this node

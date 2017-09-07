@@ -30,19 +30,24 @@ import javax.xml.stream.XMLStreamWriter;
 import javax.xml.ws.WebServiceException;
 
 /**
+ * <p>
  * Block A Block represents an xml element and associated sub-tree. The name of the element must be
  * defined by a root element in a schema. All prefixes within the subtree must correspond to
  * namespace declarations defined within the tree. Many specifications refer to this as a "embedded
  * document" or "xml block".  I chose the term, block, for simplicity.
- * <p/>
+ * </p>
+ * <p>
  * The block can be exposed as: * BusinessObject * StAX object
- * <p/>
+ * </p>
+ * <p>
  * Note that the whole Message can also be thought of as a Block.  Thus a Message can be createFrom
  * a Block and written as a Block.
- * <p/>
+ * </p>
+ * <p>
  * In addition, each of the accessors has a consume parameter.  If consume is true, the Block is no
  * longer valid after the message is called. (i.e. the implementation does not need to cache the
  * information)
+ * </p>
  */
 public interface Block<T,C> extends OMDataSourceExt {
 

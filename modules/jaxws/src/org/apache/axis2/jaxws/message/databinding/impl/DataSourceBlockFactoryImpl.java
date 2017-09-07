@@ -33,8 +33,9 @@ import javax.activation.DataSource;
 
 /**
  * SourceBlockFactoryImpl
- * <p/>
+ * <p>
  * Creates a SourceBlock
+ * </p>
  */
 public class DataSourceBlockFactoryImpl extends BlockFactoryImpl implements DataSourceBlockFactory {
 

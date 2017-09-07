@@ -29,8 +29,9 @@ import javax.xml.stream.XMLStreamException;
 
 /**
  * OMBlockFactoryImpl
- * <p/>
+ * <p>
  * Creates an OMBlock
+ * </p>
  */
 public class OMBlockFactoryImpl extends BlockFactoryImpl implements OMBlockFactory {
 

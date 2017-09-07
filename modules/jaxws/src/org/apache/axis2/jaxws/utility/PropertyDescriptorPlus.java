@@ -36,14 +36,17 @@ import java.util.Collection;
 /**
  * A PropertyDescriptor provides acesss to a bean property.  Values can be queried/changed using the
  * read and writer methods of the PropertyDescriptor.
- * <p/>
+ * <p>
  * A PropertyDescriptorPlus object wraps a PropertyDescriptor and supplies enhanced set/get methods
  * that match JAXB semantis.
- * <p/>
+ * </p>
+ * <p>
  * For example, the set(..) method is smart enough to add lists, arrays and atomic values on JAXB
  * beans.
- * <p/>
+ * </p>
+ * <p>
  * The PropertyDescriptorPlus object also stores the xmlName of the property.
+ * </p>
  *
  * @See XMLRootElementUtil.createPropertyDescriptorMap , which creates the PropertyDescriptorPlus
  * objects

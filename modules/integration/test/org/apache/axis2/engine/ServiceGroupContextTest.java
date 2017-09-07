@@ -27,6 +27,7 @@ import org.apache.axis2.engine.util.RequestCounter;
 import org.apache.axis2.integration.LocalWithAddressingTestCase;
 
 /**
+ * <p>
  * This test will first sends a request to a dummy service deployed. That service will get
  * message contexts as inputs and will put a property in the service group context to count the
  * number of requests. Then the client, upon receiving the response, extracts the sgc id from
@@ -35,9 +36,11 @@ import org.apache.axis2.integration.LocalWithAddressingTestCase;
  * correctly identify the service group from the information sent by the client and retrieve the
  * sgc earlier used and will use that for the current request as well. The service will retrieve
  * the request count from the sgc and increase that by one.
- * <p/>
+ * </p>
+ * <p>
  * Test will asserts whether the client gets the number of requests as 2, when he invokes two
  * times.
+ * </p>
  */
 public class ServiceGroupContextTest extends LocalWithAddressingTestCase {
     protected void setUp() throws Exception {

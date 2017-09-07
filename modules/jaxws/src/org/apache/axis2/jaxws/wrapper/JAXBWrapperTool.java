@@ -66,10 +66,11 @@ public interface JAXBWrapperTool {
                          PropertyDescriptorPlus pd) throws JAXBWrapperException;
 
     /**
-     * wrap Creates a jaxb object that is initialized with the child objects.
-     * <p/>
+     * Wrap Creates a jaxb object that is initialized with the child objects.
+     * <p>
      * Note that the jaxbClass must be the class the represents the complexType. (It should never be
      * JAXBElement)
+     * </p>
      *
      * @param jaxbClass
      * @param childNames    list of xml child names as String
@@ -83,10 +84,11 @@ public interface JAXBWrapperTool {
                        Map<String, PropertyDescriptorPlus> pdMap) throws JAXBWrapperException;
 
     /**
-     * wrap Creates a jaxb object that is initialized with the child objects.
-     * <p/>
+     * Wrap Creates a jaxb object that is initialized with the child objects.
+     * <p>
      * Note that the jaxbClass must be the class the represents the complexType. (It should never be
      * JAXBElement)
+     * </p>
      *
      * @param jaxbClass
      * @param childNames    list of xml child names as String
@@ -103,9 +105,10 @@ public interface JAXBWrapperTool {
     /**
      * Short Cut for JAXB objects with one child
      * wrap Creates a jaxb object that is initialized with one child object.
-     * <p/>
+     * <p>
      * Note that the jaxbClass must be the class the represents the complexType. (It should never be
      * JAXBElement)
+     * </p>
      *
      * @param jaxbClass
      * @param childName     xml child name as String or null if no child

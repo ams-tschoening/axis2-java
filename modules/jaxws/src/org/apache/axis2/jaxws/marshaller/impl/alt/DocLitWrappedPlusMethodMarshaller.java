@@ -55,12 +55,14 @@ import java.util.Map;
 import java.util.TreeSet;
 
 /**
+ * <p>
  * The DocLitWrapped "plus" marshaller is used when the java method is doc/lit wrapped, but it does
  * not exactly comply with the doc/lit rules.  This can result from the customer adding annotations,
- * but it can also be the result of WSGEN generation
- * <p/>
+ * but it can also be the result of WSGEN generation.
+ * </p>
+ * <p>
  * Here is an example:
- *
+ * <pre>
  * @WebMethod(action = "http://addheaders.sample.test.org/echoStringWSGEN1")
  * @RequestWrapper(localName = "echoStringWSGEN1", targetNamespace = "http://wrap.sample.test.org",
  * className = "org.test.sample.wrap.EchoStringWSGEN1")
@@ -69,11 +71,15 @@ import java.util.TreeSet;
  * public String echoStringWSGEN1(
  * @WebParam(name = "headerValue", targetNamespace = "http://wrap.sample.test.org", header = true)
  * String headerValue )
- * <p/>
+ * </pre>
+ * </p>
+ * <p>
  * In this case the method is doc/lit, but the headerValue parameter is passed in the header.  The
  * wrapper class EchoStringWSGEN1 will not have any child elements.
- * <p/>
+ * </p>
+ * <p>
  * A similar example is:
+ * <pre>
  * @WebMethod(action = "http://addheaders.sample.test.org/echoStringWSGEN2")
  * @RequestWrapper(localName = "echoStringWSGEN2", targetNamespace = "http://wrap.sample.test.org",
  * className = "org.test.sample.wrap.EchoStringWSGEN2")
@@ -82,16 +88,21 @@ import java.util.TreeSet;
  * @WebResult(name = "headerValue", targetNamespace = "http://wrap.sample.test.org", header = true)
  * public String echoStringWSGEN2(
  * @WebParam(name = "data", targetNamespace = "") String data )
- * <p/>
+ * </pre>
+ * </p>
+ * <p>
  * In this second case, the return is passed in a header (as defined by @WebResult)
- * <p/>
+ * </p>
+ * <p>
  * At the time of this writing, the "plus" marshaller is only used if a doc/lit wrapped method has
  * "header" parameters.  If other deviations are found, this class will be updated.  The advantage
  * of using DocLitWrapperPlus for these deviations is that it does not impact the normal
  * DocLitWrapper marshalling (which is used for 99% of the cases).  Thus these deviations will not
  * polute or slow down the normal flow.
- * <p/>
+ * </p>
+ * <p>
  * Scheu
+ * </p>
  */
 public class DocLitWrappedPlusMethodMarshaller implements MethodMarshaller {
 

@@ -46,15 +46,18 @@ import org.apache.axis2.receivers.RawXMLINOutMessageReceiver;
 import javax.xml.namespace.QName;
 
 /**
+ * <p>
  * This tests that it is possible to use the more advanced function allowed by the WS-Addressing
  * specification to redirect responses. This test sets up 2 services, MultiHopRedirectService1 and
  * MultiHopRedirectService2. MultiHopRedirectService1 echos the XML it receives to
  * MultiHopRedirectService2, adding the original ReplyTo. MultiHopRedirectService2 then echos the
  * XML to the orignal ReplyTo, setting the RelatesTo to the messageID of the original request
  * message to allow the client to correlate the message.
- * <p/>
+ * </p>
+ * <p>
  * The clearly only works if the client is using a separate listener (which the client in the test
- * does)
+ * does).
+ * </p>
  */
 public class MultiHopRedirectServiceTest extends UtilServerBasedTestCase implements TestConstants {
 

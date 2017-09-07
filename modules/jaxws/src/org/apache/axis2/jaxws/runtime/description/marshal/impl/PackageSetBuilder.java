@@ -70,24 +70,31 @@ import java.util.TreeSet;
 import java.util.concurrent.Future;
 
 /**
+ * <p>
  * In order to marshal or unmarshal the user data, we need to know the set of packages involved.
  * The set of packages is used to construct an appropriate JAXBContext object during the
  * marshalling/unmarshalling.
- * <p/>
+ * </p>
+ * <p>
  * There are two ways to get this data.
- * <p/>
+ * </p>
+ * <p>
  * Schema Walk (preferred):  Get the list of packages by walking the schemas that are referenced by
  * the wsdl (or generated wsdl).  Each schema represents a different package.  The package is
  * obtained using the jaxb customization or JAXB default ns<->package rule.
- * <p/>
+ * </p>
+ * <p>
  * Annotation Walk(secondary) : Walk the list of Endpoints, Operations, Parameters, etc. and build a
  * list of packages by looking at the classes involved.
- * <p/>
+ * </p>
+ * <p>
  * The Schema Walk is faster and more complete, but relies on the presence of the schema or wsdl.
- * <p/>
+ * </p>
+ * <p>
  * The Annotation Walk is slower and is not complete.  For example, the annotation walk may not
  * discover the packages for derived types that are defined in a different schema than the formal
  * parameter types.
+ * </p>
  */
 public class PackageSetBuilder {
 

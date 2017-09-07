@@ -59,15 +59,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * <p>
  * This extension invokes the schema unwrapper depending on the users setting. it is desirable to
  * put this extension before other extensions since extnsions such as the databinding extension may
  * well depend on the schema being unwrapped previously. For a complete unwrap the following format
  * of the schema is expected &lt; element &gt; &lt; complexType &gt; &lt; sequence &gt; &lt; element
  * /&gt; &lt; /sequence &gt; &lt; /complexType &gt; &lt; /element &gt;
- * <p/>
+ * </p>
+ * <p>
  * When an unwrapped WSDL is encountered Axis2 generates a wrapper schema and that wrapper schema
  * has the above mentioned format. This unwrapping algorithm will work on a pure doc/lit WSDL if it
- * has the above mentioned format only
+ * has the above mentioned format only.
+ * </p>
  */
 public class SchemaUnwrapperExtension extends AbstractCodeGenerationExtension {
 

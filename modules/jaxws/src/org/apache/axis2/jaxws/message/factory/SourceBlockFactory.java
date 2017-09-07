@@ -22,10 +22,12 @@ package org.apache.axis2.jaxws.message.factory;
 
 /**
  * SourceBlockFactory
- * <p/>
+ * <p>
  * Creates a SourceBlock
- * <p/>
+ * </p>
+ * <p>
  * The FactoryRegistry should be used to get access to the Factory
+ * </p>
  *
  * @see org.apache.axis2.jaxws.registry.FactoryRegistry
  */

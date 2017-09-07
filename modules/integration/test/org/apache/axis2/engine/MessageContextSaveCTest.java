@@ -823,13 +823,15 @@ public class MessageContextSaveCTest extends TestCase {
     }
 
     /**
+     * <p>
      * Compare two mappings containing object graph info.
      * This uses the class name and object ID.
-     * <p/>
+     * </p>
+     * <p>
      * Strict comparison includes the object hash codes. If
      * you expect the same object to be represented in
      * both maps, you may want to use Strict checking.
-     * <p/>
+     * </p>
      *
      * @param map1   The first object graph info map
      * @param map2   The second object graph info map

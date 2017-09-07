@@ -23,9 +23,10 @@ import com.intellij.openapi.components.ApplicationComponent;
 
 /**
  * <h3>SampleApplicationPlugin</h3>
- * <p/>
+ * <p>
  * Application level plugin sample showing IDEA <b>OpenAPI</b> basics.<br>
  * Implements <code>ApplicationComponent</code> interface.
+ * </p>
  */
 public class ActionsPlugin implements ApplicationComponent {
 

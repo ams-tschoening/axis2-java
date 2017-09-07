@@ -70,12 +70,14 @@ import java.util.concurrent.FutureTask;
 /**
  * The ProviderDispatcher is used to invoke instances of a target endpoint that implement the {@link
  * javax.xml.ws.Provider} interface.
- * <p/>
+ * <p>
  * The Provider<T> is a generic class, with certain restrictions on the parameterized type T.  This
  * implementation supports the following types:
- * <p/>
+ * </p>
+ * <p>
  * java.lang.String javax.activation.DataSource javax.xml.soap.SOAPMessage
  * javax.xml.transform.Source
+ * </p>
  */
 public class ProviderDispatcher extends JavaDispatcher {
 

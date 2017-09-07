@@ -57,32 +57,37 @@ import java.util.Set;
 
 
 /**
+ * <p>
  * XMLPartBase class for an XMLPart An XMLPart is an abstraction of the xml portion of the message.
  * The actual representation can be in one of three different forms: * An OM tree * A SAAJ
  * SOAPEnvelope * An XMLSpine (an optimized representation of the message) The representation is
  * stored in the private variable (content)
- * <p/>
+ * <p>
  * The representation changes as the Message flows through the JAX-WS framework.  For example, here
  * is a typical flow on the inbound case: a) Message is built from OM
  * (representation: OM) b) Message flows into SOAP Handler chain              (representation:
  * OM->SOAPEnvelope) c) Message flows out of the SOAP Handler chain d) Message flows into the
  * logical dispatch processing (representation: SOAPEnvelope->XMLSpine)
- * <p/>
+ * </p>
+ * <p>
  * The key to performance is the implementation of the transformations between OM, SAAJ SOAPEnvelope
  * and XMLSpine.   This base class defines all of the methods that are required on an XMLPart, the
  * actual transformations are provided by the derived class.  This division of work allows the
  * derived class to concentrate on the optimization of the transformations.  For example, the
  * derived class may implement XMLSpine -> OM using OMObjectWrapperElement constructs...thus avoid
  * expensive parsing.
- * <p/>
+ * </p>
+ * <p>
  * Here are the methods that the derived XMLPart should implement. OMElement
  * _convertSE2OM(SOAPEnvelope se) OMElement _convertSpine2OM(XMLSpine spine) SOAPEnvelope
  * _convertOM2SE(OMElement om) SOAPEnvelope _convertSpine2SE(XMLSpine spine) XMLSpine
  * _convertOM2Spine(OMElement om) XMLSpine _convertSE2Spine(SOAPEnvelope se) XMLSpine
  * _createSpine(Protocol protocol)
- * <p/>
+ * </p>
+ * <p>
  * NOTE: For XML/HTTP (REST), a SOAP 1.1. Envelope is built and the rest payload is placed in the
  * body.  This purposely mimics the Axis2 implementation.
+ * </p>
  *
  * @see org.apache.axis2.jaxws.message.XMLPart
  * @see XMLPartImpl
