@@ -83,7 +83,7 @@ public class NegativeInteger extends NonPositiveInteger {
      * Work-around for http://developer.java.sun.com/developer/bugParade/bugs/4378370.html
      *
      * @return BigIntegerRep
-     * @throws java.io.ObjectStreamException
+     * @throws java.io.ObjectStreamException Not thrown anymore, just to keep signature the same.
      * @deprecated As per https://issues.apache.org/jira/browse/AXIS2-3848
      */
     public Object writeReplace() throws ObjectStreamException {
