@@ -30,9 +30,11 @@ public class ADBHelperDataSource<T> extends AbstractADBDataSource {
     private final ADBHelper<T> helper;
 
     /**
-     * Constructor taking in an ADBBean
+     * Constructor taking in an ADBBean.
      *
-     * @param bean
+     * @param bean The bean to use.
+     * @param parentQName The parent QName to forward to the base class.
+     * @param helper The helper to use.
      */
     public ADBHelperDataSource(T bean, QName parentQName, ADBHelper<T> helper) {
         super(parentQName);
@@ -41,10 +43,10 @@ public class ADBHelperDataSource<T> extends AbstractADBDataSource {
     }
 
     /**
-     * This needs to be generated inside the ADB bean
+     * This needs to be generated inside the ADB bean.
      *
-     * @param xmlWriter
-     * @throws XMLStreamException
+     * @param xmlWriter The writer to serialize the bean with.
+     * @throws XMLStreamException in case of serialization fails.
      * @see OMDataSource#serialize(javax.xml.stream.XMLStreamWriter)
      */
     public void serialize(XMLStreamWriter xmlWriter) throws XMLStreamException{
@@ -54,7 +56,8 @@ public class ADBHelperDataSource<T> extends AbstractADBDataSource {
 
     /**
      * Returns the backing Object.
-     * @return Object
+     *
+     * @return Object The backing bean.
      */
     public Object getObject() {
         return bean;
