@@ -127,6 +127,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <!-- Not required for the Maven build, but necessary to avoid errors when
+                 importing the project into an IDE. -->
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.0</version>
