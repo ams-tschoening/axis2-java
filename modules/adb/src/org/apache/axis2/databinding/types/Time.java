@@ -36,10 +36,11 @@ public class Time implements java.io.Serializable {
     private String originalString;
 
     /**
-     * Initializes with a Calender. Year, month and date are ignored.
-     * 
-     * @param value The value to store.
+     * a shared java.text.SimpleDateFormat instance used for parsing the basic component of the
+     * timestamp
      */
+
+    /** Initializes with a Calender. Year, month and date are ignored. */
     public Time(Calendar value) {
         this._value = value;
         this._value.clear(Calendar.YEAR);
@@ -47,12 +48,7 @@ public class Time implements java.io.Serializable {
         this._value.clear(Calendar.DATE);
     }
 
-    /**
-     * Converts a string formatted as HH:mm:ss[.SSS][+/-offset]
-     * 
-     * @param value The value to parse.
-     * @throws NumberFormatException if the given value contains invalid characters.
-     */
+    /** Converts a string formatted as HH:mm:ss[.SSS][+/-offset] */
     public Time(String value) throws NumberFormatException {
         _value = makeValue(value);
         this.isFromString = true;
@@ -92,13 +88,7 @@ public class Time implements java.io.Serializable {
         this._value.clear(Calendar.DATE);
     }
 
-    /**
-     * Utility function that parses xsd:time strings and returns a Calendar object.
-     * 
-     * @param value The value to parse.
-     * @return Calendar containing the individual parsed values.
-     * @throws NumberFormatException if the given value contains invalid characters.
-     */
+    /** Utility function that parses xsd:time strings and returns a Date object */
     private Calendar makeValue(String source) throws NumberFormatException {
 
         // cannonical form of the times is  hh ':' mm ':' ss ('.' s+)? (zzzzzz)?

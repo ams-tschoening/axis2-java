@@ -35,32 +35,21 @@ public class Day implements Serializable {
     int day;
     String timezone;
 
-    /**
-     * Constructs a Day with the given value and no timezone is specified.
-     *
-     * @param day The day to use.
-     */
+    /** Constructs a Day with the given values No timezone is specified */
     public Day(int day) throws NumberFormatException {
         setValue(day);
     }
 
     /**
-     * Constructs a Day with the given value, including a timezone string. The timezone is validated
+     * Constructs a Day with the given values, including a timezone string The timezone is validated
      * but not used.
-     *
-     * @param day The day to use.
-     * @param timezone The timezone the day is expected to be in.
      */
     public Day(int day, String timezone)
             throws NumberFormatException {
         setValue(day, timezone);
     }
 
-    /**
-     * Constructs a Day from a String.
-     *
-     * @param source The string to parse the day to use from in the format "---DD[timezone]".
-     */
+    /** Construct a Day from a String in the format ---DD[timezone] */
     public Day(String source) throws NumberFormatException {
         if (source.length() < 5) {
             throw new NumberFormatException();
@@ -82,11 +71,7 @@ public class Day implements Serializable {
         return day;
     }
 
-    /**
-     * Set the day.
-     *
-     * @param day Set the value of the instance to the given value.
-     */
+    /** Set the day */
     public void setDay(int day) {
         // validate day
         if (day < 1 || day > 31) {
@@ -162,7 +147,7 @@ public class Day implements Serializable {
     }
 
     /**
-     * Return the value of day XORed with the hashCode of timezone if one is defined.
+     * Return the value of day XORed with the hashCode of timezone iff one is defined.
      *
      * @return an <code>int</code> value
      */

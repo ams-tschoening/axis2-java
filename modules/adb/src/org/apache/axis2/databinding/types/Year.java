@@ -35,31 +35,20 @@ public class Year implements Serializable {
     int year;
     String timezone = null;
 
-    /**
-     * Constructs a Year with the given value and no timezone is specified.
-     *
-     * @param year The year to use.
-     */
+    /** Constructs a Year with the given values No timezone is specified */
     public Year(int year) throws NumberFormatException {
         setValue(year);
     }
 
     /**
-     * Constructs a Year with the given value, including a timezone string. The timezone is validated
-     * but not used.
-     *
-     * @param year The year to use.
-     * @param timezone The timezone the year is expected to be in.
+     * Constructs a Year with the given values, including a timezone string The timezone is
+     * validated but not used.
      */
     public Year(int year, String timezone) throws NumberFormatException {
         setValue(year, timezone);
     }
 
-    /**
-     * Constructs a Year from a String.
-     *
-     * @param source The string to parse the year to use from in the format "[-]CCYY[timezone]".
-     */
+    /** Construct a Year from a String in the format [-]CCYY[timezone] */
     public Year(String source) throws NumberFormatException {
         int negative = 0;
 

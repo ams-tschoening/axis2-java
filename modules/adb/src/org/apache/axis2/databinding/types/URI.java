@@ -23,18 +23,17 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * <i>Axis Note: This class was 'borrowed' from Xerces 2.0.2</i>
- * <p>
+ * ******************************************************************* <i>Axis Note: This class was
+ * 'borrowed' from Xerces 2.0.2</i>
+ * <p/>
  * A class to represent a Uniform Resource Identifier (URI). This class is designed to handle the
  * parsing of URIs and provide access to the various components (scheme, host, port, userinfo,
  * path, query string and fragment) that may constitute a URI.
- * </p>
- * <p>
+ * <p/>
  * Parsing of a URI specification is done according to the URI syntax described in <a
  * href="http://www.ietf.org/rfc/rfc2396.txt?number=2396">RFC 2396</a>, and amended by <a
  * href="http://www.ietf.org/rfc/rfc2732.txt?number=2732">RFC 2732</a>.
- * </p>
- * <p>
+ * <p/>
  * Every absolute URI consists of a scheme, followed by a colon (':'), followed by a
  * scheme-specific part. For URIs that follow the "generic URI" syntax, the scheme-specific part
  * begins with two slashes ("//") and may be followed by an authority segment (comprised of user
@@ -42,17 +41,16 @@ import java.io.Serializable;
  * longer specifies the use of the parameters segment and excludes the "user:password" syntax as
  * part of the authority segment. If "user:password" appears in a URI, the entire user/password
  * string is stored as userinfo.
- * </p>
- * <p>
+ * <p/>
  * For URIs that do not follow the "generic URI" syntax (e.g. mailto), the entire scheme-specific
  * part is treated as the "path" portion of the URI.
- * </p>
- * <p>
+ * <p/>
  * Note that, unlike the java.net.URL class, this class does not provide any built-in network
  * access functionality nor does it provide any scheme-specific functionality (for example, it does
  * not know a default port for a specific scheme). Rather, it only knows the grammar and basic set
  * of operations that can be applied to a URI.
- * </p>
+ * <p/>
+ * ********************************************************************
  */
 public class URI implements Serializable {
 
@@ -60,27 +58,30 @@ public class URI implements Serializable {
 
 
     /**
-     * MalformedURIExceptions are
+     * **************************************************************** MalformedURIExceptions are
      * thrown in the process of building a URI or setting fields on a URI when an operation would
      * result in an invalid URI specification.
+     * <p/>
+     * ******************************************************************
      */
     public static class MalformedURIException extends IOException {
 
         private static final long serialVersionUID = -8488692760975768757L;
 
         /**
-         * Constructs a
+         * *************************************************************** Constructs a
          * <code>MalformedURIException</code> with no specified detail message.
+         * ****************************************************************
          */
         public MalformedURIException() {
             super();
         }
 
         /**
-         * Constructs a
+         * ************************************************************** Constructs a
          * <code>MalformedURIException</code> with the specified detail message.
          *
-         * @param p_msg the detail message.
+         * @param p_msg the detail message. ****************************************************************
          */
         public MalformedURIException(String p_msg) {
             super(p_msg);
@@ -1163,7 +1164,7 @@ public class URI implements Serializable {
     /**
      * <p>Set the host for this URI. If null is passed in, the userinfo field is also set to null and
      * the port is set to -1.</p>
-     *
+     * <p/>
      * <p>Note: This method overwrites registry based authority if it previously existed in this
      * URI.</p>
      *
@@ -1208,7 +1209,7 @@ public class URI implements Serializable {
 
     /**
      * <p>Sets the registry based authority for this URI.</p>
-     *
+     * <p/>
      * <p>Note: This method overwrites server based authority if it previously existed in this
      * URI.</p>
      *
@@ -1451,7 +1452,7 @@ public class URI implements Serializable {
      * digit groups separated by a '.'. Each group must consist of one to three digits. See RFC 2732
      * Section 3, and RFC 2373 Section 2.2, for the definition of IPv6 references. A hostname consists
      * of domain labels (each of which must begin and end with an alphanumeric but may contain '-')
-     * separated &nbsp; by a '.'. See RFC 2396 Section 3.2.2.
+     * separated & by a '.'. See RFC 2396 Section 3.2.2.
      *
      * @return true if the string is a syntactically valid IPv4 address, IPv6 reference or hostname
      */
@@ -1531,7 +1532,7 @@ public class URI implements Serializable {
      * constraint that it must be a 32-bit address. Though not expressed in the grammar, in order to
      * satisfy the 32-bit address constraint, each segment of the address cannot be greater than 255
      * (8 bits of information).</p>
-     *
+     * <p/>
      * <p><code>IPv4address = 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT "." 1*3DIGIT</code></p>
      *
      * @return true if the string is a syntactically valid IPv4 address
@@ -1591,9 +1592,9 @@ public class URI implements Serializable {
      * <p>Determines whether a string is an IPv6 reference as defined by RFC 2732, where IPv6address
      * is defined in RFC 2373. The IPv6 address is parsed according to Section 2.2 of RFC 2373, with
      * the additional constraint that the address be composed of 128 bits of information.</p>
-     *
+     * <p/>
      * <p><code>IPv6reference = "[" IPv6address "]"</code></p>
-     *
+     * <p/>
      * <p>Note: The BNF expressed in RFC 2373 Appendix B does not accurately describe section 2.2, and
      * was in fact removed from RFC 3513, the successor of RFC 2373.</p>
      *

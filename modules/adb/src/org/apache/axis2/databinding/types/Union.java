@@ -46,11 +46,11 @@ public abstract class Union implements Serializable {
     }
 
     /**
-     * Method to parse XML-Schema objects.
+     * method to parse xmlschema objects
      *
-     * @param xmlStreamReader Reader for the XML.
-     * @param namespaceURI Ignored currently.
-     * @param type the types to consider only.
+     * @param xmlStreamReader
+     * @param namespaceURI
+     * @param type
      * @throws URI.MalformedURIException
      * @throws XMLStreamException
      */

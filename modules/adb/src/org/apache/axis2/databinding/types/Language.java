@@ -39,10 +39,9 @@ public class Language extends Token {
     }
 
     /**
-     * CTOR for Language.
+     * ctor for Language
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException will be thrown if validation fails.
+     * @throws IllegalArgumentException will be thrown if validation fails
      */
     public Language(String stValue) throws IllegalArgumentException {
         try {
@@ -60,8 +59,6 @@ public class Language extends Token {
      * Validates the value against the xsd definition. Language-Tag = Primary-tag *( "-" Subtag )
      * Primary-tag = 1*8ALPHA Subtag = 1*8ALPHA TODO
      *
-     * @param stValue The value to validate.
-     * @return {@code true} if the given value is valid, {@code false} otherwise.
      * @see <a href="http://www.ietf.org/rfc/rfc1766.txt">RFC1766</a>
      */
     public static boolean isValid(String stValue) {

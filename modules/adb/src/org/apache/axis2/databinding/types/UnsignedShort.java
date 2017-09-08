@@ -34,10 +34,9 @@ public class UnsignedShort extends UnsignedInt {
     }
 
     /**
-     * CTOR for UnsignedShort.
+     * ctor for UnsignedShort
      *
-     * @param sValue Value to store.
-     * @throws NumberFormatException will be thrown if validation fails.
+     * @throws NumberFormatException will be thrown if validation fails
      */
     public UnsignedShort(long sValue) throws NumberFormatException {
         setValue(sValue);
@@ -48,9 +47,9 @@ public class UnsignedShort extends UnsignedInt {
     }
 
     /**
-     * Validates the data and sets the value for the object.
+     * validates the data and sets the value for the object.
      *
-     * @param sValue The value to store.
+     * @param sValue value
      */
     public void setValue(long sValue) throws NumberFormatException {
         if (!UnsignedShort.isValid(sValue))
@@ -60,12 +59,7 @@ public class UnsignedShort extends UnsignedInt {
         lValue = new Long(sValue);
     }
 
-    /**
-     * Validate the value against the xsd definition.
-     * 
-     * @param sValue number to check against range
-     * @return {@code true} if the given value is valid, {@code false} otherwise.
-     */
+    /** validate the value against the xsd definition */
     public static boolean isValid(long sValue) {
         return !((sValue < 0L) || (sValue > 65535L));
     }

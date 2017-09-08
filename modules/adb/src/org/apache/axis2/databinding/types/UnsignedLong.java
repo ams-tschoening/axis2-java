@@ -158,9 +158,6 @@ String.valueOf(val) + "]");
     }
 
     /**
-     * Compare this to another instance.
-     * 
-     * @param o Object to compare with.
      * @return the value 0 if the argument is an UnsignedLong numerically equal to this
      *         UnsignedLong; a value less than 0 if the argument is an UnsignedLong numerically
      *         greater than this UnsignedLong; and a value greater than 0 if the argument is an
@@ -181,10 +178,6 @@ String.valueOf(val) + "]");
     }
 
     /**
-     * Compare to primitive values instead of instances.
-     * 
-     * @param thisLong First value.
-     * @param thatLong Second value.
      * @return the value 0 if thatLong is a long numerically equal to thisLong; a value less than 0
      *         if thatLong is a long numerically greater than thisLong; and a value greater than 0
      *         if thatLong is a long numerically less than thisLong (unsigned comparison).

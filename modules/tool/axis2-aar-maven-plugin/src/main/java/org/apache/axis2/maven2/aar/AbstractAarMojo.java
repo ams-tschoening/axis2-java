@@ -232,9 +232,11 @@ public abstract class AbstractAarMojo
      * @throws IOException                   if <code>source</code> does not exist,
      *                                       <code>destination</code> cannot be written to, or an IO
      *                                       error occurs during copying.
-     * @throws java.io.FileNotFoundException if <code>destination</code> is a directory 
+     * @throws java.io.FileNotFoundException if <code>destination</code> is a directory
+     *                                       <p/>
+     *                                       TO DO: Remove this method when Maven moves to
+     *                                       plexus-utils version 1.4
      */
-    // TODO Remove this method when Maven moves to plexus-utils version 1.4
     private void copyFileIfModified(File source, File destination)
             throws IOException {
         // TO DO: Remove this method and use the method in WarFileUtils when Maven 2 changes

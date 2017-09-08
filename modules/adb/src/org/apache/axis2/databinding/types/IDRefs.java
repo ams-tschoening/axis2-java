@@ -40,10 +40,9 @@ public class IDRefs extends NCName {
     }
 
     /**
-     * CTOR for IDRefs.
+     * ctor for IDRefs
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException will be thrown if validation fails.
+     * @throws IllegalArgumentException will be thrown if validation fails
      */
     public IDRefs(String stValue) throws IllegalArgumentException {
         setValue(stValue);

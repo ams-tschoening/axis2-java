@@ -38,20 +38,20 @@ public class NormalizedString implements java.io.Serializable {
     }
 
     /**
-     * CTOR for NormalizedString.
+     * ctor for NormalizedString
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException if invalid format.
+     * @param stValue is the String value
+     * @throws IllegalArgumentException if invalid format
      */
     public NormalizedString(String stValue) throws IllegalArgumentException {
         setValue(stValue);
     }
 
     /**
-     * Validates the data and sets the value for the object.
+     * validates the data and sets the value for the object.
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException if invalid format.
+     * @param stValue String value
+     * @throws IllegalArgumentException if invalid format
      */
     public void setValue(String stValue) throws IllegalArgumentException {
         if (!NormalizedString.isValid(stValue))
@@ -70,15 +70,15 @@ public class NormalizedString implements java.io.Serializable {
     }
 
     /**
-     * Validate the value against the xsd definition for the object.
-     * <p>
+     * validate the value against the xsd definition for the object
+     * <p/>
      * The value space of normalizedString is the set of strings that do not contain the carriage
      * return (#xD), line feed (#xA) nor tab (#x9) characters. The lexical space of normalizedString
      * is the set of strings that do not contain the carriage return (#xD) nor tab (#x9)
      * characters.
-     * </p>
-     * @param stValue The value to validate.
-     * @return {@code true} if the given value is valid, {@code false} otherwise.
+     *
+     * @param stValue the String to test
+     * @return Returns true if valid normalizedString.
      */
     public static boolean isValid(String stValue) {
         int scan;

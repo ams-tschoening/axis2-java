@@ -37,10 +37,9 @@ public class Entities extends NCName {
     }
 
     /**
-     * CTOR for Entities.
+     * ctor for Entities
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException will be thrown if validation fails.
+     * @throws IllegalArgumentException will be thrown if validation fails
      */
     public Entities(String stValue) throws IllegalArgumentException {
         StringTokenizer tokenizer = new StringTokenizer(stValue);

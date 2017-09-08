@@ -34,10 +34,9 @@ public class Entity extends NCName {
     }
 
     /**
-     * CTOR for Entity.
+     * ctor for Entity
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException will be thrown if validation fails.
+     * @throws IllegalArgumentException will be thrown if validation fails
      */
     public Entity(String stValue) throws IllegalArgumentException {
         super(stValue);

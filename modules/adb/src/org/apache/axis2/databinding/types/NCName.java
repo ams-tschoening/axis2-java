@@ -38,10 +38,9 @@ public class NCName extends Name {
     }
 
     /**
-     * CTOR for NCName.
+     * ctor for NCName
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException will be thrown if validation fails.
+     * @throws IllegalArgumentException will be thrown if validation fails
      */
     public NCName(String stValue) throws IllegalArgumentException {
         try {
@@ -57,10 +56,10 @@ public class NCName extends Name {
     }
 
     /**
-     * Validates the data and sets the value for the object.
+     * validates the data and sets the value for the object.
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException if invalid format.
+     * @param stValue String value
+     * @throws IllegalArgumentException if invalid format
      */
     public void setValue(String stValue) throws IllegalArgumentException {
         if (!NCName.isValid(stValue))
@@ -71,13 +70,10 @@ public class NCName extends Name {
     }
 
     /**
-     * Validate the value against the xsd definition.
-     * <p>
+     * validate the value against the xsd definition
+     * <p/>
      * NCName ::=  (Letter | '_') (NCNameChar)* NCNameChar ::=  Letter | Digit | '.' | '-' | '_' |
      * CombiningChar | Extender
-     * </p>
-     * @param stValue The value to validate.
-     * @return {@code true} if the given value is valid, {@code false} otherwise.
      */
     public static boolean isValid(String stValue) {
         int scan;

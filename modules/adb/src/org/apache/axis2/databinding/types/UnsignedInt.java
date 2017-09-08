@@ -35,10 +35,9 @@ public class UnsignedInt extends java.lang.Number {
     }
 
     /**
-     * CTOR for UnsignedInt.
+     * ctor for UnsignedInt
      *
-     * @param iValue The value to store.
-     * @throws NumberFormatException will be thrown if validation fails.
+     * @throws NumberFormatException will be thrown if validation fails
      */
     public UnsignedInt(long iValue) throws NumberFormatException {
         setValue(iValue);
@@ -50,7 +49,7 @@ public class UnsignedInt extends java.lang.Number {
 
 
     /**
-     * Validates the data and sets the value for the object.
+     * validates the data and sets the value for the object.
      *
      * @param iValue value
      */
@@ -76,12 +75,7 @@ String.valueOf(iValue) + "]");
             return 0;
     }
 
-    /**
-     * Validate the value against the xsd definition.
-     * 
-     * @param iValue number to check against range
-     * @return {@code true} if the given value is valid, {@code false} otherwise.
-     */
+    /** validate the value against the xsd definition */
     public static boolean isValid(long iValue) {
         return !((iValue < 0L) || (iValue > 4294967295L));
     }

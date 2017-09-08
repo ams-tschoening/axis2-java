@@ -25,11 +25,11 @@ import java.util.Random;
 
 /**
  * Custom class for supporting primitive XSD data type nonPositiveInteger
- * <p>
+ * <p/>
  * nonPositiveInteger is derived from integer by setting the value of maxInclusive to be 0. This
  * results in the standard mathematical concept of the non-positive integers. The value space of
  * nonPositiveInteger is the infinite set {...,-2,-1,0}.
- * </p>
+ *
  * @see <a href="http://www.w3.org/TR/xmlschema-2/#nonPositiveInteger">XML Schema 3.3.14</a>
  */
 public class NonPositiveInteger extends BigInteger {
@@ -66,9 +66,9 @@ public class NonPositiveInteger extends BigInteger {
         checkValidity();
     } // ctor
 
+    /** validate the value against the xsd definition */
     private BigInteger zero = new BigInteger("0");
 
-    /** validate the value against the xsd definition */
     private void checkValidity() {
         if (compareTo(zero) > 0) {
             throw new NumberFormatException(

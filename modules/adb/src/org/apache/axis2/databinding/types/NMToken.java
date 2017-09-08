@@ -24,11 +24,11 @@ import org.apache.axis2.util.XMLChar;
 
 /**
  * Custom class for supporting XSD data type NMToken
- * <p>
+ * <p/>
  * NMTOKEN represents the NMTOKEN attribute type from [XML 1.0(Second Edition)]. The value space of
  * NMTOKEN is the set of tokens that match the Nmtoken production in [XML 1.0 (Second Edition)]. The
  * base type of NMTOKEN is token.
- * </p>
+ *
  * @see <a href="http://www.w3.org/TR/xmlschema-2/#nmtoken">XML Schema 3.3.4</a>
  */
 public class NMToken extends Token {
@@ -40,10 +40,9 @@ public class NMToken extends Token {
     }
 
     /**
-     * CTOR for NMToken.
+     * ctor for NMToken
      *
-     * @param stValue The value to store.
-     * @throws IllegalArgumentException will be thrown if validation fails.
+     * @throws IllegalArgumentException will be thrown if validation fails
      */
     public NMToken(String stValue) throws IllegalArgumentException {
         try {
@@ -58,11 +57,8 @@ public class NMToken extends Token {
     }
 
     /**
-     * Validate the value against the xsd definition Nmtoken    ::=    (NameChar)+ NameChar    ::=
+     * validate the value against the xsd definition Nmtoken    ::=    (NameChar)+ NameChar    ::=
      * Letter | Digit | '.' | '-' | '_' | ':' | CombiningChar | Extender
-     * 
-     * @param stValue The value to validate.
-     * @return {@code true} if the given value is valid, {@code false} otherwise.
      */
     public static boolean isValid(String stValue) {
         int scan;

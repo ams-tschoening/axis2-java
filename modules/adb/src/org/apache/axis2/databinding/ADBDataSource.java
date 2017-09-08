@@ -29,10 +29,9 @@ public class ADBDataSource extends AbstractADBDataSource {
     private ADBBean bean;
 
     /**
-     * Constructor taking in an ADBBean.
+     * Constructor taking in an ADBBean
      *
-     * @param bean The bean to use.
-     * @param parentQName The parent QName to forward to the base class.
+     * @param bean
      */
     public ADBDataSource(ADBBean bean, QName parentQName) {
         super(parentQName);
@@ -40,10 +39,10 @@ public class ADBDataSource extends AbstractADBDataSource {
     }
 
     /**
-     * This needs to be generated inside the ADB bean.
+     * This needs to be generated inside the ADB bean
      *
-     * @param xmlWriter The writer to serialize the bean with.
-     * @throws XMLStreamException in case of serialization fails.
+     * @param xmlWriter
+     * @throws XMLStreamException
      * @see OMDataSource#serialize(javax.xml.stream.XMLStreamWriter)
      */
     public void serialize(XMLStreamWriter xmlWriter) throws XMLStreamException{
@@ -53,8 +52,7 @@ public class ADBDataSource extends AbstractADBDataSource {
 
     /**
      * Returns the backing Object.
-     *
-     * @return Object The backing bean.
+     * @return Object
      */
     public Object getObject() {
         return bean;

@@ -36,33 +36,20 @@ public class YearMonth implements Serializable {
     int month;
     String timezone = null;
 
-    /**
-     * Constructs a YearMonth with the given value and no timezone is specified.
-     *
-     * @param year The year to use.
-     * @param month The month to use.
-     */
+    /** Constructs a YearMonth with the given values No timezone is specified */
     public YearMonth(int year, int month) throws NumberFormatException {
         setValue(year, month);
     }
 
     /**
-     * Constructs a YearMonth with the given value, including a timezone string. The timezone is validated
-     * but not used.
-     *
-     * @param year The year to use.
-     * @param month The month to use.
-     * @param timezone The timezone the year and month are expected to be in.
+     * Constructs a YearMonth with the given values, including a timezone string The timezone is
+     * validated but not used.
      */
     public YearMonth(int year, int month, String timezone) throws NumberFormatException {
         setValue(year, month, timezone);
     }
 
-    /**
-     * Constructs a YearMonth from a String.
-     *
-     * @param source The string to parse the YearMonth to use from in the format "[-]CCYY-MM".
-     */
+    /** Construct a YearMonth from a String in the format [-]CCYY-MM */
     public YearMonth(String source) throws NumberFormatException {
         int negative = 0;
 

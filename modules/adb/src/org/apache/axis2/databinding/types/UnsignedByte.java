@@ -35,10 +35,9 @@ public class UnsignedByte extends UnsignedShort {
     }
 
     /**
-     * CTOR for UnsignedByte.
+     * ctor for UnsignedByte
      *
-     * @param sValue The value to store.
-     * @throws Exception will be thrown if validation fails.
+     * @throws Exception will be thrown if validation fails
      */
     public UnsignedByte(long sValue) throws NumberFormatException {
         setValue(sValue);
@@ -49,7 +48,7 @@ public class UnsignedByte extends UnsignedShort {
     }
 
     /**
-     * Validates the data and sets the value for the object.
+     * validates the data and sets the value for the object.
      *
      * @param sValue the number to set
      */
@@ -62,10 +61,9 @@ public class UnsignedByte extends UnsignedShort {
     }
 
     /**
-     * Validate the value against the xsd value space definition.
+     * validate the value against the xsd value space definition
      *
      * @param sValue number to check against range
-     * @return {@code true} if the given value is valid, {@code false} otherwise.
      */
     public static boolean isValid(long sValue) {
         return !((sValue < 0L) || (sValue > 255L));

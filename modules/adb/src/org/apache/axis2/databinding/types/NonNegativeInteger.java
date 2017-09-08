@@ -62,9 +62,9 @@ public class NonNegativeInteger extends BigInteger {
         checkValidity();
     } // ctor
 
+    /** validate the value against the xsd definition */
     private BigInteger zero = new BigInteger("0");
 
-    /** validate the value against the xsd definition */
     private void checkValidity() {
         if (compareTo(zero) < 0) {
             throw new NumberFormatException(

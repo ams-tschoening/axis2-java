@@ -26,12 +26,12 @@ import java.util.Random;
 
 /**
  * Custom class for supporting primitive XSD data type negativeinteger
- * <p>
+ * <p/>
  * negativeInteger is derived from nonPositiveInteger by setting the value of maxInclusive to be -1.
  * This results in the standard mathematical concept of the negative integers. The value space of
  * negativeInteger is the infinite set {...,-2,-1}. The base type of negativeInteger is
  * nonPositiveInteger.
- * </p>
+ *
  * @see <a href="http://www.w3.org/TR/xmlschema-2/#negativeInteger">XML Schema 3.3.15</a>
  */
 public class NegativeInteger extends NonPositiveInteger {
@@ -83,7 +83,7 @@ public class NegativeInteger extends NonPositiveInteger {
      * Work-around for http://developer.java.sun.com/developer/bugParade/bugs/4378370.html
      *
      * @return BigIntegerRep
-     * @throws java.io.ObjectStreamException Not thrown anymore, just to keep signature the same.
+     * @throws java.io.ObjectStreamException
      * @deprecated As per https://issues.apache.org/jira/browse/AXIS2-3848
      */
     public Object writeReplace() throws ObjectStreamException {
