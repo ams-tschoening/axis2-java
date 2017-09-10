@@ -290,7 +290,7 @@
                             <value>${project.build.directory}</value>
                             <regex>\\</regex>
                             <replacement>\\\\</replacement>
-                            <failIfNoMatch>true</failIfNoMatch>
+                            <failIfNoMatch>false</failIfNoMatch>
                         </configuration>
                     </execution>
                 </executions>
