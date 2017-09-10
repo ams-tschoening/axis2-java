@@ -17,6 +17,7 @@
   ~ under the License.
   --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <%@ page import="org.apache.axis2.Constants,
                  org.apache.axis2.description.AxisOperation" %>
@@ -28,6 +29,7 @@
 <%@ page import="java.util.Hashtable" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="services" value="${requestScope.configContext.axisConfiguration.services}"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -43,21 +45,15 @@
 <% String prefix = request.getAttribute("frontendHostUrl") + (String)request.getAttribute(Constants.SERVICE_PATH) + "/";
 %>
 <%
-    HashMap serviceMap = (HashMap) request.getAttribute(Constants.SERVICE_MAP);
+    HashMap serviceMap = (HashMap) pageContext.getAttribute("services");
     Hashtable errornessservice = (Hashtable) request.getAttribute(Constants.ERROR_SERVICE_MAP);
     boolean status = false;
     if (serviceMap != null && !serviceMap.isEmpty()) {
-        Iterator opItr;
-        //HashMap operations;
-        String serviceName;
-        Collection servicecol = serviceMap.values();
-        // Collection operationsList;
-        for (Iterator iterator = servicecol.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = serviceMap.values().iterator(); iterator.hasNext();) {
             AxisService axisService = (AxisService) iterator.next();
             if (!Utils.isHiddenService(axisService)) {
-            opItr = axisService.getOperations();
-            //operationsList = operations.values();
-            serviceName = axisService.getName();
+            Iterator opItr = axisService.getOperations();
+            String serviceName = axisService.getName();
 %><h2><a style="color:blue" href="<%=prefix + axisService.getName()%>?wsdl"><%=serviceName%></a></h2>
 <%
     String serviceDescription = axisService.getDocumentation();
