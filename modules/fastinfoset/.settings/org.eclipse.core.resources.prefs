@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//target/maven-shared-archive-resources=UTF-8
+encoding//target/repo=UTF-8
+encoding//target/wsdl/simpleAddService=UTF-8
 encoding/<project>=UTF-8
 encoding/src=UTF-8
 encoding/test=UTF-8

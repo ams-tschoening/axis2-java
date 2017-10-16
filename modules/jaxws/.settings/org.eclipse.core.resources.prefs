@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
+encoding//target/generated-test-sources/jaxb/AddNumbers=UTF-8
+encoding//target/generated-test-sources/jaxb/ProxyDocLitWrapped=UTF-8
+encoding//target/generated-test-sources/jaxb/echo=UTF-8
+encoding//target/generated-test-sources/jaxb/samplemtom=UTF-8
+encoding//target/generated-test-sources/jaxb/stock1=UTF-8
+encoding//target/generated-test-sources/jaxb/stock2=UTF-8
 encoding//target/maven-shared-archive-resources=UTF-8
 encoding/<project>=UTF-8
 encoding/resources=UTF-8
