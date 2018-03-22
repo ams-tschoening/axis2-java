@@ -59,6 +59,7 @@
         <module>modules/samples/version</module>
         <module>modules/soapmonitor/servlet</module>
         <module>modules/soapmonitor/module</module>
+        <module>modules/schema-validation</module>
         <module>modules/spring</module>
         <module>modules/testutils</module>
         <module>modules/tool/maven-shared</module>
@@ -77,8 +78,9 @@
         <module>modules/tool/archetype/quickstart-webapp</module>
         <module>modules/webapp</module>
         <module>modules/xmlbeans</module>
+        <module>modules/xmlbeans-codegen</module>
         <module>modules/scripting</module>
-        <module>modules/jaxbri</module>
+        <module>modules/jaxbri-codegen</module>
         <module>modules/metadata</module>
         <module>modules/saaj</module>
         <module>modules/jaxws</module>
@@ -102,6 +104,7 @@
         <module>modules/samples</module>
         <module>databinding-tests</module>
         <module>systests</module>
+        <module>code-coverage</module>
     </modules>
     <profiles>
         <profile>
@@ -507,10 +510,10 @@
         </site>
     </distributionManagement>
     <properties>
-        <neethi.version>3.0.4-SNAPSHOT</neethi.version>
+        <neethi.version>3.1.2-SNAPSHOT</neethi.version>
         <woden.version>1.0M11-SNAPSHOT</woden.version>
         <axiom.version>1.3.0-SNAPSHOT</axiom.version>
-        <xmlschema.version>2.2.3-SNAPSHOT</xmlschema.version>
+        <xmlschema.version>2.2.4-SNAPSHOT</xmlschema.version>
         <ant.version>1.7.0</ant.version>
         <antlr.version>2.7.7</antlr.version>
         <bsf.version>2.4.0</bsf.version>
@@ -534,7 +537,6 @@
         <maven.archiver.version>3.0.2</maven.archiver.version>
         <maven.version>3.3.9</maven.version>
         <maven.plugin.descriptor.version>2.0.7</maven.plugin.descriptor.version>
-        <maven.archetype.plugin.version>2.2</maven.archetype.plugin.version>
         <plexus.classworlds.version>2.4</plexus.classworlds.version>
         <plexus.utils.version>1.4.9</plexus.utils.version>
         <rhino.version>1.6R7</rhino.version>
@@ -544,7 +546,7 @@
         <tomcat.version>6.0.16</tomcat.version>
         <wsdl4j.version>1.6.2</wsdl4j.version>
         <xalan.version>2.7.0</xalan.version>
-        <xmlbeans.version>2.5.0</xmlbeans.version>
+        <xmlbeans.version>2.6.0</xmlbeans.version>
         <xml_resolver.version>1.2</xml_resolver.version>
         <xmlunit.version>1.3</xmlunit.version>
         <commons.lang.version>2.3</commons.lang.version>
@@ -946,11 +948,6 @@
                 <version>${maven.plugin.descriptor.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-archetype-plugin</artifactId>
-                <version>${maven.archetype.plugin.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.codehaus.plexus</groupId>
                 <artifactId>plexus-utils</artifactId>
                 <version>${plexus.utils.version}</version>
@@ -1135,12 +1132,6 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <configuration>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <!-- "clean verify" fails because for OSGi bundles, there
-                             is a mismatch between the type of the dependency (jar)
-                             and the actual packaging (bundle) and Maven resolves
-                             the dependency from the local repository instead of the
-                             reactor. -->
-                        <preparationGoals>clean install</preparationGoals>
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                     </configuration>
                 </plugin>
@@ -1152,6 +1143,11 @@
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
                     <version>1.5</version>
+                    <configuration>
+                        <!-- We don't actually want to allow System.exit, but the security manager
+                             installed by the plugin causes problems in multithreaded builds. -->
+                        <allowSystemExits>true</allowSystemExits>
+                    </configuration>
                     <dependencies>
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
@@ -1170,7 +1166,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -1178,7 +1174,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.0</version>
+                    <version>3.0.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-ear-plugin</artifactId>
@@ -1190,15 +1186,15 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>2.5.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>3.0.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>3.5</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-rar-plugin</artifactId>
@@ -1206,7 +1202,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.4.2</version>
+                    <version>3.0.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
@@ -1240,8 +1236,6 @@
                     <version>1.5</version>
                     <configuration>
                         <algorithms>
-                            <algorithm>MD5</algorithm>
-                            <algorithm>SHA-1</algorithm>
                             <algorithm>SHA-512</algorithm>
                         </algorithms>
                     </configuration>
@@ -1253,7 +1247,7 @@
                 <plugin>
                     <groupId>com.github.veithen.alta</groupId>
                     <artifactId>alta-maven-plugin</artifactId>
-                    <version>0.6.1</version>
+                    <version>0.6.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -1263,7 +1257,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>jaxws-maven-plugin</artifactId>
-                    <version>2.4.1</version>
+                    <version>2.5</version>
                     <configuration>
                         <vmArgs>
                             <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
@@ -1276,11 +1270,21 @@
                     <version>9.3.10.v20160621</version>
                 </plugin>
                 <plugin>
+                    <groupId>com.github.veithen.invoker</groupId>
+                    <artifactId>resolver-proxy-maven-plugin</artifactId>
+                    <version>0.1</version>
+                </plugin>
+                <plugin>
                     <artifactId>maven-invoker-plugin</artifactId>
-                    <version>2.0.0</version>
+                    <version>3.0.1</version>
                     <configuration>
                         <javaHome>${java.home}</javaHome>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>3.0.1</version>
                 </plugin>
                 
                 <!-- Use released versions of the aar and mar plugins in order to avoid
@@ -1367,9 +1371,55 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- Work around AXIS2-5890. The jaxb2-maven-plugin doesn't have an option
+                             to force regenerating the source, so just clean the stale flag file. -->
+                        <id>clean-testXjcStaleFlag</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                            <filesets>
+                                <fileset>
+                                    <directory>${project.build.directory}/jaxb2</directory>
+                                    <includes>
+                                        <include>*-testXjcStaleFlag</include>
+                                    </includes>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>org.apache.axis2.*</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <!-- Make test execution deterministic -->
+                    <runOrder>alphabetical</runOrder>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <trimStackTrace>false</trimStackTrace>
                     <systemProperties>
                         <property>
                             <name>java.io.tmpdir</name>
@@ -1389,6 +1439,18 @@
                         </property>
                     </systemProperties>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.veithen.phos</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-data-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <!-- Always build source JARs -->
