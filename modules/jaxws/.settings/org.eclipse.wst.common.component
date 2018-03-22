@@ -4,5 +4,13 @@
         <wb-resource deploy-path="/" source-path="/resources"/>
         <wb-resource deploy-path="/" source-path="/target/maven-shared-archive-resources"/>
         <wb-resource deploy-path="/" source-path="/target/generated-sources/annotations"/>
+        <wb-resource deploy-path="/" source-path="/test"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/jaxb/echo"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/jaxb/stock1"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/jaxb/stock2"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/jaxb/samplemtom"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/jaxb/ProxyDocLitWrapped"/>
+        <wb-resource deploy-path="/" source-path="/target/generated-test-sources/jaxb/AddNumbers"/>
+        <wb-resource deploy-path="/" source-path="/test-resources"/>
     </wb-module>
 </project-modules>

@@ -1,119 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-  <classpathentry kind="src" path="src/main/java"/>
-  <classpathentry kind="src" path="target/generated-sources/annotations" including="**/*.java"/>
-  <classpathentry kind="src" path="." including="plugin.xml|icons/**|help_toc.xml" excluding="**/*.java"/>
-  <classpathentry kind="src" path="target/maven-shared-archive-resources" excluding="**/*.java"/>
-  <classpathentry kind="output" path="target/classes"/>
-  <classpathentry kind="var" path="M2_REPO/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.3/servlet-api-2.3.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/ant/ant/1.7.0/ant-1.7.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/ant/ant-launcher/1.7.0/ant-launcher-1.7.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/james/apache-mime4j-core/0.8.0/apache-mime4j-core-0.8.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/ws/commons/axiom/axiom-api/1.3.0-SNAPSHOT/axiom-api-1.3.0-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/ws/commons/axiom/axiom-dom/1.3.0-SNAPSHOT/axiom-dom-1.3.0-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/ws/commons/axiom/axiom-impl/1.3.0-SNAPSHOT/axiom-impl-1.3.0-SNAPSHOT.jar"/>
-  <classpathentry kind="src" path="/axis2-adb"/>
-  <classpathentry kind="src" path="/axis2-codegen"/>
-  <classpathentry kind="src" path="/axis2-kernel"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/commands/3.3.0-I20070605-0010/commands-3.3.0-I20070605-0010.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/common/3.2.0-v20060603/common-3.2.0-v20060603.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-fileupload/commons-fileupload/1.3.3/commons-fileupload-1.3.3.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/commons-fileupload/commons-fileupload/1.3.3/commons-fileupload-1.3.3-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.1/commons-io-2.1.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/commons-io/commons-io/2.1/commons-io-2.1-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/runtime/compatibility/3.1.200-v20070502/compatibility-3.1.200-v20070502.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/update/configurator/3.2.100-v20070615/configurator-3.2.100-v20070615.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/contenttype/3.4.200-v20140207-1251/contenttype-3.4.200-v20140207-1251.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/org/eclipse/core/contenttype/3.4.200-v20140207-1251/contenttype-3.4.200-v20140207-1251-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/update/core/3.2.1-v20092006/core-3.2.1-v20092006.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/expressions/3.2.1-r321_v20060721/expressions-3.2.1-r321_v20060721.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/filesystem/1.1.0-v20070606/filesystem-1.1.0-v20070606.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/forms/3.3.0-v20070511/forms-3.3.0-v20070511.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1/geronimo-jta_1.1_spec-1.1.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1/geronimo-jta_1.1_spec-1.1-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-ws-metadata_2.0_spec/1.1.2/geronimo-ws-metadata_2.0_spec-1.1.2.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/org/apache/geronimo/specs/geronimo-ws-metadata_2.0_spec/1.1.2/geronimo-ws-metadata_2.0_spec-1.1.2-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/com/google/googlejavaformat/google-java-format/1.3/google-java-format-1.3.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/com/google/googlejavaformat/google-java-format/1.3/google-java-format-1.3-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/19.0/guava-19.0.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/com/google/guava/guava/19.0/guava-19.0-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/help/3.3.0-v20070524/help-3.3.0-v20070524.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/ide/3.2.1-M20060915-1030/ide-3.2.1-M20060915-1030.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/errorprone/javac/9-dev-r3297-1-shaded/javac-9-dev-r3297-1-shaded.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/com/google/errorprone/javac/9-dev-r3297-1-shaded/javac-9-dev-r3297-1-shaded-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/jaxen/jaxen/1.1.6/jaxen-1.1.6.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/jaxen/jaxen/1.1.6/jaxen-1.1.6-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/com/sun/xml/ws/jaxws-tools/2.2.6/jaxws-tools-2.2.6.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/com/sun/xml/ws/jaxws-tools/2.2.6/jaxws-tools-2.2.6-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/jface/3.2.1-M20060908-1000/jface-3.2.1-M20060908-1000.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/jobs/3.2.0-v20060603/jobs-3.2.0-v20060603.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/neethi/neethi/3.0.4-SNAPSHOT/neethi-3.0.4-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/osgi/3.2.1-R32x_v20060919/osgi-3.2.1-R32x_v20060919.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/preferences/3.5.200-v20140224-1527/preferences-3.5.200-v20140224-1527.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/org/eclipse/equinox/preferences/3.5.200-v20140224-1527/preferences-3.5.200-v20140224-1527-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/registry/3.5.400-v20140428-1507/registry-3.5.400-v20140428-1507.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/org/eclipse/equinox/registry/3.5.400-v20140428-1507/registry-3.5.400-v20140428-1507-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/resources/3.2.1-R32x_v20060914/resources-3.2.1-R32x_v20060914.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/runtime/3.2.0-v20060603/runtime-3.2.0-v20060603.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/codehaus/woodstox/stax2-api/3.1.1/stax2-api-3.1.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/swt/3.2.1-v3235e/swt-3.2.1-v3235e.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/3.2.1-M20060913-0800/ui-3.2.1-M20060913-0800.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/update/ui/3.2.100-v20070615/ui-3.2.100-v20070615.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/views/3.2.100-I20070319-0010/views-3.2.100-I20070319-0010.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/woden/woden-core/1.0M11-SNAPSHOT/woden-core-1.0M11-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/codehaus/woodstox/woodstox-core-asl/4.2.0/woodstox-core-asl-4.2.0.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/tschoening/.m2/repository/org/codehaus/woodstox/woodstox-core-asl/4.2.0/woodstox-core-asl-4.2.0-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/workbench/3.2.1-M20060906-0800/workbench-3.2.1-M20060906-0800.jar"/>
-  <classpathentry kind="var" path="M2_REPO/wsdl4j/wsdl4j/1.6.2/wsdl4j-1.6.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/swt/win32/win32/x86/3.2.1-v3235/x86-3.2.1-v3235.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/ws/xmlschema/xmlschema-core/2.2.3-SNAPSHOT/xmlschema-core-2.2.3-SNAPSHOT.jar"/>
-  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry including="**/*.java" kind="src" path="target/generated-sources/annotations"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="target/maven-shared-archive-resources">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.3/servlet-api-2.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/ant/ant/1.7.0/ant-1.7.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/ant/ant-launcher/1.7.0/ant-launcher-1.7.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/james/apache-mime4j-core/0.8.0/apache-mime4j-core-0.8.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/ws/commons/axiom/axiom-api/1.3.0-SNAPSHOT/axiom-api-1.3.0-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/ws/commons/axiom/axiom-dom/1.3.0-SNAPSHOT/axiom-dom-1.3.0-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/ws/commons/axiom/axiom-impl/1.3.0-SNAPSHOT/axiom-impl-1.3.0-SNAPSHOT.jar"/>
+	<classpathentry kind="src" path="/axis2-adb"/>
+	<classpathentry kind="src" path="/axis2-codegen"/>
+	<classpathentry kind="src" path="/axis2-kernel"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/commands/3.3.0-I20070605-0010/commands-3.3.0-I20070605-0010.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/common/3.2.0-v20060603/common-3.2.0-v20060603.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-fileupload/commons-fileupload/1.3.3/commons-fileupload-1.3.3.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/commons-fileupload/commons-fileupload/1.3.3/commons-fileupload-1.3.3-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.1/commons-io-2.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/commons-io/commons-io/2.1/commons-io-2.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/runtime/compatibility/3.1.200-v20070502/compatibility-3.1.200-v20070502.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/update/configurator/3.2.100-v20070615/configurator-3.2.100-v20070615.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/contenttype/3.4.200-v20140207-1251/contenttype-3.4.200-v20140207-1251.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/org/eclipse/core/contenttype/3.4.200-v20140207-1251/contenttype-3.4.200-v20140207-1251-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/update/core/3.2.1-v20092006/core-3.2.1-v20092006.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/expressions/3.2.1-r321_v20060721/expressions-3.2.1-r321_v20060721.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/filesystem/1.1.0-v20070606/filesystem-1.1.0-v20070606.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/ui/forms/3.3.0-v20070511/forms-3.3.0-v20070511.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1/geronimo-jta_1.1_spec-1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1/geronimo-jta_1.1_spec-1.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-ws-metadata_2.0_spec/1.1.2/geronimo-ws-metadata_2.0_spec-1.1.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/org/apache/geronimo/specs/geronimo-ws-metadata_2.0_spec/1.1.2/geronimo-ws-metadata_2.0_spec-1.1.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/google/googlejavaformat/google-java-format/1.3/google-java-format-1.3.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/com/google/googlejavaformat/google-java-format/1.3/google-java-format-1.3-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava/19.0/guava-19.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/com/google/guava/guava/19.0/guava-19.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/help/3.3.0-v20070524/help-3.3.0-v20070524.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/ui/ide/3.2.1-M20060915-1030/ide-3.2.1-M20060915-1030.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/google/errorprone/javac/9-dev-r3297-1-shaded/javac-9-dev-r3297-1-shaded.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/com/google/errorprone/javac/9-dev-r3297-1-shaded/javac-9-dev-r3297-1-shaded-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/jaxen/jaxen/1.1.6/jaxen-1.1.6.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/jaxen/jaxen/1.1.6/jaxen-1.1.6-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/sun/xml/ws/jaxws-tools/2.2.6/jaxws-tools-2.2.6.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/com/sun/xml/ws/jaxws-tools/2.2.6/jaxws-tools-2.2.6-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jface/3.2.1-M20060908-1000/jface-3.2.1-M20060908-1000.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/jobs/3.2.0-v20060603/jobs-3.2.0-v20060603.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/neethi/neethi/3.0.4-SNAPSHOT/neethi-3.0.4-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/osgi/3.2.1-R32x_v20060919/osgi-3.2.1-R32x_v20060919.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/preferences/3.5.200-v20140224-1527/preferences-3.5.200-v20140224-1527.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/org/eclipse/equinox/preferences/3.5.200-v20140224-1527/preferences-3.5.200-v20140224-1527-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/registry/3.5.400-v20140428-1507/registry-3.5.400-v20140428-1507.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/org/eclipse/equinox/registry/3.5.400-v20140428-1507/registry-3.5.400-v20140428-1507-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/resources/3.2.1-R32x_v20060914/resources-3.2.1-R32x_v20060914.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/runtime/3.2.0-v20060603/runtime-3.2.0-v20060603.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/codehaus/woodstox/stax2-api/3.1.1/stax2-api-3.1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/swt/3.2.1-v3235e/swt-3.2.1-v3235e.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/ui/3.2.1-M20060913-0800/ui-3.2.1-M20060913-0800.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/update/ui/3.2.100-v20070615/ui-3.2.100-v20070615.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/ui/views/3.2.100-I20070319-0010/views-3.2.100-I20070319-0010.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/woden/woden-core/1.0M11-SNAPSHOT/woden-core-1.0M11-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/codehaus/woodstox/woodstox-core-asl/4.2.0/woodstox-core-asl-4.2.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/tschoening/.m2/repository/org/codehaus/woodstox/woodstox-core-asl/4.2.0/woodstox-core-asl-4.2.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/ui/workbench/3.2.1-M20060906-0800/workbench-3.2.1-M20060906-0800.jar"/>
+	<classpathentry kind="var" path="M2_REPO/wsdl4j/wsdl4j/1.6.2/wsdl4j-1.6.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/swt/win32/win32/x86/3.2.1-v3235/x86-3.2.1-v3235.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/ws/xmlschema/xmlschema-core/2.2.3-SNAPSHOT/xmlschema-core-2.2.3-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

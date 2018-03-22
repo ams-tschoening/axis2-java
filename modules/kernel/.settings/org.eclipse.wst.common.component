@@ -4,5 +4,7 @@
         <wb-resource deploy-path="/" source-path="/conf"/>
         <wb-resource deploy-path="/" source-path="/target/maven-shared-archive-resources"/>
         <wb-resource deploy-path="/" source-path="/target/generated-sources/annotations"/>
+        <wb-resource deploy-path="/" source-path="/test"/>
+        <wb-resource deploy-path="/" source-path="/test-resources/deployment/ClasspathModule"/>
     </wb-module>
 </project-modules>

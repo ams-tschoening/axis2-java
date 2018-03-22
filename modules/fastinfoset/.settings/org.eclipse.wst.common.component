@@ -3,5 +3,8 @@
         <wb-resource deploy-path="/" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/target/maven-shared-archive-resources"/>
         <wb-resource deploy-path="/" source-path="/target/generated-sources/annotations"/>
+        <wb-resource deploy-path="/" source-path="/test"/>
+        <wb-resource deploy-path="/" source-path="/target/wsdl/simpleAddService"/>
+        <wb-resource deploy-path="/" source-path="/target/repo"/>
     </wb-module>
 </project-modules>

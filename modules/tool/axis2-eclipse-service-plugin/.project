@@ -1,28 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>axis2.eclipse.service.plugin</name>
-  <comment>The Axis 2 Eclipse Service Plugin for Service archive creation. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
-  <projects>
-    <project>axis2-adb</project>
-    <project>axis2-codegen</project>
-    <project>axis2-kernel</project>
-  </projects>
-  <buildSpec>
-    <buildCommand>
-      <name>org.eclipse.jdt.core.javabuilder</name>
-    </buildCommand>
-    <buildCommand>
-      <name>org.eclipse.m2e.core.maven2Builder</name>
-    </buildCommand>
-    <buildCommand>
-      <name>org.eclipse.pde.ManifestBuilder</name>
-    </buildCommand>
-    <buildCommand>
-      <name>org.eclipse.pde.SchemaBuilder</name>
-    </buildCommand>
-  </buildSpec>
-  <natures>
-    <nature>org.eclipse.jdt.core.javanature</nature>
-    <nature>org.eclipse.m2e.core.maven2Nature</nature>
-    <nature>org.eclipse.pde.PluginNature</nature>
-  </natures>
+	<name>axis2.eclipse.service.plugin</name>
+	<comment>The Axis 2 Eclipse Service Plugin for Service archive creation. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+	<projects>
+		<project>axis2-adb</project>
+		<project>axis2-codegen</project>
+		<project>axis2-kernel</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.ManifestBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.SchemaBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+		<nature>org.eclipse.pde.PluginNature</nature>
+	</natures>
 </projectDescription>
