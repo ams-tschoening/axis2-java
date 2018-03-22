@@ -19,9 +19,38 @@
 package org.apache.axis2.maven2.repo;
 
 public class GeneratedAxis2Xml {
+    private Parameter[] parameters;
+    private Transport[] transportReceivers;
+    private Transport[] transportSenders;
     private MessageHandler[] messageBuilders;
     private MessageHandler[] messageFormatters;
+    private Handler[] handlers;
+    private String[] modules;
     
+    public Parameter[] getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Parameter[] parameters) {
+        this.parameters = parameters;
+    }
+
+    public Transport[] getTransportReceivers() {
+        return transportReceivers;
+    }
+
+    public void setTransportReceivers(Transport[] transportReceivers) {
+        this.transportReceivers = transportReceivers;
+    }
+
+    public Transport[] getTransportSenders() {
+        return transportSenders;
+    }
+
+    public void setTransportSenders(Transport[] transportSenders) {
+        this.transportSenders = transportSenders;
+    }
+
     public MessageHandler[] getMessageBuilders() {
         return messageBuilders;
     }
@@ -36,5 +65,21 @@ public class GeneratedAxis2Xml {
     
     public void setMessageFormatters(MessageHandler[] messageFormatters) {
         this.messageFormatters = messageFormatters;
+    }
+
+    public Handler[] getHandlers() {
+        return handlers;
+    }
+
+    public void setHandlers(Handler[] handlers) {
+        this.handlers = handlers;
+    }
+    
+    public String[] getModules() {
+        return modules;
+    }
+
+    public void setModules(String[] modules) {
+        this.modules = modules;
     }
 }
